@@ -727,23 +727,12 @@
                 this.canvas.height = window.innerHeight;
             }
             
-            loadPreferences() {
-                const savedSnowing = localStorage.getItem('snowEnabled');
-                const savedColorIndex = localStorage.getItem('snowColorIndex');
-                
-                // Default to snow OFF for first-time visitors
-                if (savedSnowing === 'true') {
-                    this.isSnowing = true;
-                } else {
-                    this.isSnowing = false; // Explicitly set to false (default state)
-                }
-                
-                if (savedColorIndex) {
-                    this.currentColorIndex = parseInt(savedColorIndex);
-                }
-                
-                this.updateUI();
-            }
+        loadPreferences() {
+    // Force snow to always start ON with White color
+    this.isSnowing = true;
+    this.currentColorIndex = 1; // White
+    this.updateUI();
+}
             
             setupEventListeners() {
                 // Setup both desktop and mobile controls
