@@ -692,7 +692,308 @@
             </div>
         </div>
     </footer>
-<!---->
+<script>
+  // Enhanced Snow System
+  class EnhancedSnowSystem {
+    constructor() {
+      this.canvas = document.getElementById('snowCanvas');
+      this.ctx = this.canvas.getContext('2d');
+      this.snowflakes = [];
+      this.isSnowing = false;
+      this.currentColorIndex = 0;
+      this.animationId = null;
+      this.colors = [
+        { name: 'Blue', rgba: '25,118,210', class: 'color-blue' },
+        { name: 'White', rgba: '255,255,255', class: 'color-white' },
+        { name: 'Gold', rgba: '251,191,36', class: 'color-gold' },
+        { name: 'Silver', rgba: '156,163,175', class: 'color-silver' },
+        { name: 'Pink', rgba: '236,72,153', class: 'color-pink' }
+      ];
+      this.init();
+    }
+
+    init() {
+      this.resizeCanvas();
+      this.loadPreferences();
+      this.setupEventListeners();
+      window.addEventListener('resize', () => this.resizeCanvas());
+    }
+
+    resizeCanvas() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
+
+    loadPreferences() {
+      const savedSnowing = localStorage.getItem('snowEnabled');
+      const savedColorIndex = localStorage.getItem('snowColorIndex');
+      const isFirstVisit = savedSnowing === null;
+
+      if (isFirstVisit) {
+        this.isSnowing = true;
+        this.currentColorIndex = 1;
+        localStorage.setItem('snowEnabled', 'true');
+        localStorage.setItem('snowColorIndex', '1');
+      } else {
+        this.isSnowing = savedSnowing === 'true';
+        this.currentColorIndex = savedColorIndex ? parseInt(savedColorIndex) : 1;
+      }
+
+      if (this.isSnowing) {
+        for (let i = 0; i < 50; i++) {
+          this.snowflakes.push(this.createSnowflake());
+        }
+        this.animate();
+      }
+
+      this.updateUI();
+    }
+
+    setupEventListeners() {
+      this.setupControlEvents('snowToggle', '');
+      this.setupControlEvents('snowToggleMobile', 'Mobile');
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.snow-controls-desktop') && !e.target.closest('.snow-controls-mobile')) {
+          document.getElementById('colorMenu').classList.remove('show');
+          document.getElementById('colorMenuMobile').classList.remove('show');
+        }
+      });
+    }
+
+    setupControlEvents(toggleId, suffix) {
+      const toggleBtn = document.getElementById(toggleId);
+      const colorPicker = document.getElementById(`colorPicker${suffix}`);
+      const colorMenu = document.getElementById(`colorMenu${suffix}`);
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => this.toggleSnow());
+      }
+      if (colorPicker) {
+        colorPicker.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleColorMenu(suffix);
+        });
+      }
+      if (colorMenu) {
+        const colorOptions = colorMenu.querySelectorAll('.color-option');
+        colorOptions.forEach((option, index) => {
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.changeSnowColor(index);
+          });
+        });
+      }
+    }
+
+    createSnowflake() {
+      return {
+        x: Math.random() * this.canvas.width,
+        y: -10,
+        radius: Math.random() * 3 + 1,
+        speed: Math.random() * 2 + 1,
+        drift: Math.random() * 2 - 1,
+        opacity: Math.random() * 0.8 + 0.2
+      };
+    }
+
+    animate() {
+      if (!this.isSnowing) return;
+
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      const heroSection = document.querySelector('#home');
+      const heroRect = heroSection.getBoundingClientRect();
+      const heroHeight = heroRect.height;
+
+      for (let i = this.snowflakes.length - 1; i >= 0; i--) {
+        const flake = this.snowflakes[i];
+        flake.y += flake.speed;
+        flake.x += flake.drift;
+
+        if (flake.y < heroHeight) {
+          this.ctx.beginPath();
+          this.ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+          this.ctx.fillStyle = `rgba(${this.colors[this.currentColorIndex].rgba}, ${flake.opacity})`;
+          this.ctx.fill();
+        }
+
+        if (flake.y > heroHeight || flake.x < -10 || flake.x > this.canvas.width + 10) {
+          this.snowflakes.splice(i, 1);
+        }
+      }
+
+      if (Math.random() < 0.3 && this.snowflakes.length < 150) {
+        this.snowflakes.push(this.createSnowflake());
+      }
+
+      this.animationId = requestAnimationFrame(() => this.animate());
+    }
+
+    toggleSnow() {
+      this.isSnowing = !this.isSnowing;
+      localStorage.setItem('snowEnabled', this.isSnowing.toString());
+      if (this.isSnowing) {
+        for (let i = 0; i < 50; i++) {
+          this.snowflakes.push(this.createSnowflake());
+        }
+        this.animate();
+      } else {
+        this.snowflakes = [];
+        if (this.animationId) cancelAnimationFrame(this.animationId);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+      this.updateUI();
+    }
+
+    changeSnowColor(colorIndex) {
+      this.currentColorIndex = colorIndex;
+      localStorage.setItem('snowColorIndex', colorIndex.toString());
+      this.updateUI();
+      document.getElementById('colorMenu').classList.remove('show');
+      document.getElementById('colorMenuMobile').classList.remove('show');
+    }
+
+    toggleColorMenu(suffix = '') {
+      const menu = document.getElementById(`colorMenu${suffix}`);
+      if (menu) menu.classList.toggle('show');
+    }
+
+    updateUI() {
+      this.updateControlUI('');
+      this.updateControlUI('Mobile');
+    }
+
+    updateControlUI(suffix) {
+      const toggleBtn = document.getElementById(`snowToggle${suffix}`);
+      const toggleText = document.getElementById(`snowToggleText${suffix}`);
+      const colorPicker = document.getElementById(`colorPicker${suffix}`);
+      const currentColorDot = document.getElementById(`currentColorDot${suffix}`);
+      const currentColorText = document.getElementById(`currentColorText${suffix}`);
+      const colorMenu = document.getElementById(`colorMenu${suffix}`);
+
+      if (!toggleBtn) return;
+
+      if (this.isSnowing) {
+        toggleBtn.classList.add('active');
+        if (toggleText) toggleText.textContent = 'Snow On';
+        if (colorPicker) colorPicker.style.display = 'flex';
+      } else {
+        toggleBtn.classList.remove('active');
+        if (toggleText) toggleText.textContent = 'Snow Off';
+        if (colorPicker) colorPicker.style.display = 'none';
+      }
+
+      const currentColor = this.colors[this.currentColorIndex];
+      if (currentColorDot) currentColorDot.className = `color-dot ${currentColor.class}`;
+      if (currentColorText) currentColorText.textContent = currentColor.name;
+
+      if (colorMenu) {
+        const colorOptions = colorMenu.querySelectorAll('.color-option');
+        colorOptions.forEach((option, index) => {
+          const checkIcon = option.querySelector('.fas.fa-check');
+          if (index === this.currentColorIndex) {
+            option.classList.add('active');
+            if (checkIcon) checkIcon.style.display = 'block';
+          } else {
+            option.classList.remove('active');
+            if (checkIcon) checkIcon.style.display = 'none';
+          }
+        });
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    new EnhancedSnowSystem();
+
+    // Countdown functionality
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const messageEl = document.getElementById('message');
+    const startDateInput = document.getElementById('startDate');
+    const resetBtn = document.getElementById('resetBtn');
+    let countdownInterval;
+
+    const today = new Date();
+    const todayFormatted = today.toISOString().split('T')[0];
+    startDateInput.value = todayFormatted;
+    startDateInput.min = todayFormatted;
+
+    function getChristmasDate() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      let christmasDate = new Date(currentYear, 11, 25);
+      if (now > christmasDate) {
+        christmasDate = new Date(currentYear + 1, 11, 25);
+      }
+      return christmasDate;
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const christmasDate = getChristmasDate();
+      const diff = christmasDate - now;
+      if (diff <= 0) {
+        clearInterval(countdownInterval);
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        messageEl.textContent = '🎄 Merry Christmas! 🎄';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      daysEl.textContent = days.toString().padStart(2, '0');
+      hoursEl.textContent = hours.toString().padStart(2, '0');
+      minutesEl.textContent = minutes.toString().padStart(2, '0');
+      secondsEl.textContent = seconds.toString().padStart(2, '0');
+      if (days === 0 && hours < 24) {
+        messageEl.textContent = 'Christmas is almost here!';
+      } else if (days < 7) {
+        messageEl.textContent = 'Getting very close now!';
+      } else if (days < 30) {
+        messageEl.textContent = 'The excitement is building!';
+      } else {
+        messageEl.textContent = 'Counting down to Christmas!';
+      }
+    }
+
+    function startCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      updateCountdown();
+      countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    resetBtn.addEventListener('click', function() {
+      startDateInput.value = todayFormatted;
+      startCountdown();
+    });
+
+    startCountdown();
+
+    // Mobile menu toggle
+    document.querySelector('.md\\:hidden').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+
 
 </body>
 </html>
