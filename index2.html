@@ -351,6 +351,61 @@
             line-height: 1.2;
         }
 
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: lightboxFadeIn 0.3s ease-out;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #dc2626;
+        }
+
+        @keyframes lightboxFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         @media (max-width: 768px) {
             .stamps-collection {
                 grid-template-columns: 1fr;
@@ -361,6 +416,12 @@
             .vintage-stamp {
                 width: 140px;
                 height: 175px;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
             }
         }
         .christmas-stamp {
@@ -683,7 +744,7 @@
             <div class="order-1 md:order-2 flex justify-center items-center">
                 <div class="stamps-collection">
                     <!-- Stamp 1 -->
-                    <div class="vintage-stamp">
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss1.webp')">
                         <img src="https://santasecret.com.au/ss1.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -694,7 +755,7 @@
                     </div>
 
                     <!-- Stamp 2 -->
-                    <div class="vintage-stamp">
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss3.webp')">
                         <img src="https://santasecret.com.au/ss3.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -705,7 +766,7 @@
                     </div>
 
                     <!-- Stamp 3 -->
-                    <div class="vintage-stamp">
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss6.webp')">
                         <img src="https://santasecret.com.au/ss6.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -716,7 +777,7 @@
                     </div>
 
                     <!-- Stamp 4 -->
-                    <div class="vintage-stamp">
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss2.webp')">
                         <img src="https://santasecret.com.au/ss2.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -725,6 +786,12 @@
                             <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Lightbox Modal -->
+                <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                    <span class="lightbox-close">&times;</span>
+                    <img id="lightboxImage" class="lightbox-image" alt="Kim's Christmas Creation">
                 </div>
             </div>
         </div>
@@ -1334,6 +1401,28 @@
             
             // Start initial rotation
             startStampRotation();
+            });
+
+            // Lightbox functionality for stamps
+            function openLightbox(imageSrc) {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImage = document.getElementById('lightboxImage');
+                lightboxImage.src = imageSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            function closeLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
             });
 
             startCountdown();
