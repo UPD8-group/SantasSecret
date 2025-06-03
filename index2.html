@@ -1173,6 +1173,22 @@
     </footer>
 
     <script>
+    <script>
+        // Global lightbox functions
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         // Hero-Only Snow System
         class HeroSnowSystem {
             constructor() {
@@ -1402,21 +1418,6 @@
             // Start initial rotation
             startStampRotation();
             });
-
-            // Lightbox functionality for stamps
-            function openLightbox(imageSrc) {
-                const lightbox = document.getElementById('lightbox');
-                const lightboxImage = document.getElementById('lightboxImage');
-                lightboxImage.src = imageSrc;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            }
-
-            function closeLightbox() {
-                const lightbox = document.getElementById('lightbox');
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Restore scrolling
-            }
 
             // Close lightbox with Escape key
             document.addEventListener('keydown', function(e) {
