@@ -266,10 +266,10 @@
         .stamps-collection {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: 400px;
+            gap: 25px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 25px;
             background: #f8f6f0;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -277,8 +277,8 @@
 
         .vintage-stamp {
             position: relative;
-            width: 160px;
-            height: 200px;
+            width: 200px;
+            height: 250px;
             background: #faf9f7;
             border: 2px solid #8b4513;
             margin: 0 auto;
@@ -286,6 +286,8 @@
             transform: rotate(-1deg);
             transition: all 0.4s ease;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
         }
 
         .vintage-stamp:nth-child(2n) {
@@ -316,7 +318,7 @@
 
         .vintage-stamp-image {
             width: 100%;
-            height: 130px;
+            height: 170px;
             object-fit: cover;
             border-bottom: 2px solid #8b4513;
             position: relative;
@@ -409,19 +411,17 @@
         @media (max-width: 768px) {
             .stamps-collection {
                 grid-template-columns: 1fr;
-                max-width: 200px;
-                gap: 15px;
+                max-width: 250px;
+                gap: 20px;
             }
             
             .vintage-stamp {
-                width: 140px;
-                height: 175px;
+                width: 180px;
+                height: 225px;
             }
 
-            .lightbox-close {
-                top: 10px;
-                right: 15px;
-                font-size: 30px;
+            .vintage-stamp-image {
+                height: 150px;
             }
         }
         .christmas-stamp {
@@ -744,7 +744,7 @@
             <div class="order-1 md:order-2 flex justify-center items-center">
                 <div class="stamps-collection">
                     <!-- Stamp 1 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss1.webp')">
+                    <a href="https://santasecret.com.au/ss1.webp" target="_blank" class="vintage-stamp">
                         <img src="https://santasecret.com.au/ss1.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -752,10 +752,10 @@
                             <div class="vintage-stamp-price">5¢</div>
                             <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Stamp 2 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss3.webp')">
+                    <a href="https://santasecret.com.au/ss3.webp" target="_blank" class="vintage-stamp">
                         <img src="https://santasecret.com.au/ss3.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -763,10 +763,10 @@
                             <div class="vintage-stamp-price">5¢</div>
                             <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Stamp 3 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss6.webp')">
+                    <a href="https://santasecret.com.au/ss6.webp" target="_blank" class="vintage-stamp">
                         <img src="https://santasecret.com.au/ss6.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -774,10 +774,10 @@
                             <div class="vintage-stamp-price">5¢</div>
                             <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Stamp 4 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss2.webp')">
+                    <a href="https://santasecret.com.au/ss2.webp" target="_blank" class="vintage-stamp">
                         <img src="https://santasecret.com.au/ss2.webp" 
                              alt="Kim's Christmas Creation" 
                              class="vintage-stamp-image">
@@ -785,13 +785,7 @@
                             <div class="vintage-stamp-price">5¢</div>
                             <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Lightbox Modal -->
-                <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-                    <span class="lightbox-close">&times;</span>
-                    <img id="lightboxImage" class="lightbox-image" alt="Kim's Christmas Creation">
+                    </a>
                 </div>
             </div>
         </div>
@@ -1174,21 +1168,6 @@
 
     <script>
     <script>
-        // Global lightbox functions
-        function openLightbox(imageSrc) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightboxImage');
-            lightboxImage.src = imageSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
         // Hero-Only Snow System
         class HeroSnowSystem {
             constructor() {
@@ -1419,12 +1398,90 @@
             startStampRotation();
             });
 
-            // Close lightbox with Escape key
+            // Enhanced countdown functionality
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const messageEl = document.getElementById('message');
+            const startDateInput = document.getElementById('startDate');
+            const resetBtn = document.getElementById('resetBtn');
+            let countdownInterval;
+
+            const today = new Date();
+            const todayFormatted = today.toISOString().split('T')[0];
+            if (startDateInput) {
+                startDateInput.value = todayFormatted;
+                startDateInput.min = todayFormatted;
+            }
+
+            function getChristmasDate() {
+                const now = new Date();
+                const currentYear = now.getFullYear();
+                let christmasDate = new Date(currentYear, 11, 25);
+                if (now > christmasDate) {
+                    christmasDate = new Date(currentYear + 1, 11, 25);
+                }
+                return christmasDate;
+            }
+
+            function updateCountdown() {
+                if (!daysEl || !hoursEl || !minutesEl || !secondsEl || !messageEl) return;
+                
+                const now = new Date();
+                const christmasDate = getChristmasDate();
+                const diff = christmasDate - now;
+                
+                if (diff <= 0) {
+                    clearInterval(countdownInterval);
+                    daysEl.textContent = '00';
+                    hoursEl.textContent = '00';
+                    minutesEl.textContent = '00';
+                    secondsEl.textContent = '00';
+                    messageEl.textContent = '🎄 Merry Christmas! The magic is here! 🎄';
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                daysEl.textContent = days.toString().padStart(2, '0');
+                hoursEl.textContent = hours.toString().padStart(2, '0');
+                minutesEl.textContent = minutes.toString().padStart(2, '0');
+                secondsEl.textContent = seconds.toString().padStart(2, '0');
+                
+                if (days === 0 && hours < 24) {
+                    messageEl.textContent = '✨ Christmas magic is almost here! ✨';
+                } else if (days < 7) {
+                    messageEl.textContent = '🎁 So close you can almost taste the Christmas cookies! 🍪';
+                } else if (days < 30) {
+                    messageEl.textContent = '🎄 The Christmas excitement is building! 🎄';
+                } else {
+                    messageEl.textContent = '❄️ Counting down to the most magical time of year! ❄️';
+                }
+            }
+
+            function startCountdown() {
+                if (countdownInterval) clearInterval(countdownInterval);
+                updateCountdown();
+                countdownInterval = setInterval(updateCountdown, 1000);
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    if (startDateInput) {
+                        startDateInput.value = todayFormatted;
+                    }
+                    // Close lightbox with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    closeLightbox();
+                    window.closeLightbox();
                 }
             });
+                });
+            }
 
             startCountdown();
 
