@@ -31,11 +31,7 @@
 
         /* Enhanced Hero Background */
         .hero-gradient {
-            background: linear-gradient(135deg, 
-                rgba(220, 38, 38, 0.6) 0%, 
-                rgba(153, 27, 27, 0.5) 50%, 
-                rgba(5, 150, 105, 0.4) 100%),
-            url('https://santasecret.com.au/banner_SS.jpg');
+            background: url('https://santasecret.com.au/banner_SS.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -266,6 +262,150 @@
             animation: sparkle 2s linear infinite;
         }
 
+        /* Christmas Stamp Styling */
+        .christmas-stamp {
+            position: relative;
+            width: 300px;
+            height: 360px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 8px solid #dc2626;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            margin: 0 auto;
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+        }
+
+        .christmas-stamp:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .christmas-stamp::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            );
+            border-radius: 16px;
+            z-index: -1;
+        }
+
+        .stamp-image-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .stamp-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.6s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stamp-image.active {
+            opacity: 1;
+        }
+
+        .stamp-image:not(.active) {
+            opacity: 0;
+        }
+
+        .stamp-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stamp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-year {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .stamp-indicators {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .stamp-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stamp-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .postmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #dc2626;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+            transform: rotate(15deg);
+        }
+
         /* Text Gradient */
         .text-gradient {
             background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 100%);
@@ -282,6 +422,16 @@
             
             .gallery-item:hover {
                 transform: scale(1.02);
+            }
+
+            .christmas-stamp {
+                width: 250px;
+                height: 300px;
+                transform: rotate(-1deg);
+            }
+
+            .stamp-image-container {
+                height: 200px;
             }
         }
 
@@ -361,7 +511,7 @@
                 <h1 class="heading-font text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight">
                     Discover the Secrets to an 
                     <span class="block text-yellow-300">Unconventional Christmas</span>
-                    <span class="block text-lg md:text-2xl font-normal mt-4 opacity-90">
+                    <span class="block text-yellow-300 text-3xl md:text-5xl lg:text-6xl font-extrabold mt-4">
                         right in the heart of Bungendore
                     </span>
                 </h1>
@@ -369,9 +519,9 @@
                     Bespoke Christmas decorations and gifts to make your holidays special ❤️
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <button class="btn-christmas text-lg transform hover:scale-105">
+                    <a href="#gallery" class="btn-christmas text-lg transform hover:scale-105">
                         <i class="fas fa-gift mr-3"></i>Explore Our Magic
-                    </button>
+                    </a>
                     <a href="#about" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-red-600 transition-all duration-300">
                         <i class="fas fa-heart mr-2"></i>Meet Kim
                     </a>
@@ -427,21 +577,53 @@
                 </div>
             </div>
 
-            <!-- Enhanced Image Layout -->
-            <div class="relative w-full h-[500px] order-1 md:order-2">
-                <div class="absolute top-0 left-0 w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white gallery-item">
-                    <img src="/web_number1.jpg" alt="Tree 1" class="w-full h-full object-cover"/>
+            <!-- Christmas Stamp Display -->
+            <div class="order-1 md:order-2 flex justify-center items-center">
+                <div class="christmas-stamp">
+                    <!-- Postmark -->
+                    <div class="postmark">
+                        DEC<br>2024
+                    </div>
+                    
+                    <!-- Image Container -->
+                    <div class="stamp-image-container">
+                        <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=500&fit=crop&auto=format" 
+                             alt="Christmas Tree" 
+                             class="stamp-image active" 
+                             data-index="0">
+                        <img src="https://images.unsplash.com/photo-1576869052793-1c7849175b0e?w=400&h=500&fit=crop&auto=format" 
+                             alt="Christmas Ornaments" 
+                             class="stamp-image" 
+                             data-index="1">
+                        <img src="https://images.unsplash.com/photo-1544273677-6c6b5b4e6c11?w=400&h=500&fit=crop&auto=format" 
+                             alt="Christmas Decorations" 
+                             class="stamp-image" 
+                             data-index="2">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=500&fit=crop&auto=format" 
+                             alt="Christmas Lights" 
+                             class="stamp-image" 
+                             data-index="3">
+                        <img src="https://images.unsplash.com/photo-1545048702-79362596cdc9?w=400&h=500&fit=crop&auto=format" 
+                             alt="Christmas Gifts" 
+                             class="stamp-image" 
+                             data-index="4">
+                    </div>
+
+                    <!-- Stamp Indicators -->
+                    <div class="stamp-indicators">
+                        <div class="stamp-dot active" data-index="0"></div>
+                        <div class="stamp-dot" data-index="1"></div>
+                        <div class="stamp-dot" data-index="2"></div>
+                        <div class="stamp-dot" data-index="3"></div>
+                        <div class="stamp-dot" data-index="4"></div>
+                    </div>
+
+                    <!-- Stamp Footer -->
+                    <div class="stamp-footer">
+                        <div class="stamp-title">Santa's Secret</div>
+                        <div class="stamp-year">Bungendore Christmas 2024</div>
+                    </div>
                 </div>
-                <div class="absolute top-8 right-0 w-64 h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white gallery-item">
-                    <img src="/web_number2.jpg" alt="Tree 2" class="w-full h-full object-cover"/>
-                </div>
-                <div class="absolute bottom-0 left-24 w-64 h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white gallery-item">
-                    <img src="/web_number3.jpg" alt="Baubles" class="w-full h-full object-cover"/>
-                </div>
-                
-                <!-- Floating elements -->
-                <div class="absolute top-10 right-10 text-4xl animate-float">🎁</div>
-                <div class="absolute bottom-10 left-10 text-3xl animate-float" style="animation-delay: -1s;">⭐</div>
             </div>
         </div>
     </section>
@@ -812,7 +994,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
                     <p>&copy; 2024 Santa's Secret. All rights reserved. Made with ❤️ in Bungendore.</p>
                     <p class="mt-2 md:mt-0">
-                        <a href="https://1973.studio" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://1973.studio" target="_blank" class="text-red-400 hover:text-red-300 transition-colors">
                             Website Made in 1973
                         </a>
                     </p>
@@ -1000,7 +1182,56 @@
 
             resetBtn.addEventListener('click', function() {
                 startDateInput.value = todayFormatted;
-                startCountdown();
+                // Christmas Stamp Carousel
+            let currentStampIndex = 0;
+            const stampImages = document.querySelectorAll('.stamp-image');
+            const stampDots = document.querySelectorAll('.stamp-dot');
+            const totalStampImages = stampImages.length;
+
+            function showStampImage(index) {
+                // Remove active class from all images and dots
+                stampImages.forEach(img => img.classList.remove('active'));
+                stampDots.forEach(dot => dot.classList.remove('active'));
+                
+                // Add active class to current image and dot
+                stampImages[index].classList.add('active');
+                stampDots[index].classList.add('active');
+                
+                currentStampIndex = index;
+            }
+
+            function nextStampImage() {
+                const nextIndex = (currentStampIndex + 1) % totalStampImages;
+                showStampImage(nextIndex);
+            }
+
+            // Auto-rotate stamp images every 4 seconds
+            setInterval(nextStampImage, 4000);
+
+            // Click handlers for stamp dots
+            stampDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showStampImage(index);
+                });
+            });
+
+            // Pause auto-rotation on hover
+            const stamp = document.querySelector('.christmas-stamp');
+            let stampInterval;
+            
+            function startStampRotation() {
+                stampInterval = setInterval(nextStampImage, 4000);
+            }
+            
+            function stopStampRotation() {
+                clearInterval(stampInterval);
+            }
+            
+            stamp.addEventListener('mouseenter', stopStampRotation);
+            stamp.addEventListener('mouseleave', startStampRotation);
+            
+            // Start initial rotation
+            startStampRotation();
             });
 
             startCountdown();
