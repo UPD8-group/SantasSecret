@@ -31,7 +31,7 @@
 
         /* Enhanced Hero Background */
         .hero-gradient {
-            background: url('https://santasecret.com.au/banner_SS.jpg');
+            background: url('https://santasecret.com.au/ss4.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -262,7 +262,107 @@
             animation: sparkle 2s linear infinite;
         }
 
-        /* Christmas Stamp Styling */
+        /* Vintage Christmas Stamps Collection */
+        .stamps-collection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f6f0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .vintage-stamp {
+            position: relative;
+            width: 160px;
+            height: 200px;
+            background: #faf9f7;
+            border: 2px solid #8b4513;
+            margin: 0 auto;
+            overflow: hidden;
+            transform: rotate(-1deg);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .vintage-stamp:nth-child(2n) {
+            transform: rotate(1deg);
+        }
+
+        .vintage-stamp:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        /* Perforated edges */
+        .vintage-stamp::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: 
+                radial-gradient(circle at 6px 6px, transparent 3px, #8b4513 3px, #8b4513 4px, transparent 4px),
+                radial-gradient(circle at 6px 6px, transparent 3px, #8b4513 3px, #8b4513 4px, transparent 4px);
+            background-size: 12px 12px;
+            background-position: 0 0, 6px 6px;
+            border-radius: 3px;
+        }
+
+        .vintage-stamp-image {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-bottom: 2px solid #8b4513;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vintage-stamp-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #faf9f7;
+            padding: 8px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .vintage-stamp-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 2px;
+        }
+
+        .vintage-stamp-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 9px;
+            color: #8b4513;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .stamps-collection {
+                grid-template-columns: 1fr;
+                max-width: 200px;
+                gap: 15px;
+            }
+            
+            .vintage-stamp {
+                width: 140px;
+                height: 175px;
+            }
+        }
         .christmas-stamp {
             position: relative;
             width: 300px;
@@ -579,51 +679,51 @@
                 </div>
             </div>
 
-            <!-- Christmas Stamp Display -->
+            <!-- Vintage Christmas Stamps Collection -->
             <div class="order-1 md:order-2 flex justify-center items-center">
-                <div class="christmas-stamp">
-                    <!-- Postmark -->
-                    <div class="postmark">
-                        DEC<br>2024
-                    </div>
-                    
-                    <!-- Image Container -->
-                    <div class="stamp-image-container">
-                        <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=500&fit=crop&auto=format" 
-                             alt="Christmas Tree" 
-                             class="stamp-image active" 
-                             data-index="0">
-                        <img src="https://images.unsplash.com/photo-1576869052793-1c7849175b0e?w=400&h=500&fit=crop&auto=format" 
-                             alt="Christmas Ornaments" 
-                             class="stamp-image" 
-                             data-index="1">
-                        <img src="https://images.unsplash.com/photo-1544273677-6c6b5b4e6c11?w=400&h=500&fit=crop&auto=format" 
-                             alt="Christmas Decorations" 
-                             class="stamp-image" 
-                             data-index="2">
-                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=500&fit=crop&auto=format" 
-                             alt="Christmas Lights" 
-                             class="stamp-image" 
-                             data-index="3">
-                        <img src="https://images.unsplash.com/photo-1545048702-79362596cdc9?w=400&h=500&fit=crop&auto=format" 
-                             alt="Christmas Gifts" 
-                             class="stamp-image" 
-                             data-index="4">
+                <div class="stamps-collection">
+                    <!-- Stamp 1 -->
+                    <div class="vintage-stamp">
+                        <img src="https://santasecret.com.au/ss1.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
                     </div>
 
-                    <!-- Stamp Indicators -->
-                    <div class="stamp-indicators">
-                        <div class="stamp-dot active" data-index="0"></div>
-                        <div class="stamp-dot" data-index="1"></div>
-                        <div class="stamp-dot" data-index="2"></div>
-                        <div class="stamp-dot" data-index="3"></div>
-                        <div class="stamp-dot" data-index="4"></div>
+                    <!-- Stamp 2 -->
+                    <div class="vintage-stamp">
+                        <img src="https://santasecret.com.au/ss3.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
                     </div>
 
-                    <!-- Stamp Footer -->
-                    <div class="stamp-footer">
-                        <div class="stamp-title">Santa's Secret</div>
-                        <div class="stamp-year">Bungendore Christmas 2024</div>
+                    <!-- Stamp 3 -->
+                    <div class="vintage-stamp">
+                        <img src="https://santasecret.com.au/ss6.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
+                    </div>
+
+                    <!-- Stamp 4 -->
+                    <div class="vintage-stamp">
+                        <img src="https://santasecret.com.au/ss2.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
                     </div>
                 </div>
             </div>
