@@ -697,11 +697,18 @@
     <!-- Enhanced Snow Canvas -->
     <canvas id="snowCanvas" class="snow-canvas"></canvas>
 
-    <!-- Updated Navigation without Logo -->
+    <!-- Navigation with Logo Restored -->
     <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
-                <!-- Desktop Menu - Now centered/left aligned without logo -->
+                <!-- Logo Section - Restored -->
+                <div class="flex items-center">
+                    <a href="#home" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
+                        <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6 items-center">
                     <a href="#home" class="nav-link text-gray-800 hover:text-red-600 py-2">Home</a>
                     <a href="#about" class="nav-link text-gray-800 hover:text-red-600 py-2">About</a>
@@ -711,8 +718,8 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="flex items-center md:hidden ml-auto">
-                    <button class="focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
+                <div class="flex items-center">
+                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -731,20 +738,10 @@
         </div>
     </nav>
 
-    <!-- Enhanced Hero Section with Large Logo Overlay -->
+    <!-- Enhanced Hero Section -->
     <section id="home" class="relative overflow-hidden min-h-screen flex items-center justify-center hero-gradient">
         <!-- Dark overlay for text readability -->
         <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
-        
-        <!-- Large Logo Overlay - Using working white background version -->
-        <div class="absolute top-6 left-6 z-50 logo-overlay" style="pointer-events: none;">
-            <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" 
-                 alt="Santa's Secret Logo" 
-                 class="w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain rounded-xl"
-                 style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); opacity: 0.95;"
-                 onload="console.log('Logo loaded successfully!')"
-                 onerror="console.log('Logo failed to load');">
-        </div>
         
         <!-- Snow Canvas - Hero Only -->
         <canvas id="snowCanvas" class="snow-canvas"></canvas>
