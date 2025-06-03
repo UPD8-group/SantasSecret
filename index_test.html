@@ -67,7 +67,7 @@
             z-index: 10;
         }
 
-        /* Navigation Enhancement */
+        /* Navigation Enhancement - Reduced padding and improved alignment */
         .nav-glass {
             background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(10px);
@@ -663,34 +663,37 @@
     <!-- Enhanced Snow Canvas -->
     <canvas id="snowCanvas" class="snow-canvas"></canvas>
 
-    <!-- Navigation -->
+    <!-- Updated Navigation with Reduced White Space -->
     <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4">
+        <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
+                <!-- Logo Section - Moved to top alignment -->
                 <div class="flex items-center">
-                    <a href="#" class="w-24 h-24 flex items-center justify-center rounded-lg shadow-sm">
+                    <a href="#" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
                         <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
                     </a>
                 </div>
 
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-800 hover:text-red-600">Home</a>
-                    <a href="#about" class="nav-link text-gray-800 hover:text-red-600">About</a>
-                    <a href="#countdown" class="nav-link text-gray-800 hover:text-red-600">Countdown</a>
-                    <a href="#gallery" class="nav-link text-gray-800 hover:text-red-600">Gallery</a>
-                    <a href="#visitus" class="nav-link text-gray-800 hover:text-red-600">Visit Us</a>
+                <!-- Desktop Menu - Aligned to top -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#home" class="nav-link text-gray-800 hover:text-red-600 py-2">Home</a>
+                    <a href="#about" class="nav-link text-gray-800 hover:text-red-600 py-2">About</a>
+                    <a href="#countdown" class="nav-link text-gray-800 hover:text-red-600 py-2">Countdown</a>
+                    <a href="#gallery" class="nav-link text-gray-800 hover:text-red-600 py-2">Gallery</a>
+                    <a href="#visitus" class="nav-link text-gray-800 hover:text-red-600 py-2">Visit Us</a>
                 </div>
 
-                <div class="flex items-center space-x-4">
-                    <button class="md:hidden focus:outline-none text-gray-800">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center">
+                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile menu -->
-            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
-                <div class="flex flex-col space-y-4">
+            <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
+                <div class="flex flex-col space-y-2">
                     <a href="#home" class="py-2 text-gray-800 hover:text-red-600">Home</a>
                     <a href="#about" class="py-2 text-gray-800 hover:text-red-600">About</a>
                     <a href="#countdown" class="py-2 text-gray-800 hover:text-red-600">Countdown</a>
@@ -783,61 +786,16 @@
                     <div class="bg-gradient-to-r from-red-50 to-green-50 p-6 rounded-2xl border-l-4 border-red-500">
                         <p class="font-semibold text-gray-900 text-lg">Ready to bring some magic into your home?</p>
                         <p class="text-gray-700 mt-2">Step into Santa's Secret and make this Christmas unforgettable with decor as unique as you are.</p>
-               <!-- Beautiful Featured Image -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beautiful Featured Image -->
             <div class="order-1 md:order-2 flex justify-center items-center">
                 <div class="featured-image-container">
                     <img src="https://santasecret.com.au/ss3.webp" 
                          alt="Kim's Beautiful Christmas Workshop Display" 
                          class="featured-workshop-image">
-                </div>
-            </div>
-
-            <!-- Enhanced Vintage Christmas Stamps Collection -->
-            <div class="order-1 md:order-2 flex justify-center items-center">
-                <div class="stamps-collection">
-                    <!-- Stamp 1 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss1.webp', 'Kim\\'s Christmas Creation - Handcrafted Ornaments')">>
-                        <img src="https://santasecret.com.au/ss1.webp" 
-                             alt="Kim's Christmas Creation" 
-                             class="vintage-stamp-image">
-                        <div class="vintage-stamp-footer">
-                            <div class="vintage-stamp-price">5¢</div>
-                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
-                        </div>
-                    </div>
-
-                    <!-- Stamp 2 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss3.webp', 'Festive Workshop Display - Bespoke Christmas Decorations')">
-                        <img src="https://santasecret.com.au/ss3.webp" 
-                             alt="Kim's Christmas Creation" 
-                             class="vintage-stamp-image">
-                        <div class="vintage-stamp-footer">
-                            <div class="vintage-stamp-price">5¢</div>
-                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
-                        </div>
-                    </div>
-
-                    <!-- Stamp 3 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss6.webp', 'Custom Holiday Arrangements - Unique Christmas Trees')">
-                        <img src="https://santasecret.com.au/ss6.webp" 
-                             alt="Kim's Christmas Creation" 
-                             class="vintage-stamp-image">
-                        <div class="vintage-stamp-footer">
-                            <div class="vintage-stamp-price">5¢</div>
-                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
-                        </div>
-                    </div>
-
-                    <!-- Stamp 4 -->
-                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss2.webp', 'Artisan Christmas Collection - Handmade with Love')">
-                        <img src="https://santasecret.com.au/ss2.webp" 
-                             alt="Kim's Christmas Creation" 
-                             class="vintage-stamp-image">
-                        <div class="vintage-stamp-footer">
-                            <div class="vintage-stamp-price">5¢</div>
-                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1228,6 +1186,12 @@
     </div>
 
     <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
         // Lightbox functionality
         function openLightbox(imageSrc, caption) {
             const lightbox = document.getElementById('lightbox');
@@ -1439,12 +1403,6 @@
             });
 
             startCountdown();
-
-            // Mobile menu toggle
-            document.querySelector('.md\\:hidden').addEventListener('click', function() {
-                const mobileMenu = document.getElementById('mobileMenu');
-                mobileMenu.classList.toggle('hidden');
-            });
 
             // Smooth scrolling for navigation
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
