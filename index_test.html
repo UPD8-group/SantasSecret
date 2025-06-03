@@ -359,7 +359,79 @@
             }
         }
 
-       
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            animation: scaleIn 0.3s ease;
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: -10px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(220, 38, 38, 0.8);
+            transform: scale(1.1);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -370,7 +442,180 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-       
+        @media (max-width: 768px) {
+            .stamps-collection {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .vintage-stamp {
+                width: 200px;
+                height: 250px;
+            }
+
+            .vintage-stamp-image {
+                height: 160px;
+            }
+
+            .lightbox-close {
+                top: -40px;
+                right: 0;
+                font-size: 28px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-caption {
+                font-size: 16px;
+                bottom: -50px;
+            }
+        }
+
+        .christmas-stamp {
+            position: relative;
+            width: 300px;
+            height: 360px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 8px solid #dc2626;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            margin: 0 auto;
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+        }
+
+        .christmas-stamp:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .christmas-stamp::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            );
+            border-radius: 16px;
+            z-index: -1;
+        }
+
+        .stamp-image-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .stamp-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.6s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stamp-image.active {
+            opacity: 1;
+        }
+
+        .stamp-image:not(.active) {
+            opacity: 0;
+        }
+
+        .stamp-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stamp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-year {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .stamp-indicators {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .stamp-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stamp-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .postmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #dc2626;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+            transform: rotate(15deg);
+        }
+
         /* Text Gradient */
         .text-gradient {
             background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 100%);
@@ -389,7 +634,16 @@
                 transform: scale(1.02);
             }
 
+            .christmas-stamp {
+                width: 250px;
+                height: 300px;
+                transform: rotate(-1deg);
+            }
 
+            .stamp-image-container {
+                height: 200px;
+            }
+        }
 
         /* Christmas decoration elements */
         .decoration {
@@ -538,7 +792,47 @@
                 </div>
             </div>
 
-            
+            <!-- Enhanced Vintage Christmas Stamps Collection -->
+            <div class="order-1 md:order-2 flex justify-center items-center">
+           
+
+                    <!-- Stamp 2 -->
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss3.webp', 'Festive Workshop Display - Bespoke Christmas Decorations')">
+                        <img src="https://santasecret.com.au/ss3.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
+                    </div>
+
+                    <!-- Stamp 3 -->
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss6.webp', 'Custom Holiday Arrangements - Unique Christmas Trees')">
+                        <img src="https://santasecret.com.au/ss6.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
+                    </div>
+
+                    <!-- Stamp 4 -->
+                    <div class="vintage-stamp" onclick="openLightbox('https://santasecret.com.au/ss2.webp', 'Artisan Christmas Collection - Handmade with Love')">
+                        <img src="https://santasecret.com.au/ss2.webp" 
+                             alt="Kim's Christmas Creation" 
+                             class="vintage-stamp-image">
+                        <div class="vintage-stamp-footer">
+                            <div class="vintage-stamp-price">5¢</div>
+                            <div class="vintage-stamp-text">Santa's Secret<br>Bungendore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Enhanced Meet Kim Section -->
     <section id="about" class="bg-gradient-to-r from-red-600 to-red-700 text-white py-20 px-6 relative overflow-hidden">
         <!-- Background decorations -->
@@ -914,6 +1208,44 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox functionality
+        function openLightbox(imageSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImage.src = imageSrc;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('show');
+            
+            // Prevent body scroll when lightbox is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('show');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
 
         // Hero-Only Snow System
         class HeroSnowSystem {
