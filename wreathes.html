@@ -61,7 +61,12 @@
 
         /* Wreath Hero Background */
         .wreath-hero {
-            background: linear-gradient(135deg, #10b981 0%, #059669 30%, #34d399 70%, #6ee7b7 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
+                        url('https://images.unsplash.com/photo-1666115079117-28e25113048b?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNocmlzdG1hcyUyMHdyZWF0aHxlbnwwfHwwfHx8MA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             position: relative;
             overflow: hidden;
         }
@@ -74,11 +79,10 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(252, 211, 77, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(167, 243, 208, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 60% 20%, rgba(254, 202, 202, 0.2) 0%, transparent 40%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="botanicals" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><g fill="rgba(255,255,255,0.1)"><circle cx="5" cy="5" r="2"/><circle cx="15" cy="15" r="1.5"/><path d="M10,2 Q12,5 10,8 Q8,5 10,2" fill="rgba(252,211,77,0.2)"/><path d="M18,10 Q16,12 14,10 Q16,8 18,10" fill="rgba(167,243,208,0.2)"/></g></pattern></defs><rect width="100" height="100" fill="url(%23botanicals)"/></svg>');
-            opacity: 0.6;
+                radial-gradient(circle at 20% 30%, rgba(252, 211, 77, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(167, 243, 208, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(254, 202, 202, 0.1) 0%, transparent 40%);
+            opacity: 0.7;
             animation: gentle-sparkle 8s ease-in-out infinite alternate;
         }
 
@@ -91,14 +95,14 @@
             bottom: 0;
             background: linear-gradient(45deg, 
                 transparent 30%, 
-                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 50%, 
                 transparent 70%);
-            animation: shimmer-sweep 4s ease-in-out infinite;
+            animation: shimmer-sweep 6s ease-in-out infinite;
         }
 
         @keyframes gentle-sparkle {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.02); }
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.01); }
         }
 
         @keyframes shimmer-sweep {
@@ -188,7 +192,7 @@
 
         /* Enhanced Section Backgrounds */
         .wreath-bg {
-            background: linear-gradient(135deg, #fef7ed 0%, #fef3c7 100%);
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 25%, #f9fafb 50%, #ecfdf5 75%, #d1fae5 100%);
             position: relative;
         }
 
@@ -200,9 +204,17 @@
             right: 0;
             bottom: 0;
             background-image: 
-                radial-gradient(circle at 20% 20%, rgba(5, 150, 105, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+                radial-gradient(circle at 15% 25%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(252, 211, 77, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(167, 243, 208, 0.06) 0%, transparent 60%),
+                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.1) 50%, transparent 52%);
             pointer-events: none;
+            animation: background-dance 12s ease-in-out infinite;
+        }
+
+        @keyframes background-dance {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
         }
 
         /* Gallery Enhancement */
@@ -264,14 +276,22 @@
         /* Wreath decoration elements */
         .wreath-decoration {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
+            font-size: 2.5rem;
+            opacity: 0.15;
             animation: gentle-sway 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
         }
 
         .wreath-decoration:nth-child(2n) {
             animation-delay: -2s;
             animation-duration: 6s;
+            opacity: 0.2;
+        }
+
+        .wreath-decoration:nth-child(3n) {
+            animation-delay: -1s;
+            animation-duration: 5s;
+            opacity: 0.18;
         }
 
         /* Product Cards */
@@ -402,23 +422,27 @@
 
     <!-- Wreath Hero Section -->
     <section class="relative overflow-hidden min-h-screen flex items-center justify-center wreath-hero">
-        <!-- Wreath decorations -->
-        <div class="wreath-decoration" style="top: 10%; left: 10%;">🌿</div>
-        <div class="wreath-decoration" style="top: 20%; right: 15%;">🍃</div>
-        <div class="wreath-decoration" style="bottom: 30%; left: 20%;">🌸</div>
-        <div class="wreath-decoration" style="bottom: 20%; right: 10%;">🌺</div>
-        <div class="wreath-decoration" style="top: 60%; left: 5%;">🌻</div>
+        <!-- Enhanced Wreath decorations with more variety and brightness -->
+        <div class="wreath-decoration" style="top: 8%; left: 12%; color: #f59e0b;">🌺</div>
+        <div class="wreath-decoration" style="top: 15%; right: 10%; color: #10b981;">🌿</div>
+        <div class="wreath-decoration" style="top: 25%; left: 5%; color: #f472b6;">🌸</div>
+        <div class="wreath-decoration" style="bottom: 35%; left: 15%; color: #fbbf24;">🌻</div>
+        <div class="wreath-decoration" style="bottom: 15%; right: 8%; color: #34d399;">🍃</div>
+        <div class="wreath-decoration" style="top: 45%; right: 20%; color: #a78bfa;">🌼</div>
+        <div class="wreath-decoration" style="bottom: 25%; left: 25%; color: #fb7185;">🌹</div>
+        <div class="wreath-decoration" style="top: 60%; left: 8%; color: #fde047;">🌻</div>
+        <div class="wreath-decoration" style="top: 35%; right: 5%; color: #22d3ee;">🌊</div>
         
         <div class="container mx-auto px-6 z-20 text-center text-white relative">
             <div class="max-w-5xl mx-auto">
                 <div class="animate-gentle-sway mb-8">
-                    <i class="fas fa-circle-notch text-yellow-400 text-6xl mb-6"></i>
+                    <i class="fas fa-circle-notch text-yellow-300 text-6xl mb-6 drop-shadow-lg"></i>
                 </div>
-                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight">
+                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg">
                     Handcrafted Wreathes for 
-                    <span class="text-yellow-400">Every Season</span>
+                    <span class="text-yellow-300">Every Season</span>
                 </h1>
-                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95">
+                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95 drop-shadow-md">
                     Beautiful, bespoke wreathes that celebrate the changing seasons and bring natural elegance to your home year-round
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
