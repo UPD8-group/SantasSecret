@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween Collection - Santa's Secret</title>
+    <link rel="icon" type="image/png" href="/boxicon.ico">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --halloween-orange: #f97316;
+            --halloween-purple: #7c3aed;
+            --halloween-black: #1f2937;
+            --halloween-gold: #f59e0b;
+            --warm-white: #fef7ed;
+            --soft-gray: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Navigation Enhancement */
+        .nav-glass {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: linear-gradient(90deg, var(--halloween-orange), var(--halloween-purple));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Halloween Hero Background */
+        .halloween-hero {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #111827 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .halloween-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="bats" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M15,10 Q10,5 5,10 Q10,15 15,10 Q20,15 25,10 Q20,5 15,10 Z" fill="rgba(249,115,22,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23bats)"/></svg>');
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite alternate;
+        }
+
+        /* Enhanced Cards */
+        .magical-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(249, 115, 22, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magical-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(249, 115, 22, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .magical-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .magical-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(249, 115, 22, 0.1);
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Halloween Button Enhancement */
+        .btn-halloween {
+            background: linear-gradient(135deg, var(--halloween-orange) 0%, #ea580c 100%);
+            color: white;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 
+                0 4px 15px rgba(249, 115, 22, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-halloween::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-halloween:hover::before {
+            left: 100%;
+        }
+
+        .btn-halloween:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(249, 115, 22, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced Section Backgrounds */
+        .halloween-bg {
+            background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%);
+            position: relative;
+        }
+
+        .halloween-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Gallery Enhancement */
+        .gallery-item {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(249, 115, 22, 0.1), rgba(124, 58, 237, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes spooky-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-spooky-float {
+            animation: spooky-float 4s ease-in-out infinite;
+        }
+
+        /* Text Gradient */
+        .text-gradient-halloween {
+            background: linear-gradient(135deg, var(--halloween-orange) 0%, var(--halloween-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Halloween decoration elements */
+        .halloween-decoration {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: spooky-float 4s ease-in-out infinite;
+        }
+
+        .halloween-decoration:nth-child(2n) {
+            animation-delay: -2s;
+            animation-duration: 6s;
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .halloween-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-item:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        /* Spooky glow effect */
+        .spooky-glow {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+            to { box-shadow: 0 0 30px rgba(249, 115, 22, 0.5); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
+                        <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link text-gray-800 hover:text-orange-600 py-2">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-800 hover:text-orange-600 py-2">About</a>
+                    <a href="index.html#countdown" class="nav-link text-gray-800 hover:text-orange-600 py-2">Countdown</a>
+                    <a href="index.html#gallery" class="nav-link text-gray-800 hover:text-orange-600 py-2">Gallery</a>
+                    <a href="halloween.html" class="nav-link text-orange-600 py-2 font-semibold">Halloween</a>
+                    <a href="wreathes.html" class="nav-link text-gray-800 hover:text-orange-600 py-2">Wreathes</a>
+                    <a href="index.html#visitus" class="nav-link text-gray-800 hover:text-orange-600 py-2">Visit Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center">
+                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
+                <div class="flex flex-col space-y-2">
+                    <a href="index.html" class="py-2 text-gray-800 hover:text-orange-600">Home</a>
+                    <a href="index.html#about" class="py-2 text-gray-800 hover:text-orange-600">About</a>
+                    <a href="index.html#countdown" class="py-2 text-gray-800 hover:text-orange-600">Countdown</a>
+                    <a href="index.html#gallery" class="py-2 text-gray-800 hover:text-orange-600">Gallery</a>
+                    <a href="halloween.html" class="py-2 text-orange-600 font-semibold">Halloween</a>
+                    <a href="wreathes.html" class="py-2 text-gray-800 hover:text-orange-600">Wreathes</a>
+                    <a href="index.html#visitus" class="py-2 text-gray-800 hover:text-orange-600">Visit Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Halloween Hero Section -->
+    <section class="relative overflow-hidden min-h-screen flex items-center justify-center halloween-hero">
+        <!-- Halloween decorations -->
+        <div class="halloween-decoration" style="top: 10%; left: 10%;">🎃</div>
+        <div class="halloween-decoration" style="top: 20%; right: 15%;">🦇</div>
+        <div class="halloween-decoration" style="bottom: 30%; left: 20%;">👻</div>
+        <div class="halloween-decoration" style="bottom: 20%; right: 10%;">🕷️</div>
+        <div class="halloween-decoration" style="top: 60%; left: 5%;">🌙</div>
+        
+        <div class="container mx-auto px-6 z-20 text-center text-white relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="animate-spooky-float mb-8">
+                    <i class="fas fa-ghost text-orange-400 text-6xl mb-6"></i>
+                </div>
+                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight">
+                    Spooktacular Halloween 
+                    <span class="text-orange-400">Decorations & Crafts</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95">
+                    Transform your home into a haunted haven with our handcrafted Halloween decorations and spooky seasonal crafts
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#halloween-collection" class="btn-halloween text-lg transform hover:scale-105">
+                        <i class="fas fa-magic mr-3"></i>Explore Halloween Magic
+                    </a>
+                    <a href="index.html#visitus" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-gray-800 transition-all duration-300">
+                        <i class="fas fa-store mr-2"></i>Visit Our Shop
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Halloween About Section -->
+    <section class="halloween-bg py-20 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-6xl font-extrabold mb-6 text-gradient-halloween">
+                    Halloween Collection
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    From eerie elegance to playful pumpkins, our Halloween collection brings the perfect blend of spooky and stylish to your seasonal celebrations
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pumpkin Decorations -->
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 spooky-glow">
+                        <i class="fas fa-seedling text-orange-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900">Pumpkin Perfection</h3>
+                    <p class="text-gray-700 mb-6">
+                        Handcrafted pumpkin displays, carved jack-o'-lanterns, and painted gourds that bring autumn warmth to your doorstep.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Custom carved designs</li>
+                        <li>• Painted decorative pumpkins</li>
+                        <li>• Miniature pumpkin arrangements</li>
+                        <li>• Glow-in-the-dark options</li>
+                    </ul>
+                </div>
+
+                <!-- Spooky Wreaths -->
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 spooky-glow">
+                        <i class="fas fa-circle-notch text-purple-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900">Haunted Wreaths</h3>
+                    <p class="text-gray-700 mb-6">
+                        Spine-tingling wreaths featuring dark foliage, miniature skulls, ravens, and other ghostly elements for your front door.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Gothic black and orange designs</li>
+                        <li>• Raven and bat accents</li>
+                        <li>• LED lighting options</li>
+                        <li>• Weather-resistant materials</li>
+                    </ul>
+                </div>
+
+                <!-- Indoor Decor -->
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 spooky-glow">
+                        <i class="fas fa-home text-gray-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900">Indoor Hauntings</h3>
+                    <p class="text-gray-700 mb-6">
+                        Transform your living spaces with elegant Halloween centerpieces, candle arrangements, and atmospheric decorations.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Spooky candle displays</li>
+                        <li>• Halloween table runners</li>
+                        <li>• Ghostly garlands</li>
+                        <li>• Vintage-inspired accents</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Halloween Products -->
+    <section id="halloween-collection" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-halloween">
+                    Featured Halloween Creations
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Discover our most popular Halloween pieces, each handcrafted with love and attention to spooky detail
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product placeholders - you can replace with actual product images -->
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                            <i class="fas fa-seedling text-orange-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Enchanted Pumpkin Display</h3>
+                        <p class="text-gray-600 mb-4">A stunning arrangement of carved and painted pumpkins with LED lighting.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$85</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                            <i class="fas fa-circle-notch text-purple-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Gothic Halloween Wreath</h3>
+                        <p class="text-gray-600 mb-4">Dark and dramatic wreath featuring ravens, skulls, and autumn foliage.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$65</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <i class="fas fa-ghost text-gray-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Ghostly Centerpiece</h3>
+                        <p class="text-gray-600 mb-4">Elegant table centerpiece with floating ghosts and flickering candles.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$45</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center">
+                            <i class="fas fa-magic text-yellow-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Witch's Garden Display</h3>
+                        <p class="text-gray-600 mb-4">Mystical arrangement with potion bottles, herbs, and magical elements.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$95</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                            <i class="fas fa-spider text-red-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Spooky Spider Corner</h3>
+                        <p class="text-gray-600 mb-4">Create an eerie corner with oversized spiders and webbing effects.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$55</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center">
+                            <i class="fas fa-moon text-indigo-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Midnight Moon Scene</h3>
+                        <p class="text-gray-600 mb-4">Atmospheric display featuring a glowing moon with silhouetted trees.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-orange-600">$75</span>
+                            <button class="btn-halloween text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="index.html#visitus" class="btn-halloween text-lg">
+                    <i class="fas fa-store mr-2"></i>Visit Our Workshop
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Orders Section -->
+    <section class="halloween-bg py-20 px-6 relative">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="magical-card p-12 rounded-3xl">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold mb-6 text-gradient-halloween">
+                    Custom Halloween Creations
+                </h2>
+                <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                    Have a specific vision for your Halloween decor? Kim can bring your spookiest dreams to life with custom-designed pieces tailored to your home and style.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Custom Design</h3>
+                        <p class="text-sm text-gray-600">Personalized decorations to match your theme</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hammer text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Handcrafted</h3>
+                        <p class="text-sm text-gray-600">Each piece made with attention to detail</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-gray-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Timely Delivery</h3>
+                        <p class="text-sm text-gray-600">Ready for your Halloween celebrations</p>
+                    </div>
+                </div>
+
+                <a href="tel:0480784317" class="btn-halloween text-lg">
+                    <i class="fas fa-phone mr-2"></i>Call for Custom Orders
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="halloween-decoration" style="top: 10%; left: 10%;">🎃</div>
+            <div class="halloween-decoration" style="top: 30%; right: 15%;">🦇</div>
+            <div class="halloween-decoration" style="bottom: 30%; left: 20%;">👻</div>
+            <div class="halloween-decoration" style="bottom: 10%; right: 10%;">🕷️</div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gradient-halloween">Santa's Secret</h3>
+                    <p class="text-gray-300 mb-6">Creating magical seasonal memories in Bungendore. From spooky Halloween to festive Christmas - where tradition meets imagination.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/SantasSecretBungendore" 
+                           target="_blank"
+                           class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center hover:bg-orange-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="mailto:info.santasecret@gmail.com" 
+                           class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-home mr-2 text-sm"></i>Home
+                        </a></li>
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-user mr-2 text-sm"></i>About Kim
+                        </a></li>
+                        <li><a href="index.html#gallery" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-images mr-2 text-sm"></i>Gallery
+                        </a></li>
+                        <li><a href="halloween.html" class="text-orange-400 hover:text-orange-300 transition-colors flex items-center">
+                            <i class="fas fa-ghost mr-2 text-sm"></i>Halloween
+                        </a></li>
+                        <li><a href="wreathes.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-circle-notch mr-2 text-sm"></i>Wreathes
+                        </a></li>
+                        <li><a href="index.html#visitus" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-sm"></i>Visit Us
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-map-marker-alt mr-3 text-orange-400"></i>
+                            <span>24b Malbon St, Bungendore NSW</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-phone mr-3 text-green-400"></i>
+                            <a href="tel:0480784317" class="hover:text-white transition-colors">0480 784 317</a>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-3 text-purple-400"></i>
+                            <a href="mailto:info.santasecret@gmail.com" class="hover:text-white transition-colors">info.santasecret@gmail.com</a>
+                        </div>
+                        <div class="mt-4 p-3 bg-gray-800 rounded-lg">
+                            <p class="text-sm text-gray-400 mb-2">Store Hours:</p>
+                            <p class="text-sm text-gray-300">Fri: 10am-2pm | Sat: 10am-3pm | Sun: 10am-2pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
+                    <p>&copy; 2024 Santa's Secret. All rights reserved. Made with ❤️ in Bungendore.</p>
+                    <div class="mt-4 md:mt-0">
+                        <a href="https://codepluscanvas.com" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-white text-2xl font-light" title="Created with Code+Canvas">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Add scroll-based navigation background
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('shadow-lg');
+                } else {
+                    nav.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
