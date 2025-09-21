@@ -1,1 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa's Secret - Christmas Shop in Bungendore</title>
+    <link rel="icon" type="image/png" href="/boxicon.ico">
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --christmas-red: #dc2626;
+            --christmas-green: #059669;
+            --christmas-gold: #f59e0b;
+            --warm-white: #fef7ed;
+            --soft-gray: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Logo Overlay Styling */
+        .logo-overlay {
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .logo-overlay:hover {
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Hero Background */
+        .hero-gradient {
+            background: url('https://santasecret.com.au/ss4.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.2)"/><circle cx="15" cy="15" r="0.5" fill="rgba(255,255,255,0.2)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+            opacity: 0.3;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Enhanced Snow Canvas - Hero Section Only */
+        .snow-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Navigation Enhancement - Reduced padding and improved alignment */
+        .nav-glass {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: linear-gradient(90deg, var(--christmas-red), var(--christmas-gold));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Enhanced Cards */
+        .magical-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(220, 38, 38, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magical-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(220, 38, 38, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .magical-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .magical-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(220, 38, 38, 0.1);
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Christmas Button Enhancement */
+        .btn-christmas {
+            background: linear-gradient(135deg, var(--christmas-red) 0%, #b91c1c 100%);
+            color: white;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 
+                0 4px 15px rgba(220, 38, 38, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-christmas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-christmas:hover::before {
+            left: 100%;
+        }
+
+        .btn-christmas:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(220, 38, 38, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced Section Backgrounds */
+        .festive-bg {
+            background: linear-gradient(135deg, var(--warm-white) 0%, #fef3c7 100%);
+            position: relative;
+        }
+
+        .festive-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(220, 38, 38, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Gallery Enhancement */
+        .gallery-item {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(220, 38, 38, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Countdown Enhancement */
+        .countdown-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(248, 250, 252, 0.8));
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .countdown-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-sparkle {
+            animation: sparkle 2s linear infinite;
+        }
+
+        /* Beautiful Featured Image */
+        .featured-image-container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 25px;
+            background: linear-gradient(145deg, 
+                rgba(248, 250, 252, 0.95) 0%, 
+                rgba(226, 232, 240, 0.9) 50%,
+                rgba(241, 245, 249, 0.95) 100%);
+            border-radius: 35px;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.15),
+                0 0 40px rgba(59, 130, 246, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-image-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(59, 130, 246, 0.05), 
+                transparent, 
+                rgba(147, 197, 253, 0.03),
+                transparent);
+            transform: rotate(45deg);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .featured-image-container:hover::before {
+            opacity: 1;
+            animation: shimmer-blue 2s ease-in-out;
+        }
+
+        .featured-image-container:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 40px 90px rgba(0, 0, 0, 0.2),
+                0 0 60px rgba(59, 130, 246, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .featured-workshop-image {
+            width: 100%;
+            height: auto;
+            border-radius: 25px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.12),
+                0 5px 15px rgba(59, 130, 246, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-workshop-image:hover {
+            transform: scale(1.03);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.15),
+                0 8px 25px rgba(59, 130, 246, 0.12);
+        }
+
+        @keyframes shimmer-blue {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-100%) translateY(-100%) rotate(45deg); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: translateX(0%) translateY(0%) rotate(45deg); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateX(100%) translateY(100%) rotate(45deg); 
+            }
+        }
+
+        /* Mobile responsiveness for featured image */
+        @media (max-width: 768px) {
+            .featured-image-container {
+                max-width: 95%;
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .featured-image-container:hover {
+                transform: translateY(-8px) scale(1.01);
+            }
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            animation: scaleIn 0.3s ease;
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: -10px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(220, 38, 38, 0.8);
+            transform: scale(1.1);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .stamps-collection {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .vintage-stamp {
+                width: 200px;
+                height: 250px;
+            }
+
+            .vintage-stamp-image {
+                height: 160px;
+            }
+
+            .lightbox-close {
+                top: -40px;
+                right: 0;
+                font-size: 28px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-caption {
+                font-size: 16px;
+                bottom: -50px;
+            }
+        }
+
+        .christmas-stamp {
+            position: relative;
+            width: 300px;
+            height: 360px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 8px solid #dc2626;
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            margin: 0 auto;
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+        }
+
+        .christmas-stamp:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .christmas-stamp::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 8px,
+                #dc2626 8px,
+                #dc2626 12px
+            );
+            border-radius: 16px;
+            z-index: -1;
+        }
+
+        .stamp-image-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .stamp-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.6s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .stamp-image.active {
+            opacity: 1;
+        }
+
+        .stamp-image:not(.active) {
+            opacity: 0;
+        }
+
+        .stamp-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stamp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-year {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .stamp-indicators {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .stamp-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stamp-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .postmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #dc2626;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.1;
+            transform: rotate(15deg);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.5rem;
+            }
+            
+            /* Mobile-specific hero text alignment */
+            .hero-mobile-text {
+                text-align: center;
+                max-width: 90%;
+                margin: 0 auto;
+                line-height: 1.4;
+            }
+            
+            .hero-mobile-subtitle {
+                font-size: 1.1rem;
+                line-height: 1.5;
+                padding: 0 1rem;
+                margin: 0 auto;
+                max-width: 95%;
+            }
+            
+            .gallery-item:hover {
+                transform: scale(1.02);
+            }
+
+            .christmas-stamp {
+                width: 250px;
+                height: 300px;
+                transform: rotate(-1deg);
+            }
+
+            .stamp-image-container {
+                height: 200px;
+            }
+        }
+
+        /* Desktop-specific styling */
+        @media (min-width: 769px) {
+            .hero-desktop-subtitle {
+                white-space: nowrap;
+                max-width: none;
+            }
+        }
+
+        /* Christmas decoration elements */
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .decoration:nth-child(2n) {
+            animation-delay: -2s;
+            animation-duration: 6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Snow Canvas -->
+    <canvas id="snowCanvas" class="snow-canvas"></canvas>
+
+    <!-- Navigation with Logo Restored -->
+    <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section - Restored -->
+                <div class="flex items-center">
+                    <a href="#home" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
+                        <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#home" class="nav-link text-gray-800 hover:text-red-600 py-2">Home</a>
+                    <a href="#about" class="nav-link text-gray-800 hover:text-red-600 py-2">About</a>
+                    <a href="#countdown" class="nav-link text-gray-800 hover:text-red-600 py-2">Countdown</a>
+                    <a href="#gallery" class="nav-link text-gray-800 hover:text-red-600 py-2">Gallery</a>
+                    <a href="halloween.html" class="nav-link text-gray-800 hover:text-red-600 py-2">Halloween</a>
+                    <a href="wreathes.html" class="nav-link text-gray-800 hover:text-red-600 py-2">Wreathes</a>
+                    <a href="#visitus" class="nav-link text-gray-800 hover:text-red-600 py-2">Visit Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center">
+                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
+                <div class="flex flex-col space-y-2">
+                    <a href="#home" class="py-2 text-gray-800 hover:text-red-600">Home</a>
+                    <a href="#about" class="py-2 text-gray-800 hover:text-red-600">About</a>
+                    <a href="#countdown" class="py-2 text-gray-800 hover:text-red-600">Countdown</a>
+                    <a href="#gallery" class="py-2 text-gray-800 hover:text-red-600">Gallery</a>
+                    <a href="halloween.html" class="py-2 text-gray-800 hover:text-red-600">Halloween</a>
+                    <a href="wreathes.html" class="py-2 text-gray-800 hover:text-red-600">Wreathes</a>
+                    <a href="#visitus" class="py-2 text-gray-800 hover:text-red-600">Visit Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Hero Section -->
+    <section id="home" class="relative overflow-hidden min-h-screen flex items-center justify-center hero-gradient">
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        
+        <!-- Snow Canvas - Hero Only -->
+        <canvas id="snowCanvas" class="snow-canvas"></canvas>
+        
+        <!-- Floating Christmas decorations -->
+        <div class="decoration" style="top: 10%; left: 10%;">🎄</div>
+        <div class="decoration" style="top: 20%; right: 15%;">⭐</div>
+        <div class="decoration" style="bottom: 30%; left: 20%;">🎁</div>
+        <div class="decoration" style="bottom: 20%; right: 10%;">❄️</div>
+        
+        <div class="container mx-auto px-6 z-20 text-center text-white relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="animate-float mb-8">
+                    <i class="fas fa-star text-yellow-300 text-6xl mb-6 animate-sparkle"></i>
+                </div>
+                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight">
+                    Discover the Secrets to an 
+                    <span class="md:inline block text-yellow-300">Unconventional Christmas</span>
+                    <span class="md:inline block text-yellow-300">in the heart of Bungendore</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95 hero-mobile-subtitle md:hero-desktop-subtitle">
+                    Bespoke Christmas decorations and gifts to make your holidays special ❤️
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#gallery" class="btn-christmas text-lg transform hover:scale-105">
+                        <i class="fas fa-gift mr-3"></i>Explore Our Magic
+                    </a>
+                    <a href="#about" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-red-600 transition-all duration-300">
+                        <i class="fas fa-heart mr-2"></i>Meet Kim
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced About Section -->
+    <section class="festive-bg py-20 px-6 relative">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <!-- Text Content -->
+            <div class="order-2 md:order-1">
+                <h2 class="heading-font text-5xl font-extrabold text-gray-900 mb-8">
+                    The Art of <span class="text-gradient">Bespoke Decorations</span>
+                </h2>
+                <div class="prose prose-lg text-gray-700 space-y-6">
+                    <p class="text-xl leading-relaxed">
+                        Transform your home with one-of-a-kind Christmas and Easter decorations designed to make this holiday season truly unforgettable.
+                    </p>
+                    <p>
+                        At Santa's Secret, we create and sell handcrafted ornaments, custom Christmas trees, and decor pieces that blend tradition with a touch of modern flair.
+                    </p>
+
+                    <div class="magical-card p-6 mt-8 rounded-2xl">
+                        <h3 class="heading-font text-2xl font-bold mb-4 text-red-600">Why Choose Santa's Secret?</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-magic text-red-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Artisan Craftsmanship:</strong> Every piece is made with care, using a mix of recycled and new materials for an eco-friendly, beautiful result.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-palette text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Custom Creations:</strong> From bespoke trees to personalized ornaments, we bring your holiday vision to life.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-store text-yellow-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Shop Our Collection:</strong> Browse our exclusive designs online or visit our Bungendore studio.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-red-50 to-green-50 p-6 rounded-2xl border-l-4 border-red-500">
+                        <p class="font-semibold text-gray-900 text-lg">Ready to bring some magic into your home?</p>
+                        <p class="text-gray-700 mt-2">Step into Santa's Secret and make this Christmas unforgettable with decor as unique as you are.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beautiful Featured Image -->
+            <div class="order-1 md:order-2 flex justify-center items-center">
+                <div class="featured-image-container">
+                    <img src="https://santasecret.com.au/ss3.webp" 
+                         alt="Kim's Beautiful Christmas Workshop Display" 
+                         class="featured-workshop-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Meet Kim Section -->
+    <section id="about" class="bg-gradient-to-r from-red-600 to-red-700 text-white py-20 px-6 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="decoration" style="top: 10%; left: 5%;">🎄</div>
+            <div class="decoration" style="top: 60%; right: 10%;">❄️</div>
+            <div class="decoration" style="bottom: 20%; left: 15%;">🎁</div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12 relative z-10">
+            <!-- Enhanced Image -->
+            <div class="flex-shrink-0">
+                <div class="relative">
+                    <img src="/meetKim.png" alt="Meet Kim" class="w-80 h-80 object-cover rounded-3xl border-4 border-white shadow-2xl"/>
+                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                        <i class="fas fa-heart text-red-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Text -->
+            <div class="max-w-3xl text-left">
+                <div class="magical-card bg-white/90 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
+                    <blockquote class="text-2xl md:text-3xl font-medium leading-relaxed mb-8 text-gray-800">
+                        "At Santa's Secret, we believe the holidays should be as unique as you are.
+                        From upcycled trees to oversized, handcrafted ornaments, our collection transforms
+                        tradition into something extraordinary."
+                    </blockquote>
+                    <blockquote class="text-2xl md:text-3xl font-medium leading-relaxed mb-8 text-gray-800">
+                        "Step into a world where Christmas is reimagined—bold, beautiful, and unmistakably yours."
+                    </blockquote>
+                    <footer class="text-xl italic font-light text-gray-700">
+                        — Kim, the Artisan Behind the Magic ✨
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Christmas Countdown -->
+    <section id="countdown" class="py-20 festive-bg relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1 class="heading-font text-4xl md:text-6xl font-bold mb-6 text-gradient">Christmas Countdown</h1>
+                <p class="text-xl text-gray-700">Count down the magical moments until Christmas!</p>
+            </div>
+
+            <div class="countdown-container rounded-3xl p-8 mb-12 shadow-2xl max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="mb-4 md:mb-0">
+                        <h2 class="heading-font text-2xl font-bold mb-2 text-gray-800">Set Your Countdown</h2>
+                        <p class="text-sm text-gray-600">Choose when your countdown should begin</p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <input type="date" id="startDate" class="bg-white/80 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg">
+                        <button id="resetBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl transition-all shadow-lg hover:shadow-xl">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+                    <div class="countdown-card rounded-2xl p-6">
+                        <div class="text-5xl font-bold mb-2 text-red-600" id="days">00</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-600">Days</div>
+                    </div>
+
+                    <div class="countdown-card rounded-2xl p-6">
+                        <div class="text-5xl font-bold mb-2 text-green-600" id="hours">00</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-600">Hours</div>
+                    </div>
+
+                    <div class="countdown-card rounded-2xl p-6">
+                        <div class="text-5xl font-bold mb-2 text-yellow-600" id="minutes">00</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-600">Minutes</div>
+                    </div>
+
+                    <div class="countdown-card rounded-2xl p-6">
+                        <div class="text-5xl font-bold mb-2 text-red-600" id="seconds">00</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-600">Seconds</div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <div id="message" class="text-2xl font-bold heading-font text-gray-800"></div>
+                </div>
+            </div>
+
+            <!-- Enhanced Fun Facts -->
+            <div class="magical-card rounded-3xl p-8 shadow-2xl">
+                <h2 class="heading-font text-3xl font-bold mb-8 text-center text-gradient">Christmas Fun Facts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="magical-card p-6 rounded-2xl">
+                        <h3 class="font-bold mb-3 flex items-center text-red-600">
+                            <i class="fas fa-candy-cane mr-3 text-2xl"></i> Candy Canes
+                        </h3>
+                        <p class="text-gray-700">The average candy cane is about 13 cm tall. Aussies love a sweet treat—especially at Christmas! Candy canes are one of the top-selling seasonal lollies across Australia every December.</p>
+                    </div>
+
+                    <div class="magical-card p-6 rounded-2xl">
+                        <h3 class="font-bold mb-3 flex items-center text-green-600">
+                            <i class="fas fa-tree mr-3 text-2xl"></i> Christmas Trees
+                        </h3>
+                        <p class="text-gray-700">It takes around 7–10 years for a Christmas tree to reach full height. In Australia, over 1.4 million real Christmas trees are sold each year, with rising demand for sustainable options.</p>
+                    </div>
+
+                    <div class="magical-card p-6 rounded-2xl">
+                        <h3 class="font-bold mb-3 flex items-center text-blue-600">
+                            <i class="fas fa-sleigh mr-3 text-2xl"></i> Santa's Aussie Journey
+                        </h3>
+                        <p class="text-gray-700">To reach all children across Australia's 7.7 million km², Santa would fly faster than a jet—zipping between bushland, beaches, cities, and outback towns. Maybe even a stop for pavlova!</p>
+                    </div>
+
+                    <div class="magical-card p-6 rounded-2xl">
+                        <h3 class="font-bold mb-3 flex items-center text-yellow-600">
+                            <i class="fas fa-gift mr-3 text-2xl"></i> Gift Giving
+                        </h3>
+                        <p class="text-gray-700">The tradition comes from the Three Wise Men—but in Australia, it's about backyard cricket, family BBQs, and secret Santa swaps under the gum tree.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Gallery -->
+    <section id="gallery" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-6xl font-extrabold mb-6 text-gradient">
+                    Our Christmas Gallery
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Explore the magic we've created for families across Bungendore and beyond
+                </p>
+            </div>
+
+            <div class="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6">
+                <img src="/photo1.jpg" alt="Gallery Image 1" class="w-full gallery-item shadow-xl" />
+                <img src="/photo2.jpg" alt="Gallery Image 2" class="w-full gallery-item shadow-xl" />
+                <img src="/photo3.jpg" alt="Gallery Image 3" class="w-full gallery-item shadow-xl" />
+                <img src="/photo4.jpg" alt="Gallery Image 4" class="w-full gallery-item shadow-xl" />
+                <img src="/photo5.jpg" alt="Gallery Image 5" class="w-full gallery-item shadow-xl" />
+                <img src="/photo6.jpg" alt="Gallery Image 6" class="w-full gallery-item shadow-xl" />
+                <img src="/photo7.jpg" alt="Gallery Image 7" class="w-full gallery-item shadow-xl" />
+                <img src="/photo8.jpg" alt="Gallery Image 8" class="w-full gallery-item shadow-xl" />
+                <img src="/photo9.jpg" alt="Gallery Image 9" class="w-full gallery-item shadow-xl" />
+                <img src="/photo10.jpg" alt="Gallery Image 10" class="w-full gallery-item shadow-xl" />
+                <img src="/photo11.jpg" alt="Gallery Image 11" class="w-full gallery-item shadow-xl" />
+                <img src="/photo12.jpg" alt="Gallery Image 12" class="w-full gallery-item shadow-xl" />
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="btn-christmas">
+                    <i class="fas fa-camera mr-2"></i>View More Photos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Contact Section -->
+    <section id="visitus" class="py-20 festive-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-6xl font-bold mb-6 text-gradient">Visit Our Magical Store</h2>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    Step into our enchanted workshop in the heart of Bungendore
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Enhanced Store Information -->
+                <div class="magical-card p-8 rounded-3xl">
+                    <h3 class="heading-font text-2xl font-bold mb-8 text-red-600">Store Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-red-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900 mb-1">Address</p>
+                                <p class="text-gray-700">24b Malbon Street</p>
+                                <p class="text-gray-700">Bungendore, NSW 2621</p>
+                                <p class="text-sm text-gray-500 italic mt-1">(The old Lolly Shop)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900 mb-2">Opening Hours</p>
+                                <div class="space-y-1">
+                                    <p class="flex justify-between">
+                                        <span class="font-medium">Friday:</span> 
+                                        <span>10 am–2 pm</span>
+                                    </p>
+                                    <p class="flex justify-between">
+                                        <span class="font-medium">Saturday:</span> 
+                                        <span>10 am–3:00 pm</span>
+                                    </p>
+                                    <p class="flex justify-between">
+                                        <span class="font-medium">Sunday:</span> 
+                                        <span>10 am–2 pm</span>
+                                    </p>
+                                </div>
+                                <a href="https://www.google.com/search?q=santas+secret+bungendore" 
+                                   target="_blank" 
+                                   class="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 underline mt-2">
+                                    <i class="fas fa-external-link-alt mr-1"></i>
+                                    Check current hours on Google
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900 mb-1">Phone</p>
+                                <a href="tel:0480784317" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    0480 784 317
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-yellow-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900 mb-1">Email</p>
+                                <a href="mailto:info.santasecret@gmail.com" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    info.santasecret@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-gradient-to-r from-red-50 to-green-50 rounded-2xl">
+                        <h4 class="heading-font font-bold mb-4 text-gray-900">What Makes Us Special</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-magic text-red-500 mr-2"></i>
+                                <span class="text-sm">Custom Decorations</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-green-500 mr-2"></i>
+                                <span class="text-sm">Handcrafted Ornaments</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-leaf text-green-500 mr-2"></i>
+                                <span class="text-sm">Eco-friendly Materials</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-palette text-yellow-500 mr-2"></i>
+                                <span class="text-sm">Bespoke Design Service</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Map Section -->
+                <div class="magical-card p-8 rounded-3xl">
+                    <h3 class="heading-font text-2xl font-bold mb-6 text-red-600">Find Our Workshop</h3>
+                    <div class="relative w-full h-96 rounded-2xl overflow-hidden shadow-lg">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3256.8947298471834!2d149.42688767652457!3d-35.25316317264089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b164d89c84b7e9b%3A0x504f0b535df2c10!2s24b%20Malbon%20St%2C%20Bungendore%20NSW%202621%2C%20Australia!5e0!3m2!1sen!2sus!4v1703123456789!5m2!1sen!2sus"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Santa's Secret Location">
+                        </iframe>
+                    </div>
+                    <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                        <a href="https://www.google.com/maps/dir//24b+Malbon+St,+Bungendore+NSW+2621" 
+                           target="_blank" 
+                           class="btn-christmas flex-1 text-center">
+                            <i class="fas fa-directions mr-2"></i>
+                            Get Directions
+                        </a>
+                        <a href="tel:0480784317" 
+                           class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full transition-all flex-1 text-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            Call Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="decoration" style="top: 10%; left: 10%;">🎄</div>
+            <div class="decoration" style="top: 30%; right: 15%;">⭐</div>
+            <div class="decoration" style="bottom: 30%; left: 20%;">🎁</div>
+            <div class="decoration" style="bottom: 10%; right: 10%;">❄️</div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gradient">Santa's Secret</h3>
+                    <p class="text-gray-300 mb-6">Creating magical Christmas memories in Bungendore since 2024. Where tradition meets imagination.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/SantasSecretBungendore" 
+                           target="_blank"
+                           class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="mailto:info.santasecret@gmail.com" 
+                           class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-home mr-2 text-sm"></i>Home
+                        </a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-user mr-2 text-sm"></i>About Kim
+                        </a></li>
+                        <li><a href="#gallery" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-images mr-2 text-sm"></i>Gallery
+                        </a></li>
+                        <li><a href="halloween.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-ghost mr-2 text-sm"></i>Halloween
+                        </a></li>
+                        <li><a href="wreathes.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-circle-notch mr-2 text-sm"></i>Wreathes
+                        </a></li>
+                        <li><a href="#visitus" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-sm"></i>Visit Us
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-map-marker-alt mr-3 text-red-400"></i>
+                            <span>24b Malbon St, Bungendore NSW</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-phone mr-3 text-green-400"></i>
+                            <a href="tel:0480784317" class="hover:text-white transition-colors">0480 784 317</a>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:info.santasecret@gmail.com" class="hover:text-white transition-colors">info.santasecret@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
+                    <p>&copy; 2024 Santa's Secret. All rights reserved. Made with ❤️ in Bungendore.</p>
+                    <div class="mt-4 md:mt-0">
+                        <a href="https://codepluscanvas.com" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:text-white text-2xl font-light" title="Created with Code+Canvas">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Lightbox functionality
+        function openLightbox(imageSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImage.src = imageSrc;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('show');
+            
+            // Prevent body scroll when lightbox is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('show');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Hero-Only Snow System
+        class HeroSnowSystem {
+            constructor() {
+                this.canvas = document.getElementById('snowCanvas');
+                if (!this.canvas) return;
+                
+                this.ctx = this.canvas.getContext('2d');
+                this.snowflakes = [];
+                this.isSnowing = true;
+                this.animationId = null;
+                this.heroSection = document.querySelector('#home');
+                
+                this.isMobile = window.innerWidth <= 768;
+                this.maxSnowflakes = this.isMobile ? 20 : 40;
+                
+                this.init();
+            }
+
+            init() {
+                this.resizeCanvas();
+                this.startSnow();
+                
+                window.addEventListener('resize', () => {
+                    this.resizeCanvas();
+                });
+            }
+
+            resizeCanvas() {
+                if (!this.heroSection) return;
+                
+                // Size canvas to match hero section
+                const heroRect = this.heroSection.getBoundingClientRect();
+                this.canvas.width = heroRect.width;
+                this.canvas.height = heroRect.height;
+                this.canvas.style.width = heroRect.width + 'px';
+                this.canvas.style.height = heroRect.height + 'px';
+            }
+
+            createSnowflake() {
+                return {
+                    x: Math.random() * this.canvas.width,
+                    y: -10,
+                    radius: Math.random() * 4 + 1,
+                    speed: Math.random() * 2 + 0.5,
+                    drift: (Math.random() - 0.5) * 1.5,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    sparkle: Math.random() > 0.7
+                };
+            }
+
+            animate() {
+                if (!this.isSnowing) return;
+
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                for (let i = this.snowflakes.length - 1; i >= 0; i--) {
+                    const flake = this.snowflakes[i];
+                    
+                    flake.y += flake.speed;
+                    flake.x += flake.drift;
+
+                    // Draw snowflake
+                    if (flake.sparkle) {
+                        this.ctx.shadowBlur = 10;
+                        this.ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+                    }
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
+                    this.ctx.fill();
+                    
+                    this.ctx.shadowBlur = 0;
+
+                    // Remove snowflakes that fall outside the hero section
+                    if (flake.y > this.canvas.height + 10 || flake.x < -50 || flake.x > this.canvas.width + 50) {
+                        this.snowflakes.splice(i, 1);
+                    }
+                }
+
+                // Add new snowflakes only in hero section
+                if (this.snowflakes.length < this.maxSnowflakes && Math.random() < 0.3) {
+                    this.snowflakes.push(this.createSnowflake());
+                }
+
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+
+            startSnow() {
+                this.isSnowing = true;
+                for (let i = 0; i < 15; i++) {
+                    this.snowflakes.push(this.createSnowflake());
+                }
+                this.animate();
+            }
+
+            stopSnow() {
+                this.isSnowing = false;
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize hero-only snow system
+            const snowSystem = new HeroSnowSystem();
+            
+            // Enhanced countdown functionality
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const messageEl = document.getElementById('message');
+            const startDateInput = document.getElementById('startDate');
+            const resetBtn = document.getElementById('resetBtn');
+            let countdownInterval;
+
+            const today = new Date();
+            const todayFormatted = today.toISOString().split('T')[0];
+            startDateInput.value = todayFormatted;
+            startDateInput.min = todayFormatted;
+
+            function getChristmasDate() {
+                const now = new Date();
+                const currentYear = now.getFullYear();
+                let christmasDate = new Date(currentYear, 11, 25);
+                if (now > christmasDate) {
+                    christmasDate = new Date(currentYear + 1, 11, 25);
+                }
+                return christmasDate;
+            }
+
+            function updateCountdown() {
+                const now = new Date();
+                const christmasDate = getChristmasDate();
+                const diff = christmasDate - now;
+                
+                if (diff <= 0) {
+                    clearInterval(countdownInterval);
+                    daysEl.textContent = '00';
+                    hoursEl.textContent = '00';
+                    minutesEl.textContent = '00';
+                    secondsEl.textContent = '00';
+                    messageEl.textContent = '🎄 Merry Christmas! The magic is here! 🎄';
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                daysEl.textContent = days.toString().padStart(2, '0');
+                hoursEl.textContent = hours.toString().padStart(2, '0');
+                minutesEl.textContent = minutes.toString().padStart(2, '0');
+                secondsEl.textContent = seconds.toString().padStart(2, '0');
+                
+                if (days === 0 && hours < 24) {
+                    messageEl.textContent = '✨ Christmas magic is almost here! ✨';
+                } else if (days < 7) {
+                    messageEl.textContent = '🎁 So close you can almost taste the Christmas cookies! 🍪';
+                } else if (days < 30) {
+                    messageEl.textContent = '🎄 The Christmas excitement is building! 🎄';
+                } else {
+                    messageEl.textContent = '❄️ Counting down to the most magical time of year! ❄️';
+                }
+            }
+
+            function startCountdown() {
+                if (countdownInterval) clearInterval(countdownInterval);
+                updateCountdown();
+                countdownInterval = setInterval(updateCountdown, 1000);
+            }
+
+            resetBtn.addEventListener('click', function() {
+                startDateInput.value = todayFormatted;
+                startCountdown();
+            });
+
+            startCountdown();
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Add scroll-based navigation background
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('shadow-lg');
+                } else {
+                    nav.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
