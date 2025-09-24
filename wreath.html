@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handcrafted Wreaths - Santa's Secret</title>
+    <link rel="icon" type="image/png" href="/boxicon.ico">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --wreath-green: #059669;
+            --wreath-gold: #f59e0b;
+            --wreath-burgundy: #991b1b;
+            --wreath-cream: #fef3c7;
+            --warm-white: #fef7ed;
+            --soft-gray: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Navigation Enhancement */
+        .nav-glass {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background: linear-gradient(90deg, var(--wreath-green), var(--wreath-gold));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Wreath Hero Background */
+        .wreath-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
+                        url('https://images.unsplash.com/photo-1666115079117-28e25113048b?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNocmlzdG1hcyUyMHdyZWF0aHxlbnwwfHwwfHx8MA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wreath-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(252, 211, 77, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(167, 243, 208, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(254, 202, 202, 0.1) 0%, transparent 40%);
+            opacity: 0.7;
+            animation: gentle-sparkle 8s ease-in-out infinite alternate;
+        }
+
+        .wreath-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                transparent 70%);
+            animation: shimmer-sweep 6s ease-in-out infinite;
+        }
+
+        @keyframes gentle-sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.01); }
+        }
+
+        @keyframes shimmer-sweep {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(200%) skewX(-15deg); }
+        }
+
+        /* Enhanced Cards */
+        .magical-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(5, 150, 105, 0.1);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(5, 150, 105, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magical-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(5, 150, 105, 0.03), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .magical-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        .magical-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(5, 150, 105, 0.1);
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Wreath Button Enhancement */
+        .btn-wreath {
+            background: linear-gradient(135deg, var(--wreath-green) 0%, #047857 100%);
+            color: white;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 
+                0 4px 15px rgba(5, 150, 105, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-wreath::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-wreath:hover::before {
+            left: 100%;
+        }
+
+        .btn-wreath:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(5, 150, 105, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Enhanced Section Backgrounds */
+        .wreath-bg {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 25%, #f9fafb 50%, #ecfdf5 75%, #d1fae5 100%);
+            position: relative;
+        }
+
+        .wreath-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(252, 211, 77, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(167, 243, 208, 0.06) 0%, transparent 60%),
+                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.1) 50%, transparent 52%);
+            pointer-events: none;
+            animation: background-dance 12s ease-in-out infinite;
+        }
+
+        @keyframes background-dance {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+
+        /* Gallery Enhancement */
+        .gallery-item {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(5, 150, 105, 0.1), rgba(245, 158, 11, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes gentle-sway {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-gentle-sway {
+            animation: gentle-sway 4s ease-in-out infinite;
+        }
+
+        /* Text Gradient */
+        .text-gradient-wreath {
+            background: linear-gradient(135deg, var(--wreath-green) 0%, var(--wreath-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Wreath decoration elements */
+        .wreath-decoration {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            animation: gentle-sway 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .wreath-decoration:nth-child(2n) {
+            animation-delay: -2s;
+            animation-duration: 6s;
+            opacity: 0.2;
+        }
+
+        .wreath-decoration:nth-child(3n) {
+            animation-delay: -1s;
+            animation-duration: 5s;
+            opacity: 0.18;
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(5, 150, 105, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .wreath-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-item:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        /* Natural glow effect */
+        .natural-glow {
+            box-shadow: 0 0 20px rgba(5, 150, 105, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(5, 150, 105, 0.3); }
+            to { box-shadow: 0 0 30px rgba(5, 150, 105, 0.5); }
+        }
+
+        /* Seasonal Categories */
+        .season-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .season-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(5, 150, 105, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .season-spring {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+
+        .season-summer {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .season-autumn {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+        }
+
+        .season-winter {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
+                        <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link text-gray-800 hover:text-green-600 py-2">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-800 hover:text-green-600 py-2">About</a>
+                    <a href="index.html#countdown" class="nav-link text-gray-800 hover:text-green-600 py-2">Countdown</a>
+                    <a href="index.html#gallery" class="nav-link text-gray-800 hover:text-green-600 py-2">Gallery</a>
+                    <a href="halloween.html" class="nav-link text-gray-800 hover:text-green-600 py-2">Halloween</a>
+                    <a href="wreaths.html" class="nav-link text-green-600 py-2 font-semibold">Wreaths</a>
+                    <a href="index.html#visitus" class="nav-link text-gray-800 hover:text-green-600 py-2">Visit Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center">
+                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
+                <div class="flex flex-col space-y-2">
+                    <a href="index.html" class="py-2 text-gray-800 hover:text-green-600">Home</a>
+                    <a href="index.html#about" class="py-2 text-gray-800 hover:text-green-600">About</a>
+                    <a href="index.html#countdown" class="py-2 text-gray-800 hover:text-green-600">Countdown</a>
+                    <a href="index.html#gallery" class="py-2 text-gray-800 hover:text-green-600">Gallery</a>
+                    <a href="halloween.html" class="py-2 text-gray-800 hover:text-green-600">Halloween</a>
+                    <a href="wreaths.html" class="py-2 text-green-600 font-semibold">Wreaths</a>
+                    <a href="index.html#visitus" class="py-2 text-gray-800 hover:text-green-600">Visit Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Wreath Hero Section -->
+    <section class="relative overflow-hidden min-h-screen flex items-center justify-center wreath-hero">
+        <!-- Enhanced Wreath decorations with more variety and brightness -->
+        <div class="wreath-decoration" style="top: 8%; left: 12%; color: #f59e0b;">🌺</div>
+        <div class="wreath-decoration" style="top: 15%; right: 10%; color: #10b981;">🌿</div>
+        <div class="wreath-decoration" style="top: 25%; left: 5%; color: #f472b6;">🌸</div>
+        <div class="wreath-decoration" style="bottom: 35%; left: 15%; color: #fbbf24;">🌻</div>
+        <div class="wreath-decoration" style="bottom: 15%; right: 8%; color: #34d399;">🍃</div>
+        <div class="wreath-decoration" style="top: 45%; right: 20%; color: #a78bfa;">🌼</div>
+        <div class="wreath-decoration" style="bottom: 25%; left: 25%; color: #fb7185;">🌹</div>
+        <div class="wreath-decoration" style="top: 60%; left: 8%; color: #fde047;">🌻</div>
+        <div class="wreath-decoration" style="top: 35%; right: 5%; color: #22d3ee;">🌊</div>
+        
+        <div class="container mx-auto px-6 z-20 text-center text-white relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="animate-gentle-sway mb-8">
+                    <i class="fas fa-circle-notch text-yellow-300 text-6xl mb-6 drop-shadow-lg"></i>
+                </div>
+                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg">
+                    Handcrafted Wreaths for 
+                    <span class="text-yellow-300">Every Season</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95 drop-shadow-md">
+                    Beautiful, bespoke wreaths that celebrate the changing seasons and bring natural elegance to your home year-round
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#wreath-collection" class="btn-wreath text-lg transform hover:scale-105">
+                        <i class="fas fa-leaf mr-3"></i>Explore Our Wreaths
+                    </a>
+                    <a href="index.html#visitus" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-green-800 transition-all duration-300">
+                        <i class="fas fa-store mr-2"></i>Visit Our Workshop
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Categories Section -->
+    <section class="wreath-bg py-20 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-6xl font-extrabold mb-6 text-gradient-wreath">
+                    Wreaths for Every Season
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    From spring's fresh blooms to winter's festive elegance, our handcrafted wreaths capture the beauty of each season
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Spring Wreaths -->
+                <div class="season-card season-spring">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
+                        <i class="fas fa-seedling text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Spring Awakening</h3>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Fresh greenery, delicate flowers, and new growth celebrating renewal and rebirth.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Pastel flower arrangements</li>
+                        <li>• Fresh eucalyptus and ferns</li>
+                        <li>• Easter-themed elements</li>
+                        <li>• Natural vine bases</li>
+                    </ul>
+                </div>
+
+                <!-- Summer Wreaths -->
+                <div class="season-card season-summer">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
+                        <i class="fas fa-sun text-yellow-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Summer Sunshine</h3>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Bright blooms, vibrant colors, and coastal elements bringing summer joy to your door.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Sunflower arrangements</li>
+                        <li>• Coastal shells and driftwood</li>
+                        <li>• Bright tropical flowers</li>
+                        <li>• Lavender and herbs</li>
+                    </ul>
+                </div>
+
+                <!-- Autumn Wreaths -->
+                <div class="season-card season-autumn">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
+                        <i class="fas fa-leaf text-orange-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Autumn Harvest</h3>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Rich autumn colors, harvest elements, and cozy textures celebrating the season's bounty.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Maple and oak leaves</li>
+                        <li>• Mini pumpkins and gourds</li>
+                        <li>• Warm burgundy and gold tones</li>
+                        <li>• Pinecones and berries</li>
+                    </ul>
+                </div>
+
+                <!-- Winter Wreaths -->
+                <div class="season-card season-winter">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
+                        <i class="fas fa-snowflake text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Winter Elegance</h3>
+                    <p class="text-gray-700 mb-6 text-center">
+                        Evergreen beauty, festive elements, and sparkling accents creating magical winter displays.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Traditional evergreen branches</li>
+                        <li>• Silver and gold accents</li>
+                        <li>• Christmas ornaments</li>
+                        <li>• Frosted pinecones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Wreath Products -->
+    <section id="wreath-collection" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-wreath">
+                    Featured Wreath Collection
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Each wreath is lovingly handcrafted using the finest natural materials and artistic attention to detail
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product placeholders - you can replace with actual product images -->
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                            <i class="fas fa-circle-notch text-green-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Classic Christmas Wreath</h3>
+                        <p class="text-gray-600 mb-4">Traditional evergreen wreath with red velvet ribbon and gold accents.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$75</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center">
+                            <i class="fas fa-sun text-yellow-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Summer Sunflower Wreath</h3>
+                        <p class="text-gray-600 mb-4">Bright and cheerful with sunflowers, wheat, and natural burlap accents.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$65</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
+                            <i class="fas fa-seedling text-pink-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Spring Blossoms Wreath</h3>
+                        <p class="text-gray-600 mb-4">Delicate pastel flowers with fresh eucalyptus on a grapevine base.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$55</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                            <i class="fas fa-
