@@ -1,51 +1,10 @@
-<script>
-        // Mobile menu toggle function
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
-        }
-
-        // Smooth scrolling for navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobileMenu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-
-            // Add scroll-based navigation background
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 100) {
-                    nav.classList.add('shadow-lg');
-                } else {
-                    nav.classList.remove('shadow-lg');
-                }
-            });
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handcrafted Wreaths - Santa's Secret</title>
     <link rel="icon" type="image/png" href="https://santasecret.com.au/boxicon.ico">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -70,7 +29,6 @@
             font-weight: 700;
         }
 
-        /* Navigation Enhancement */
         .nav-glass {
             background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(10px);
@@ -99,7 +57,6 @@
             width: 100%;
         }
 
-        /* Wreath Hero Background */
         .wreath-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
                         url('https://images.unsplash.com/photo-1666115079117-28e25113048b?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNocmlzdG1hcyUyMHdyZWF0aHxlbnwwfHwwfHx8MA%3D%3D');
@@ -111,88 +68,6 @@
             overflow: hidden;
         }
 
-        .wreath-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(252, 211, 77, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(167, 243, 208, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 60% 20%, rgba(254, 202, 202, 0.1) 0%, transparent 40%);
-            opacity: 0.7;
-            animation: gentle-sparkle 8s ease-in-out infinite alternate;
-        }
-
-        .wreath-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(255, 255, 255, 0.05) 50%, 
-                transparent 70%);
-            animation: shimmer-sweep 6s ease-in-out infinite;
-        }
-
-        @keyframes gentle-sparkle {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.01); }
-        }
-
-        @keyframes shimmer-sweep {
-            0% { transform: translateX(-100%) skewX(-15deg); }
-            100% { transform: translateX(200%) skewX(-15deg); }
-        }
-
-        /* Enhanced Cards */
-        .magical-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid rgba(5, 150, 105, 0.1);
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.1),
-                0 0 20px rgba(5, 150, 105, 0.05);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .magical-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(5, 150, 105, 0.03), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            opacity: 0;
-        }
-
-        .magical-card:hover::before {
-            animation: shimmer 1.5s ease-in-out;
-        }
-
-        .magical-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.15),
-                0 0 30px rgba(5, 150, 105, 0.1);
-        }
-
-        @keyframes shimmer {
-            0% { opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        /* Wreath Button Enhancement */
         .btn-wreath {
             background: linear-gradient(135deg, var(--wreath-green) 0%, #047857 100%);
             color: white;
@@ -200,141 +75,15 @@
             padding: 12px 32px;
             border-radius: 50px;
             border: none;
-            box-shadow: 
-                0 4px 15px rgba(5, 150, 105, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-wreath::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-wreath:hover::before {
-            left: 100%;
         }
 
         .btn-wreath:hover {
             transform: translateY(-2px);
-            box-shadow: 
-                0 8px 25px rgba(5, 150, 105, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
         }
 
-        /* Enhanced Section Backgrounds */
-        .wreath-bg {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 25%, #f9fafb 50%, #ecfdf5 75%, #d1fae5 100%);
-            position: relative;
-        }
-
-        .wreath-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 15% 25%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 85% 75%, rgba(252, 211, 77, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(167, 243, 208, 0.06) 0%, transparent 60%),
-                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.1) 50%, transparent 52%);
-            pointer-events: none;
-            animation: background-dance 12s ease-in-out infinite;
-        }
-
-        @keyframes background-dance {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.02); }
-        }
-
-        /* Gallery Enhancement */
-        .gallery-item {
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(5, 150, 105, 0.1), rgba(245, 158, 11, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes gentle-sway {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-gentle-sway {
-            animation: gentle-sway 4s ease-in-out infinite;
-        }
-
-        /* Text Gradient */
-        .text-gradient-wreath {
-            background: linear-gradient(135deg, var(--wreath-green) 0%, var(--wreath-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Wreath decoration elements */
-        .wreath-decoration {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.15;
-            animation: gentle-sway 4s ease-in-out infinite;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-        }
-
-        .wreath-decoration:nth-child(2n) {
-            animation-delay: -2s;
-            animation-duration: 6s;
-            opacity: 0.2;
-        }
-
-        .wreath-decoration:nth-child(3n) {
-            animation-delay: -1s;
-            animation-duration: 5s;
-            opacity: 0.18;
-        }
-
-        /* Product Cards */
         .product-card {
             background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 20px;
@@ -359,58 +108,67 @@
             transform: scale(1.1);
         }
 
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .wreath-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .gallery-item:hover {
-                transform: scale(1.02);
-            }
+        .text-gradient-wreath {
+            background: linear-gradient(135deg, var(--wreath-green) 0%, var(--wreath-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Natural glow effect */
-        .natural-glow {
-            box-shadow: 0 0 20px rgba(5, 150, 105, 0.3);
-            animation: glow 3s ease-in-out infinite alternate;
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
         }
 
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(5, 150, 105, 0.3); }
-            to { box-shadow: 0 0 30px rgba(5, 150, 105, 0.5); }
+        .lightbox.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Seasonal Categories */
-        .season-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 25px;
-            padding: 2rem;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            background-clip: padding-box;
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
         }
 
-        .season-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(5, 150, 105, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
         }
 
-        .season-spring {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: -10px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .season-summer {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-        }
-
-        .season-autumn {
-            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-        }
-
-        .season-winter {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        .lightbox-close:hover {
+            background: rgba(220, 38, 38, 0.8);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -419,14 +177,12 @@
     <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
-                <!-- Logo Section -->
                 <div class="flex items-center">
                     <a href="index.html" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
                         <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
                     </a>
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6 items-center">
                     <a href="index.html" class="nav-link text-gray-800 hover:text-green-600 py-2">Home</a>
                     <a href="index.html#about" class="nav-link text-gray-800 hover:text-green-600 py-2">About</a>
@@ -437,7 +193,6 @@
                     <a href="index.html#visitus" class="nav-link text-gray-800 hover:text-green-600 py-2">Visit Us</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <div class="flex items-center">
                     <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
                         <i class="fas fa-bars text-xl"></i>
@@ -445,7 +200,6 @@
                 </div>
             </div>
 
-            <!-- Mobile menu -->
             <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
                 <div class="flex flex-col space-y-2">
                     <a href="index.html" class="py-2 text-gray-800 hover:text-green-600">Home</a>
@@ -460,24 +214,10 @@
         </div>
     </nav>
 
-    <!-- Wreath Hero Section -->
+    <!-- Hero Section -->
     <section class="relative overflow-hidden min-h-screen flex items-center justify-center wreath-hero">
-        <!-- Enhanced Wreath decorations with more variety and brightness -->
-        <div class="wreath-decoration" style="top: 8%; left: 12%; color: #f59e0b;">🌺</div>
-        <div class="wreath-decoration" style="top: 15%; right: 10%; color: #10b981;">🌿</div>
-        <div class="wreath-decoration" style="top: 25%; left: 5%; color: #f472b6;">🌸</div>
-        <div class="wreath-decoration" style="bottom: 35%; left: 15%; color: #fbbf24;">🌻</div>
-        <div class="wreath-decoration" style="bottom: 15%; right: 8%; color: #34d399;">🍃</div>
-        <div class="wreath-decoration" style="top: 45%; right: 20%; color: #a78bfa;">🌼</div>
-        <div class="wreath-decoration" style="bottom: 25%; left: 25%; color: #fb7185;">🌹</div>
-        <div class="wreath-decoration" style="top: 60%; left: 8%; color: #fde047;">🌻</div>
-        <div class="wreath-decoration" style="top: 35%; right: 5%; color: #22d3ee;">🌊</div>
-        
         <div class="container mx-auto px-6 z-20 text-center text-white relative">
             <div class="max-w-5xl mx-auto">
-                <div class="animate-gentle-sway mb-8">
-                    <i class="fas fa-circle-notch text-yellow-300 text-6xl mb-6 drop-shadow-lg"></i>
-                </div>
                 <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg">
                     Handcrafted Wreaths for 
                     <span class="text-yellow-300">Every Season</span>
@@ -486,7 +226,7 @@
                     Beautiful, bespoke wreaths that celebrate the changing seasons and bring natural elegance to your home year-round
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#wreath-collection" class="btn-wreath text-lg transform hover:scale-105">
+                    <a href="#wreath-gallery" class="btn-wreath text-lg transform hover:scale-105">
                         <i class="fas fa-leaf mr-3"></i>Explore Our Wreaths
                     </a>
                     <a href="index.html#visitus" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-green-800 transition-all duration-300">
@@ -497,357 +237,192 @@
         </div>
     </section>
 
-    <!-- Seasonal Categories Section -->
-    <section class="wreath-bg py-20 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="heading-font text-4xl md:text-6xl font-extrabold mb-6 text-gradient-wreath">
-                    Wreaths for Every Season
-                </h2>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    From spring's fresh blooms to winter's festive elegance, our handcrafted wreaths capture the beauty of each season
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Spring Wreaths -->
-                <div class="season-card season-spring">
-                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
-                        <i class="fas fa-seedling text-green-600 text-3xl"></i>
-                    </div>
-                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Spring Awakening</h3>
-                    <p class="text-gray-700 mb-6 text-center">
-                        Fresh greenery, delicate flowers, and new growth celebrating renewal and rebirth.
-                    </p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Pastel flower arrangements</li>
-                        <li>• Fresh eucalyptus and ferns</li>
-                        <li>• Easter-themed elements</li>
-                        <li>• Natural vine bases</li>
-                    </ul>
-                </div>
-
-                <!-- Summer Wreaths -->
-                <div class="season-card season-summer">
-                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
-                        <i class="fas fa-sun text-yellow-600 text-3xl"></i>
-                    </div>
-                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Summer Sunshine</h3>
-                    <p class="text-gray-700 mb-6 text-center">
-                        Bright blooms, vibrant colors, and coastal elements bringing summer joy to your door.
-                    </p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Sunflower arrangements</li>
-                        <li>• Coastal shells and driftwood</li>
-                        <li>• Bright tropical flowers</li>
-                        <li>• Lavender and herbs</li>
-                    </ul>
-                </div>
-
-                <!-- Autumn Wreaths -->
-                <div class="season-card season-autumn">
-                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
-                        <i class="fas fa-leaf text-orange-600 text-3xl"></i>
-                    </div>
-                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Autumn Harvest</h3>
-                    <p class="text-gray-700 mb-6 text-center">
-                        Rich autumn colors, harvest elements, and cozy textures celebrating the season's bounty.
-                    </p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Maple and oak leaves</li>
-                        <li>• Mini pumpkins and gourds</li>
-                        <li>• Warm burgundy and gold tones</li>
-                        <li>• Pinecones and berries</li>
-                    </ul>
-                </div>
-
-                <!-- Winter Wreaths -->
-                <div class="season-card season-winter">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 natural-glow">
-                        <i class="fas fa-snowflake text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="heading-font text-2xl font-bold mb-4 text-gray-900 text-center">Winter Elegance</h3>
-                    <p class="text-gray-700 mb-6 text-center">
-                        Evergreen beauty, festive elements, and sparkling accents creating magical winter displays.
-                    </p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Traditional evergreen branches</li>
-                        <li>• Silver and gold accents</li>
-                        <li>• Christmas ornaments</li>
-                        <li>• Frosted pinecones</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wreath Gallery Section -->
+    <!-- Wreath Gallery -->
     <section id="wreath-gallery" class="py-20 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-wreath">
-                    Our Wreath Gallery
-                </h2>
+                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-wreath">Our Wreath Gallery</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                    Explore our handcrafted wreaths - each one unique and made with love. Click any wreath for a closer look and details.
+                    Examples of Kim's beautiful handcrafted wreaths - each one unique and made with love for her clients.
                 </p>
-                
-                <!-- Gallery Filter Tabs -->
-                <div class="flex flex-wrap justify-center gap-4 mb-12">
-                    <button class="gallery-filter active px-6 py-3 bg-green-600 text-white rounded-full font-semibold transition-all hover:bg-green-700" data-filter="all">
-                        All Wreaths
-                    </button>
-                    <button class="gallery-filter px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold transition-all hover:bg-green-100" data-filter="sold">
-                        Previous Creations
-                    </button>
-                    <button class="gallery-filter px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold transition-all hover:bg-green-100" data-filter="available">
-                        Available Now
-                    </button>
-                </div>
             </div>
 
-            <!-- Wreath Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="wreathGrid">
-                
-                <!-- SOLD WREATHS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Lime Gold and Emerald -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('lime-gold-emerald')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp', 'Lime Gold and Emerald - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/lime-gold-emerald.jpg" 
-                                 alt="Lime Gold and Emerald Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp" alt="Lime Gold and Emerald Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Lime Gold and Emerald</h3>
                             <p class="text-gray-600 text-sm mb-4">Vibrant lime, gold, and emerald Christmas wreath with luxurious ribbon details.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Purple Envy -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('purple-envy')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/PurpleEnvy.webp', 'Purple Envy - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/purple-envy.jpg" 
-                                 alt="Purple Envy Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/PurpleEnvy.webp" alt="Purple Envy Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Purple Envy</h3>
                             <p class="text-gray-600 text-sm mb-4">Elegant purple-themed wreath with sophisticated metallic accents.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Rosegold and Reindeer Burlap -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('rosegold-reindeer')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <!-- Rosegold and Reindeer -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp', 'Rosegold and Reindeer - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/rosegold-reindeer-burlap.jpg" 
-                                 alt="Rosegold and Reindeer Burlap Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp" alt="Rosegold and Reindeer Wreath" class="product-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Rosegold and Reindeer Burlap</h3>
+                            <h3 class="heading-font text-xl font-bold mb-2">Rosegold and Reindeer</h3>
                             <p class="text-gray-600 text-sm mb-4">Rustic charm meets elegance with rose gold tones and reindeer motifs.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Peacock Plume -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('peacock-plume')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <!-- Peacock -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Peacock.webp', 'Peacock Plume - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/peacock-plume.jpg" 
-                                 alt="Peacock Plume Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/Peacock.webp" alt="Peacock Plume Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Peacock Plume</h3>
                             <p class="text-gray-600 text-sm mb-4">Stunning peacock-inspired wreath with rich blues, greens, and gold accents.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Nutcrackers Watch -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('nutcrackers-watch')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <!-- Nutcrackers -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Nutcrackers.webp', 'Nutcrackers Watch - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/nutcrackers-watch.jpg" 
-                                 alt="Nutcrackers Watch Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/Nutcrackers.webp" alt="Nutcrackers Watch Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Nutcrackers Watch</h3>
                             <p class="text-gray-600 text-sm mb-4">Traditional Christmas magic with charming nutcracker decorations.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Maple Leaves -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('maple-leaves')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <!-- Maple -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Maple.webp', 'Maple Leaves - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/maple-leaves.jpg" 
-                                 alt="Maple Leaves Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/Maple.webp" alt="Maple Leaves Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Maple Leaves</h3>
                             <p class="text-gray-600 text-sm mb-4">Beautiful autumn-inspired wreath featuring rich maple leaf colors.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Candy Swirl -->
-                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('candy-swirl')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            SOLD
-                        </div>
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/CandySwirl.webp', 'Candy Swirl - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/candy-swirl.jpg" 
-                                 alt="Candy Swirl Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/CandySwirl.webp" alt="Candy Swirl Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Candy Swirl</h3>
                             <p class="text-gray-600 text-sm mb-4">Sweet and playful wreath with candy cane colors and whimsical details.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- AVAILABLE WREATHS -->
-                <!-- Grinch Inspired -->
-                <div class="wreath-item available" data-category="available" onclick="openWreathModal('grinch-inspired')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            AVAILABLE
-                        </div>
+                <!-- Grinch -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Grinch.webp', 'Grinch Inspired - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/grinch-inspired.jpg" 
-                                 alt="Grinch Inspired Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/Grinch.webp" alt="Grinch Inspired Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Grinch Inspired</h3>
                             <p class="text-gray-600 text-sm mb-4">Whimsical Grinch-themed wreath bringing Christmas mischief to your door.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Available Now</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Navy and Silver -->
-                <div class="wreath-item available" data-category="available" onclick="openWreathModal('navy-silver')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            AVAILABLE
-                        </div>
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/NavySilver.webp', 'Navy and Silver - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/navy-silver.jpg" 
-                                 alt="Navy and Silver Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/NavySilver.webp" alt="Navy and Silver Wreath" class="product-image">
                         </div>
                         <div class="p-6">
                             <h3 class="heading-font text-xl font-bold mb-2">Navy and Silver</h3>
                             <p class="text-gray-600 text-sm mb-4">Sophisticated navy blue and silver wreath with modern elegance.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Available Now</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Merry Christmas with Polka Dots -->
-                <div class="wreath-item available" data-category="available" onclick="openWreathModal('polka-dots')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            AVAILABLE
-                        </div>
+                <!-- Christmas Polka Dots -->
+                <div class="wreath-item">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp', 'Christmas with Polka Dots - Example of Kim\'s Work')">
+                        <div class="absolute top-3 right-3 z-10 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">EXAMPLE</div>
                         <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/merry-christmas-polka-dots.jpg" 
-                                 alt="Merry Christmas with Polka Dots Wreath" 
-                                 class="product-image">
+                            <img src="https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp" alt="Christmas Polka Dots Wreath" class="product-image">
                         </div>
                         <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Merry Christmas with Polka Dots</h3>
+                            <h3 class="heading-font text-xl font-bold mb-2">Christmas with Polka Dots</h3>
                             <p class="text-gray-600 text-sm mb-4">Fun and festive with playful polka dot patterns and Christmas cheer.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Available Now</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Merry Christmas Red and Gold -->
-                <div class="wreath-item available" data-category="available" onclick="openWreathModal('red-gold')">
-                    <div class="product-card cursor-pointer relative">
-                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            AVAILABLE
-                        </div>
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/merry-christmas-red-gold.jpg" 
-                                 alt="Merry Christmas Red and Gold Wreath" 
-                                 class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Merry Christmas Red and Gold</h3>
-                            <p class="text-gray-600 text-sm mb-4">Classic Christmas colors with traditional red and gold elegance.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Available Now</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                                <span class="text-lg font-bold text-blue-600">Example of Kim's Work</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -855,95 +430,52 @@
             </div>
 
             <div class="text-center mt-12">
-                <p class="text-gray-600 mb-6">
-                    Love what you see? Each wreath is handcrafted with care and attention to detail.
-                </p>
+                <p class="text-gray-600 mb-6">Love what you see? Kim can create custom wreaths inspired by these designs or something completely new just for you!</p>
+                <a href="index.html#visitus" class="btn-wreath text-lg">
+                    <i class="fas fa-store mr-2"></i>Visit Our Workshop
+                </a>
+            </div> available" data-category="available">
+                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/wreath_Merry%20Christmas%20with%20Polka%20Dots.jpg.webp', 'Merry Christmas with Polka Dots - Available Now')">
+                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">AVAILABLE</div>
+                        <div class="overflow-hidden">
+                            <img src="https://santasecret.com.au/images/wreaths/wreath_Merry%20Christmas%20with%20Polka%20Dots.jpg.webp" alt="Merry Christmas with Polka Dots Wreath" class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Merry Christmas with Polka Dots</h3>
+                            <p class="text-gray-600 text-sm mb-4">Fun and festive with playful polka dot patterns and Christmas cheer.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-green-600">Available Now</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">Love what you see? Each wreath is handcrafted with care and attention to detail.</p>
                 <a href="index.html#visitus" class="btn-wreath text-lg mr-4">
                     <i class="fas fa-store mr-2"></i>Visit Our Workshop
                 </a>
                 <a href="tel:0480784317" class="btn-wreath text-lg bg-yellow-600 hover:bg-yellow-700">
-                    <i class="fas fa-phone mr-2"></i>Inquire About Custom Wreaths
+                    <i class="fas fa-phone mr-2"></i>Call About Custom Wreaths
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Wreath Quick View Modal -->
-    <div id="wreathModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto relative">
-            <button onclick="closeWreathModal()" class="absolute top-4 right-4 z-10 bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-600 transition-colors">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <!-- Image Section -->
-                <div class="relative">
-                    <img id="modalImage" src="" alt="" class="w-full h-96 lg:h-full object-cover rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none">
-                    <div id="modalStatus" class="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-bold"></div>
-                </div>
-                
-                <!-- Details Section -->
-                <div class="p-8">
-                    <h2 id="modalTitle" class="heading-font text-3xl font-bold mb-4 text-gradient-wreath"></h2>
-                    <p id="modalDescription" class="text-gray-700 text-lg mb-6 leading-relaxed"></p>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center">
-                            <i class="fas fa-palette text-green-600 mr-3"></i>
-                            <span id="modalColors" class="text-gray-700"></span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-ruler text-green-600 mr-3"></i>
-                            <span class="text-gray-700">Approximately 22-24 inches diameter</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-heart text-green-600 mr-3"></i>
-                            <span class="text-gray-700">Handcrafted with love by Kim</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-leaf text-green-600 mr-3"></i>
-                            <span class="text-gray-700">Made with quality materials</span>
-                        </div>
-                    </div>
-                    
-                    <div id="modalPrice" class="text-3xl font-bold mb-6"></div>
-                    
-                    <div id="modalActions" class="space-y-4">
-                        <!-- Action buttons will be inserted here -->
-                    </div>
-                    
-                    <div class="mt-8 p-4 bg-green-50 rounded-lg">
-                        <h4 class="font-semibold mb-2 text-green-800">Want something similar?</h4>
-                        <p class="text-sm text-green-700">Kim creates custom wreaths inspired by any of her previous designs. Call to discuss your perfect wreath!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Footer -->
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
-        <!-- Background decorations -->
-        <div class="absolute inset-0 opacity-5">
-            <div class="wreath-decoration" style="top: 10%; left: 10%;">🌿</div>
-            <div class="wreath-decoration" style="top: 30%; right: 15%;">🍃</div>
-            <div class="wreath-decoration" style="bottom: 30%; left: 20%;">🌸</div>
-            <div class="wreath-decoration" style="bottom: 10%; right: 10%;">🌺</div>
-        </div>
-        
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <h3 class="heading-font text-2xl font-bold mb-4 text-gradient-wreath">Santa's Secret</h3>
                     <p class="text-gray-300 mb-6">Creating beautiful seasonal wreaths and decorations in Bungendore. From spring's first blooms to winter's festive magic - handcrafted with love.</p>
                     <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/SantasSecretBungendore" 
-                           target="_blank"
-                           class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
+                        <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="mailto:info.santasecret@gmail.com" 
-                           class="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors">
+                        <a href="mailto:info.santasecret@gmail.com" class="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
@@ -1009,41 +541,80 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <div class="text-center mt-4">
+                <p id="lightbox-caption" class="text-white text-lg"></p>
+                <div class="mt-4 space-x-4">
+                    <a href="tel:0480784317" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">
+                        <i class="fas fa-phone mr-2"></i>Call About This Wreath
+                    </a>
+                    <a href="mailto:info.santasecret@gmail.com" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-envelope mr-2"></i>Email Inquiry
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Mobile menu toggle function
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('hidden');
         }
 
-        // Smooth scrolling for navigation
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.wreath-item');
+            const filters = document.querySelectorAll('.gallery-filter');
+            
+            filters.forEach(filter => {
+                filter.classList.remove('active', 'bg-green-600', 'text-white');
+                filter.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            const activeFilter = document.querySelector(`[data-filter="${category}"]`);
+            activeFilter.classList.add('active', 'bg-green-600', 'text-white');
+            activeFilter.classList.remove('bg-gray-200', 'text-gray-700');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openLightbox(imageSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImage.src = imageSrc;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobileMenu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
+            document.querySelectorAll('.gallery-filter').forEach(button => {
+                button.addEventListener('click', function() {
+                    filterGallery(this.dataset.filter);
                 });
             });
 
-            // Add scroll-based navigation background
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('nav');
-                if (window.scrollY > 100) {
-                    nav.classList.add('shadow-lg');
-                } else {
-                    nav.classList.remove('shadow-lg');
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeLightbox();
                 }
             });
         });
