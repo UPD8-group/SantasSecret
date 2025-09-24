@@ -1,4 +1,44 @@
-<!DOCTYPE html>
+<script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Add scroll-based navigation background
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('shadow-lg');
+                } else {
+                    nav.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -541,6 +581,346 @@
         </div>
     </section>
 
+    <!-- Wreath Gallery Section -->
+    <section id="wreath-gallery" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-wreath">
+                    Our Wreath Gallery
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+                    Explore our handcrafted wreaths - each one unique and made with love. Click any wreath for a closer look and details.
+                </p>
+                
+                <!-- Gallery Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="gallery-filter active px-6 py-3 bg-green-600 text-white rounded-full font-semibold transition-all hover:bg-green-700" data-filter="all">
+                        All Wreaths
+                    </button>
+                    <button class="gallery-filter px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold transition-all hover:bg-green-100" data-filter="sold">
+                        Previous Creations
+                    </button>
+                    <button class="gallery-filter px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold transition-all hover:bg-green-100" data-filter="available">
+                        Available Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wreath Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="wreathGrid">
+                
+                <!-- SOLD WREATHS -->
+                <!-- Lime Gold and Emerald -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('lime-gold-emerald')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/lime-gold-emerald.jpg" 
+                                 alt="Lime Gold and Emerald Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Lime Gold and Emerald</h3>
+                            <p class="text-gray-600 text-sm mb-4">Vibrant lime, gold, and emerald Christmas wreath with luxurious ribbon details.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purple Envy -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('purple-envy')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/purple-envy.jpg" 
+                                 alt="Purple Envy Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Purple Envy</h3>
+                            <p class="text-gray-600 text-sm mb-4">Elegant purple-themed wreath with sophisticated metallic accents.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rosegold and Reindeer Burlap -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('rosegold-reindeer')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/rosegold-reindeer-burlap.jpg" 
+                                 alt="Rosegold and Reindeer Burlap Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Rosegold and Reindeer Burlap</h3>
+                            <p class="text-gray-600 text-sm mb-4">Rustic charm meets elegance with rose gold tones and reindeer motifs.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peacock Plume -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('peacock-plume')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/peacock-plume.jpg" 
+                                 alt="Peacock Plume Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Peacock Plume</h3>
+                            <p class="text-gray-600 text-sm mb-4">Stunning peacock-inspired wreath with rich blues, greens, and gold accents.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nutcrackers Watch -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('nutcrackers-watch')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/nutcrackers-watch.jpg" 
+                                 alt="Nutcrackers Watch Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Nutcrackers Watch</h3>
+                            <p class="text-gray-600 text-sm mb-4">Traditional Christmas magic with charming nutcracker decorations.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maple Leaves -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('maple-leaves')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/maple-leaves.jpg" 
+                                 alt="Maple Leaves Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Maple Leaves</h3>
+                            <p class="text-gray-600 text-sm mb-4">Beautiful autumn-inspired wreath featuring rich maple leaf colors.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Candy Swirl -->
+                <div class="wreath-item sold" data-category="sold" onclick="openWreathModal('candy-swirl')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            SOLD
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/candy-swirl.jpg" 
+                                 alt="Candy Swirl Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Candy Swirl</h3>
+                            <p class="text-gray-600 text-sm mb-4">Sweet and playful wreath with candy cane colors and whimsical details.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-gray-500">Previous Creation</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AVAILABLE WREATHS -->
+                <!-- Grinch Inspired -->
+                <div class="wreath-item available" data-category="available" onclick="openWreathModal('grinch-inspired')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            AVAILABLE
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/grinch-inspired.jpg" 
+                                 alt="Grinch Inspired Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Grinch Inspired</h3>
+                            <p class="text-gray-600 text-sm mb-4">Whimsical Grinch-themed wreath bringing Christmas mischief to your door.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-green-600">Available Now</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navy and Silver -->
+                <div class="wreath-item available" data-category="available" onclick="openWreathModal('navy-silver')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            AVAILABLE
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/navy-silver.jpg" 
+                                 alt="Navy and Silver Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Navy and Silver</h3>
+                            <p class="text-gray-600 text-sm mb-4">Sophisticated navy blue and silver wreath with modern elegance.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-green-600">Available Now</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merry Christmas with Polka Dots -->
+                <div class="wreath-item available" data-category="available" onclick="openWreathModal('polka-dots')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            AVAILABLE
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/merry-christmas-polka-dots.jpg" 
+                                 alt="Merry Christmas with Polka Dots Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Merry Christmas with Polka Dots</h3>
+                            <p class="text-gray-600 text-sm mb-4">Fun and festive with playful polka dot patterns and Christmas cheer.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-green-600">Available Now</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merry Christmas Red and Gold -->
+                <div class="wreath-item available" data-category="available" onclick="openWreathModal('red-gold')">
+                    <div class="product-card cursor-pointer relative">
+                        <div class="absolute top-3 right-3 z-10 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            AVAILABLE
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/codepluscanvas/Santa-s-Secret/main/wreaths/merry-christmas-red-gold.jpg" 
+                                 alt="Merry Christmas Red and Gold Wreath" 
+                                 class="product-image">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold mb-2">Merry Christmas Red and Gold</h3>
+                            <p class="text-gray-600 text-sm mb-4">Classic Christmas colors with traditional red and gold elegance.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-green-600">Available Now</span>
+                                <button class="text-green-600 hover:text-green-800 font-semibold">Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">
+                    Love what you see? Each wreath is handcrafted with care and attention to detail.
+                </p>
+                <a href="index.html#visitus" class="btn-wreath text-lg mr-4">
+                    <i class="fas fa-store mr-2"></i>Visit Our Workshop
+                </a>
+                <a href="tel:0480784317" class="btn-wreath text-lg bg-yellow-600 hover:bg-yellow-700">
+                    <i class="fas fa-phone mr-2"></i>Inquire About Custom Wreaths
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wreath Quick View Modal -->
+    <div id="wreathModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto relative">
+            <button onclick="closeWreathModal()" class="absolute top-4 right-4 z-10 bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-600 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                <!-- Image Section -->
+                <div class="relative">
+                    <img id="modalImage" src="" alt="" class="w-full h-96 lg:h-full object-cover rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none">
+                    <div id="modalStatus" class="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-bold"></div>
+                </div>
+                
+                <!-- Details Section -->
+                <div class="p-8">
+                    <h2 id="modalTitle" class="heading-font text-3xl font-bold mb-4 text-gradient-wreath"></h2>
+                    <p id="modalDescription" class="text-gray-700 text-lg mb-6 leading-relaxed"></p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-palette text-green-600 mr-3"></i>
+                            <span id="modalColors" class="text-gray-700"></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-ruler text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Approximately 22-24 inches diameter</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-heart text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Handcrafted with love by Kim</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-leaf text-green-600 mr-3"></i>
+                            <span class="text-gray-700">Made with quality materials</span>
+                        </div>
+                    </div>
+                    
+                    <div id="modalPrice" class="text-3xl font-bold mb-6"></div>
+                    
+                    <div id="modalActions" class="space-y-4">
+                        <!-- Action buttons will be inserted here -->
+                    </div>
+                    
+                    <div class="mt-8 p-4 bg-green-50 rounded-lg">
+                        <h4 class="font-semibold mb-2 text-green-800">Want something similar?</h4>
+                        <p class="text-sm text-green-700">Kim creates custom wreaths inspired by any of her previous designs. Call to discuss your perfect wreath!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Featured Wreath Products -->
     <section id="wreath-collection" class="py-20 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
@@ -606,4 +986,296 @@
                 <div class="product-card">
                     <div class="overflow-hidden">
                         <div class="product-image bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
-                            <i class="fas fa-
+                            <i class="fas fa-leaf text-orange-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Autumn Harvest Wreath</h3>
+                        <p class="text-gray-600 mb-4">Rich fall colors with maple leaves, mini pumpkins, and pinecones.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$70</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                            <i class="fas fa-anchor text-blue-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Coastal Summer Wreath</h3>
+                        <p class="text-gray-600 mb-4">Beach-inspired with shells, driftwood, and sea glass accents.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$80</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="overflow-hidden">
+                        <div class="product-image bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                            <i class="fas fa-spa text-purple-600 text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold mb-2">Lavender Fields Wreath</h3>
+                        <p class="text-gray-600 mb-4">Aromatic lavender bundles with dried herbs and rustic charm.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">$60</span>
+                            <button class="btn-wreath text-sm px-4 py-2">Inquire</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="index.html#visitus" class="btn-wreath text-lg">
+                    <i class="fas fa-store mr-2"></i>Visit Our Workshop
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wreath Care Guide -->
+    <section class="wreath-bg py-20 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold mb-6 text-gradient-wreath">
+                    Caring for Your Handcrafted Wreath
+                </h2>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    Keep your beautiful wreath looking fresh and vibrant throughout the season with these simple care tips
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-tint text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold mb-4">Moisture Management</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Lightly mist fresh wreaths every few days. Avoid overwatering dried arrangements. Keep away from direct heat sources.
+                    </p>
+                </div>
+
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-sun text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold mb-4">Light Protection</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Display in areas with indirect sunlight to prevent fading. Rotate occasionally for even aging of natural materials.
+                    </p>
+                </div>
+
+                <div class="magical-card p-8 rounded-3xl text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-broom text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold mb-4">Gentle Cleaning</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Use a soft brush to remove dust. For deeper cleaning, use a hair dryer on cool setting to blow away debris.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Orders Section -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="magical-card p-12 rounded-3xl">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold mb-6 text-gradient-wreath">
+                    Custom Wreath Commissions
+                </h2>
+                <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                    Have a special vision or need a wreath for a particular occasion? Kim creates custom wreaths tailored to your specific needs, colors, and style preferences.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Color Matching</h3>
+                        <p class="text-sm text-gray-600">Match your home's decor perfectly</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-ruler text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Custom Sizing</h3>
+                        <p class="text-sm text-gray-600">Any size to fit your space</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Special Occasions</h3>
+                        <p class="text-sm text-gray-600">Weddings, memorials, celebrations</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-green-50 to-yellow-50 p-6 rounded-2xl mb-8">
+                    <h3 class="heading-font font-bold mb-4 text-gray-900">Popular Custom Requests</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-ring text-green-500 mr-2"></i>
+                            <span>Wedding Wreaths</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-baby text-pink-500 mr-2"></i>
+                            <span>Baby Shower</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap text-blue-500 mr-2"></i>
+                            <span>Graduation</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-birthday-cake text-yellow-500 mr-2"></i>
+                            <span>Birthdays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="tel:0480784317" class="btn-wreath text-lg">
+                    <i class="fas fa-phone mr-2"></i>Discuss Your Custom Wreath
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="wreath-decoration" style="top: 10%; left: 10%;">🌿</div>
+            <div class="wreath-decoration" style="top: 30%; right: 15%;">🍃</div>
+            <div class="wreath-decoration" style="bottom: 30%; left: 20%;">🌸</div>
+            <div class="wreath-decoration" style="bottom: 10%; right: 10%;">🌺</div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="heading-font text-2xl font-bold mb-4 text-gradient-wreath">Santa's Secret</h3>
+                    <p class="text-gray-300 mb-6">Creating beautiful seasonal wreaths and decorations in Bungendore. From spring's first blooms to winter's festive magic - handcrafted with love.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/SantasSecretBungendore" 
+                           target="_blank"
+                           class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="mailto:info.santasecret@gmail.com" 
+                           class="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-home mr-2 text-sm"></i>Home
+                        </a></li>
+                        <li><a href="index.html#about" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-user mr-2 text-sm"></i>About Kim
+                        </a></li>
+                        <li><a href="index.html#gallery" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-images mr-2 text-sm"></i>Gallery
+                        </a></li>
+                        <li><a href="halloween.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-ghost mr-2 text-sm"></i>Halloween
+                        </a></li>
+                        <li><a href="wreaths.html" class="text-green-400 hover:text-green-300 transition-colors flex items-center">
+                            <i class="fas fa-circle-notch mr-2 text-sm"></i>Wreaths
+                        </a></li>
+                        <li><a href="index.html#visitus" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-sm"></i>Visit Us
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 text-lg">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-map-marker-alt mr-3 text-green-400"></i>
+                            <span>24b Malbon St, Bungendore NSW</span>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-phone mr-3 text-yellow-400"></i>
+                            <a href="tel:0480784317" class="hover:text-white transition-colors">0480 784 317</a>
+                        </div>
+                        <div class="flex items-center text-gray-300">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:info.santasecret@gmail.com" class="hover:text-white transition-colors">info.santasecret@gmail.com</a>
+                        </div>
+                        <div class="mt-4 p-3 bg-gray-800 rounded-lg">
+                            <p class="text-sm text-gray-400 mb-2">Store Hours:</p>
+                            <p class="text-sm text-gray-300">Fri: 10am-2pm | Sat: 10am-3pm | Sun: 10am-2pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
+                    <p>&copy; 2024 Santa's Secret. All rights reserved. Made with love in Bungendore.</p>
+                    <div class="mt-4 md:mt-0">
+                        <a href="https://codepluscanvas.com" target="_blank" rel="noopener noreferrer" class="text-white hover:opacity-80 transition-opacity" title="Created with Code+Canvas">
+                            <span class="text-white">code</span><span class="text-blue-400">+</span><span class="text-white">canvas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Add scroll-based navigation background
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('shadow-lg');
+                } else {
+                    nav.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
