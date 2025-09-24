@@ -196,17 +196,60 @@
             100% { left: 100%; }
         }
 
-        .business-logo {
-            width: 120px;
-            height: 80px;
-            object-fit: contain;
-            filter: grayscale(100%);
-            transition: all 0.3s ease;
-            opacity: 0.6;
+        .beetlejuice-card {
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            border-radius: 20px;
+            border: 3px solid #22c55e;
+            position: relative;
+            overflow: hidden;
         }
 
-        .business-logo:hover {
-            filter: grayscale(0%);
+        .beetlejuice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
+            animation: beetlejuiceShimmer 2s infinite;
+        }
+
+        @keyframes beetlejuiceShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .business-logo-container {
+            position: relative;
+            width: 120px;
+            height: 80px;
+            cursor: pointer;
+        }
+
+        .business-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .business-logo.gray {
+            opacity: 1;
+        }
+
+        .business-logo.color {
+            opacity: 0;
+        }
+
+        .business-logo-container:hover .business-logo.gray {
+            opacity: 0;
+        }
+
+        .business-logo-container:hover .business-logo.color {
             opacity: 1;
             transform: scale(1.1);
         }
@@ -267,18 +310,8 @@
             transform: scale(1.1);
         }
 
-        .spider-web {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            opacity: 0.1;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 0L50 100M0 50L100 50M15 15L85 85M85 15L15 85" stroke="%23ffffff" stroke-width="1" fill="none"/></svg>');
-        }
-
         @media (max-width: 768px) {
-            .business-logo {
+            .business-logo-container {
                 width: 100px;
                 height: 65px;
             }
@@ -329,7 +362,6 @@
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden min-h-screen flex items-center justify-center halloween-hero">
-        <div class="spider-web"></div>
         <div class="container mx-auto px-6 z-20 text-center text-white relative">
             <div class="max-w-5xl mx-auto">
                 <div class="mb-8">
@@ -342,7 +374,7 @@
                     Get ready for a frighteningly fun Halloween in Bungendore! Join us for trick-or-treating, spooky decorations, and spine-chilling good times!
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#halloween-event" class="btn-halloween text-lg transform hover:scale-105 bounce-animation">
+                    <a href="#beetlejuice-event" class="btn-halloween text-lg transform hover:scale-105 bounce-animation">
                         <i class="fas fa-candy-cane mr-3"></i>Join the Fun
                     </a>
                     <a href="#halloween-hats" class="btn-spooky text-lg">
@@ -353,7 +385,100 @@
         </div>
     </section>
 
-    <!-- Halloween Event Section -->
+    <!-- Beetlejuice Featured Event -->
+    <section id="beetlejuice-event" class="py-20 px-6 bg-black relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="beetlejuice-card p-8 md:p-12 mb-12 relative z-10">
+                <div class="text-center mb-8">
+                    <h2 class="spooky-font text-3xl md:text-5xl font-extrabold mb-6 text-green-400">
+                        Beetlejuice Event at Santa's Secret!
+                    </h2>
+                    <div class="inline-block bg-green-400 text-black px-6 py-3 rounded-full text-lg font-bold mb-6">
+                        <i class="fas fa-calendar-alt mr-2"></i>Friday 31st Oct, 3:30pm - 7:30pm
+                    </div>
+                    <p class="text-xl text-white max-w-3xl mx-auto mb-8">
+                        Come along, grab a photo with Beetlejuice, dress up in your Halloween costume and win amazing prizes!
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 text-white">
+                    <div>
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Event Details</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-purple-400 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">When:</span> Friday 31st Oct from 3:30pm - 7:30pm
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-costume text-purple-400 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">What:</span> Dress up in a Halloween Costume
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-camera text-purple-400 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Special:</span> Grab a photo with Beetlejuice!
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-gift text-purple-400 mr-3 mt-1"></i>
+                                <div>
+                                    <span class="font-bold">Prizes:</span> Amazing prizes up for grabs!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Prize Categories</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dressed Family</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dressed Male & Female Adult</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dressed Kids 1-18 yrs</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dressed Baby up to 1yr</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dressed Pet</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-yellow-400 mr-3"></i>
+                                <span>Best Dress Group (Football, Netball or Dance)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <div class="bg-purple-900 rounded-xl p-6 inline-block">
+                        <p class="text-green-400 text-lg font-bold mb-2">
+                            <i class="fab fa-facebook mr-2"></i><i class="fab fa-instagram mr-2"></i>
+                            Follow for Updates!
+                        </p>
+                        <p class="text-white">
+                            @santassecretbungendore on Facebook & Instagram<br>
+                            for further details and announcements
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Halloween Event Section -->
     <section id="halloween-event" class="py-20 px-6 bg-gray-900 relative">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -449,41 +574,64 @@
             <!-- Business Logos Section -->
             <div class="text-center mb-12">
                 <h3 class="heading-font text-3xl font-bold text-white mb-8">
-                    Our Spooky Partners
+                    Community Halloween Spirit
                 </h3>
-                <p class="text-gray-400 mb-8">Hover over the logos to see them come to life!</p>
+                <p class="text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Without the support of the local community, this wouldn't happen. Thanks to these amazing Bungendore businesses for making Halloween magical for our families!
+                </p>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-items-center">
-                    <!-- Note: Since actual business logos weren't provided, I'm using placeholder images -->
-                    <!-- You would replace these with the actual business logo URLs -->
+                    <!-- Village Antiques -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Bungendore+Leather" alt="Bungendore Leather & Trading" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/antiques_resized_gray.png" alt="Village Antiques Bungendore" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/antiques_resized_web.png" alt="Village Antiques Bungendore" class="business-logo color">
                     </div>
+                    
+                    <!-- Btown Kids -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Nersons+Pie" alt="Nersons Pie Place" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/btown_resized_gray.png" alt="Btown Kids" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/btown_resized_web.png" alt="Btown Kids" class="business-logo color">
                     </div>
+                    
+                    <!-- Bungendore Leather & Trading -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Village+Antiques" alt="Village Antiques" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/leather_resized_gray.png" alt="Bungendore Leather & Trading" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/leather_resized_web.png" alt="Bungendore Leather & Trading" class="business-logo color">
                     </div>
+                    
+                    <!-- Bungendore Lolly Shop -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Sage+Natural" alt="Sage Natural Living" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/lollyshop_resized_gray.png" alt="Bungendore Lolly Shop" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/lollyshop_resized_web.png" alt="Bungendore Lolly Shop" class="business-logo color">
                     </div>
+                    
+                    <!-- Nersons Pie Place -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Taym+Hair" alt="Taym Hair Studio" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/nersons_resized_gray.png" alt="Nersons Pie Place" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/nersons_resized_web.png" alt="Nersons Pie Place" class="business-logo color">
                     </div>
+                    
+                    <!-- Royal Hotel Bungendore -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Btown+Kids" alt="Btown Kids" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/royal_resized_gray.png" alt="Royal Hotel Bungendore" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/royal_resized_web.png" alt="Royal Hotel Bungendore" class="business-logo color">
                     </div>
+                    
+                    <!-- Sage Natural Living -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Lolly+Shop" alt="Bungendore Lolly Shop" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/sage_resized_gray.png" alt="Sage Natural Living Bungendore NSW" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/sage_resized_web.png" alt="Sage Natural Living Bungendore NSW" class="business-logo color">
                     </div>
+                    
+                    <!-- Scrumpers Kitchen -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Royal+Hotel" alt="Royal Hotel Bungendore" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/scrumpers_resized_gray.png" alt="Scrumpers Kitchen" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/scrumpers_resized_web.png" alt="Scrumpers Kitchen" class="business-logo color">
                     </div>
+                    
+                    <!-- Taym Hair Studio -->
                     <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Scrumpers" alt="Scrumpers Kitchen" class="business-logo">
-                    </div>
-                    <div class="business-logo-container">
-                        <img src="https://via.placeholder.com/120x80/4B5563/FFFFFF?text=Lions+Club" alt="Lions Club of Bungendore" class="business-logo">
+                        <img src="https://santasecret.com.au/images/logos/tayn_resized_gray.png" alt="Taym Hair Studio" class="business-logo gray">
+                        <img src="https://santasecret.com.au/images/logos/tayn_resized_web.png" alt="Taym Hair Studio" class="business-logo color">
                     </div>
                 </div>
             </div>
@@ -682,7 +830,7 @@
 
         // Add some spooky interactive effects
         document.addEventListener('DOMContentLoaded', function() {
-            // Add random floating ghost emojis
+            // Add random floating ghost emojis occasionally
             function createFloatingGhost() {
                 const ghost = document.createElement('div');
                 ghost.innerHTML = '👻';
@@ -709,8 +857,8 @@
                 });
             }
             
-            // Create a floating ghost every 10-15 seconds
-            setInterval(createFloatingGhost, 10000 + Math.random() * 5000);
+            // Create a floating ghost every 15-20 seconds
+            setInterval(createFloatingGhost, 15000 + Math.random() * 5000);
         });
     </script>
 </body>
