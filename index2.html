@@ -476,11 +476,19 @@
                     </div>
                     <div class="detail-row">
                         <div class="detail-icon"><i class="fas fa-clock"></i></div>
-                        <div><strong>Opening Hours</strong><span>Closed until March 2026</span></div>
+                        <div>
+                            <strong>Opening Hours</strong>
+                            <table style="font-size:0.85rem;color:var(--warm-mid);border-collapse:collapse;margin-top:4px;">
+                                <tr><td style="padding:2px 12px 2px 0;color:var(--ink);font-weight:500;">Thu – Fri</td><td>10 am – 3 pm</td></tr>
+                                <tr><td style="padding:2px 12px 2px 0;color:var(--ink);font-weight:500;">Sat – Sun</td><td>10 am – 3 pm</td></tr>
+                                <tr><td style="padding:2px 12px 2px 0;color:var(--ink);font-weight:500;">Mon – Wed</td><td>Closed</td></tr>
+                            </table>
+                            <span style="font-size:0.78rem;color:#aaa;margin-top:6px;display:block;">Hours may differ on public holidays</span>
+                        </div>
                     </div>
                     <div class="map-actions">
                         <a href="tel:0480784317" class="act-call"><i class="fas fa-phone" style="margin-right:6px"></i>Call Us</a>
-                        <a href="mailto:info.santasecret@gmail.com" class="act-email"><i class="fas fa-envelope" style="margin-right:6px"></i>Email</a>
+                        <a href="/cdn-cgi/l/email-protection#7e17101811500d1f100a1f0d1b1d0c1b0a3e19131f1712501d1113" class="act-email"><i class="fas fa-envelope" style="margin-right:6px"></i>Email</a>
                     </div>
                 </div>
             </div>
@@ -509,7 +517,7 @@
             <p>Creating magical Christmas memories in Bungendore. Where tradition meets imagination.</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="mailto:info.santasecret@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="/cdn-cgi/l/email-protection#80e9eee6efaef3e1eef4e1f3e5e3f2e5f4c0e7ede1e9ecaee3efed"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
         <div class="footer-col">
@@ -524,12 +532,12 @@
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
-            <address>24b Malbon St,<br>Bungendore NSW 2621<br><br><a href="tel:+61480784317">0480 784 317</a><br><a href="mailto:info.santasecret@gmail.com">info.santasecret@gmail.com</a></address>
+            <address>24b Malbon St,<br>Bungendore NSW 2621<br><br><a href="tel:+61480784317">0480 784 317</a><br><a href="/cdn-cgi/l/email-protection#a8c1c6cec786dbc9c6dcc9dbcdcbdacddce8cfc5c9c1c486cbc7c5"><span class="__cf_email__" data-cfemail="aac3c4ccc584d9cbc4decbd9cfc9d8cfdeeacdc7cbc3c684c9c5c7">[email&#160;protected]</span></a></address>
         </div>
     </div>
     <div class="footer-bottom">
         <span>© 2025 Santa's Secret. Made with ❤️ in Bungendore.</span>
-        <span>website by <a href="https://upd8.group" target="_blank">UPD<span style="color:#4ade80">8</span> Group</a></span>
+        <span>website by <a href="https://jaybergmann.com" target="_blank">Jay</a></span>
     </div>
 </footer>
 
@@ -595,13 +603,13 @@
       <div class="sgd-bubble-text">
         <div class="sgd-badge">✨ Coming Soon</div>
         <strong>G'day! Holly here 👋</strong><br>
-        I'm Kim's AI assistant — almost ready to help with decorations, custom orders, opening hours, and all things Christmas magic!<br><br>
+        I'm Kim's AI assistant, powered by <strong>1973.ai</strong> — almost ready to help with decorations, custom orders, opening hours, and all things Christmas magic!<br><br>
         <strong>Leave your details and I'll let you know the moment I'm live!</strong>
       </div>
     </div>
   </div>
-  <form class="sgd-form" id="sgd-form" name="saygday-waitlist" netlify onsubmit="sgdSubmit(event)">
-    <input type="hidden" name="form-name" value="saygday-waitlist"/>
+  <form class="sgd-form" id="sgd-form" name="1973ai-waitlist" netlify onsubmit="sgdSubmit(event)">
+    <input type="hidden" name="form-name" value="1973ai-waitlist"/>
     <input class="sgd-field" type="text" name="name" placeholder="Your name" required autocomplete="name"/>
     <input class="sgd-field" type="email" name="email" placeholder="Your email" required autocomplete="email"/>
     <button class="sgd-submit" type="submit"><span>Notify me when Holly's live</span><span>🎁</span></button>
@@ -611,10 +619,10 @@
     <strong>You're on the nice list!</strong>
     Holly will be in touch as soon as she's ready. See you in Bungendore! 🎄
   </div>
-  <div class="sgd-footer">AI assistant by <a href="https://upd8.group" target="_blank" rel="noopener">UPD<span style="color:#4ade80">8</span> Group</a></div>
+  <div class="sgd-footer">AI assistant by <a href="https://1973.ai" target="_blank" rel="noopener">1973.ai</a></div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // NAV SCROLL
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
@@ -709,15 +717,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox()
 function shareOnFacebook(){ window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'fb','width=800,height=600'); }
 
 // SAY G'DAY
-const SAYGDAY_LIVE=false, SAYGDAY_URL='https://upd8.group/chat/santas-secret';
+const SAYGDAY_LIVE=false, SAYGDAY_URL='https://1973.ai/chat/santas-secret';
 let sgdIsOpen=false;
 function sgdOpen(){ if(SAYGDAY_LIVE){window.open(SAYGDAY_URL,'_blank','width=420,height=640,noopener');return;} document.getElementById('sgd-panel').classList.add('sgd-open'); sgdIsOpen=true; sgdHideNudge(); }
 function sgdClose(){ document.getElementById('sgd-panel').classList.remove('sgd-open'); sgdIsOpen=false; }
 function sgdToggle(){ sgdIsOpen?sgdClose():sgdOpen(); }
 function sgdHideNudge(){ const n=document.getElementById('sgd-nudge'); if(n){n.style.opacity='0';n.style.pointerEvents='none';setTimeout(()=>n.remove(),400);} }
-function sgdSubmit(e){ e.preventDefault(); const form=document.getElementById('sgd-form'); fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()}).catch(()=>{}); form.style.display='none'; document.getElementById('sgd-thanks').style.display='block'; }
-setTimeout(sgdHideNudge,6000);
-document.getElementById('sgd-bubble').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')sgdToggle();});
-</script>
-</body>
-</html>
+function sgdSubmit(e){ e.preventDefault(); const form=document.getElementById('sgd-form'); fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-
