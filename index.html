@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -77,40 +77,43 @@
         
         .decoration{position:absolute;font-size:2rem;opacity:.1;animation:float 4s ease-in-out infinite}
         .decoration:nth-child(2n){animation-delay:-2s;animation-duration:6s}
+
+        /* Mobile menu slide animation */
+        #mobileMenu {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body>
     <canvas id="snowCanvas" class="snow-canvas"></canvas>
     
+    <!-- ============================================================
+         NAV — compact logo, hamburger-only, mix-blend removes white box
+         ============================================================ -->
     <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-3">
+        <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
-                <a href="#home" class="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center transform hover:scale-110 transition-transform">
-                    <img src="https://santasecret.com.au/SantaLogo.png" alt="Santa's Secret Logo" class="w-full h-full object-contain">
+                <a href="#home" class="flex items-center transform hover:scale-105 transition-transform">
+                    <img 
+                        src="https://santasecret.com.au/SantaLogo.png" 
+                        alt="Santa's Secret Logo" 
+                        class="h-14 w-auto object-contain"
+                        style="mix-blend-mode: multiply;">
                 </a>
                 
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="nav-link text-gray-800 hover:text-red-600 py-2 text-sm uppercase tracking-wide">Home</a>
-                    <a href="#about" class="nav-link text-gray-800 hover:text-red-600 py-2 text-sm uppercase tracking-wide">About</a>
-                    <a href="#countdown" class="nav-link text-gray-800 hover:text-red-600 py-2 text-sm uppercase tracking-wide">Countdown</a>
-                    <a href="#gallery" class="nav-link text-gray-800 hover:text-red-600 py-2 text-sm uppercase tracking-wide">Gallery</a>
-                    <a href="wreaths.html" class="nav-link text-gray-800 hover:text-red-600 py-2 text-sm uppercase tracking-wide">Wreaths</a>
-                    <a href="#visitus" class="bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition shadow-md text-sm">Visit Us</a>
-                </div>
-                
-                <button class="md:hidden focus:outline-none text-gray-800 p-2" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars text-xl"></i>
+                <button class="focus:outline-none text-gray-800 p-2 rounded-lg hover:bg-red-50 transition-colors" onclick="toggleMobileMenu()" aria-label="Open menu">
+                    <i id="menuIcon" class="fas fa-bars text-2xl text-gray-700"></i>
                 </button>
             </div>
             
-            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-100">
-                <div class="flex flex-col space-y-3 pt-3">
-                    <a href="#home" class="px-2 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg">Home</a>
-                    <a href="#about" class="px-2 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg">About</a>
-                    <a href="#countdown" class="px-2 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg">Countdown</a>
-                    <a href="#gallery" class="px-2 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg">Gallery</a>
-                    <a href="wreaths.html" class="px-2 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg">Wreaths</a>
-                    <a href="#visitus" class="px-2 py-2 text-red-600 font-bold">Visit Us →</a>
+            <div id="mobileMenu" class="hidden pb-4 border-t border-gray-100 mt-2">
+                <div class="flex flex-col space-y-1 pt-3">
+                    <a href="#home"      onclick="toggleMobileMenu()" class="px-3 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Home</a>
+                    <a href="#about"     onclick="toggleMobileMenu()" class="px-3 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">About</a>
+                    <a href="#countdown" onclick="toggleMobileMenu()" class="px-3 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Countdown</a>
+                    <a href="#gallery"   onclick="toggleMobileMenu()" class="px-3 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Gallery</a>
+                    <a href="wreaths.html" onclick="toggleMobileMenu()" class="px-3 py-2 text-gray-800 font-medium hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Wreaths</a>
+                    <a href="#visitus"   onclick="toggleMobileMenu()" class="mx-3 mt-2 bg-red-600 text-white px-4 py-2 rounded-full font-semibold text-center hover:bg-red-700 transition-colors block">Visit Us</a>
                 </div>
             </div>
         </div>
@@ -467,7 +470,19 @@
     </div>
 
     <script>
-        function toggleMobileMenu(){const m=document.getElementById('mobileMenu');m.classList.toggle('hidden')}
+        function toggleMobileMenu(){
+            const m = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            m.classList.toggle('hidden');
+            // Toggle between bars and X icon
+            if (m.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
         
         /* Snow System */
         class HeroSnowSystem{constructor(){this.canvas=document.getElementById('snowCanvas');if(!this.canvas)return;this.ctx=this.canvas.getContext('2d');this.snowflakes=[];this.isSnowing=!0;this.animationId=null;this.heroSection=document.querySelector('#home');this.isMobile=window.innerWidth<=768;this.maxSnowflakes=this.isMobile?20:40;this.init()}init(){this.resizeCanvas();this.startSnow();window.addEventListener('resize',()=>{this.resizeCanvas()})}resizeCanvas(){if(!this.heroSection)return;const r=this.heroSection.getBoundingClientRect();this.canvas.width=r.width;this.canvas.height=r.height;this.canvas.style.width=r.width+'px';this.canvas.style.height=r.height+'px'}createSnowflake(){return{x:Math.random()*this.canvas.width,y:-10,radius:Math.random()*4+1,speed:Math.random()*2+.5,drift:(Math.random()-.5)*1.5,opacity:Math.random()*.8+.2,sparkle:Math.random()>.7}}animate(){if(!this.isSnowing)return;this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);for(let i=this.snowflakes.length-1;i>=0;i--){const f=this.snowflakes[i];f.y+=f.speed;f.x+=f.drift;if(f.sparkle){this.ctx.shadowBlur=10;this.ctx.shadowColor='rgba(255,255,255,0.8)'}this.ctx.beginPath();this.ctx.arc(f.x,f.y,f.radius,0,Math.PI*2);this.ctx.fillStyle=`rgba(255,255,255,${f.opacity})`;this.ctx.fill();this.ctx.shadowBlur=0;if(f.y>this.canvas.height+10||f.x<-50||f.x>this.canvas.width+50){this.snowflakes.splice(i,1)}}if(this.snowflakes.length<this.maxSnowflakes&&Math.random()<.3){this.snowflakes.push(this.createSnowflake())}this.animationId=requestAnimationFrame(()=>this.animate())}startSnow(){this.isSnowing=!0;for(let i=0;i<15;i++){this.snowflakes.push(this.createSnowflake())}this.animate()}}
@@ -509,269 +524,87 @@
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, 'facebook-share-dialog', 'width=800,height=600');
         }
     </script>
+
 <!-- ============================================================
      SAY G'DAY WIDGET — Santa's Secret (Holly)
-     Drop this block just before </body> in index.html
-     When saygday.ai/chat/santas-secret goes live, set:
-       SAYGDAY_URL = 'https://saygday.ai/chat/santas-secret'
-       SAYGDAY_LIVE = true
      ============================================================ -->
-
 <style>
-  /* --- Bubble --- */
   #sgd-bubble {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 9999;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    width: 62px; height: 62px; border-radius: 50%;
     background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
     box-shadow: 0 4px 20px rgba(220,38,38,.45), 0 0 0 0 rgba(220,38,38,.4);
-    border: 3px solid #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 3px solid #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
     transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
     animation: sgd-pulse 2.8s ease-in-out infinite;
   }
-  #sgd-bubble:hover {
-    transform: scale(1.12);
-    box-shadow: 0 8px 30px rgba(220,38,38,.55), 0 0 0 0 rgba(220,38,38,.0);
-    animation: none;
-  }
+  #sgd-bubble:hover { transform: scale(1.12); box-shadow: 0 8px 30px rgba(220,38,38,.55); animation: none; }
   #sgd-bubble svg { width: 28px; height: 28px; }
   @keyframes sgd-pulse {
     0%,100% { box-shadow: 0 4px 20px rgba(220,38,38,.45), 0 0 0 0 rgba(220,38,38,.4); }
     50%      { box-shadow: 0 4px 20px rgba(220,38,38,.45), 0 0 0 10px rgba(220,38,38,.0); }
   }
-
-  /* --- Tooltip nudge --- */
   #sgd-nudge {
-    position: fixed;
-    bottom: 100px;
-    right: 28px;
-    z-index: 9998;
-    background: #fff;
-    border: 1px solid rgba(220,38,38,.15);
-    border-radius: 14px 14px 4px 14px;
-    padding: 10px 14px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #1f2937;
-    box-shadow: 0 8px 24px rgba(0,0,0,.1);
-    white-space: nowrap;
+    position: fixed; bottom: 100px; right: 28px; z-index: 9998;
+    background: #fff; border: 1px solid rgba(220,38,38,.15);
+    border-radius: 14px 14px 4px 14px; padding: 10px 14px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #1f2937;
+    box-shadow: 0 8px 24px rgba(0,0,0,.1); white-space: nowrap;
     animation: sgd-nudge-in .4s cubic-bezier(.34,1.56,.64,1) forwards;
-    cursor: pointer;
-    transition: opacity .3s;
+    cursor: pointer; transition: opacity .3s;
   }
   #sgd-nudge span { color: #dc2626; }
-  @keyframes sgd-nudge-in {
-    from { opacity:0; transform: translateY(8px) scale(.9); }
-    to   { opacity:1; transform: translateY(0) scale(1); }
-  }
-
-  /* --- Panel --- */
+  @keyframes sgd-nudge-in { from { opacity:0; transform: translateY(8px) scale(.9); } to { opacity:1; transform: translateY(0) scale(1); } }
   #sgd-panel {
-    position: fixed;
-    bottom: 104px;
-    right: 28px;
-    z-index: 9998;
-    width: 320px;
-    background: #fff;
-    border-radius: 20px;
+    position: fixed; bottom: 104px; right: 28px; z-index: 9998;
+    width: 320px; background: #fff; border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,.15), 0 0 0 1px rgba(220,38,38,.08);
-    overflow: hidden;
-    transform-origin: bottom right;
-    transform: scale(.85) translateY(16px);
-    opacity: 0;
-    pointer-events: none;
+    overflow: hidden; transform-origin: bottom right;
+    transform: scale(.85) translateY(16px); opacity: 0; pointer-events: none;
     transition: transform .3s cubic-bezier(.34,1.46,.64,1), opacity .25s ease;
   }
-  #sgd-panel.sgd-open {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .sgd-header {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    padding: 16px 18px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-  }
-  .sgd-avatar {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.2);
-    border: 2px solid rgba(255,255,255,.6);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
+  #sgd-panel.sgd-open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+  .sgd-header { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); padding: 16px 18px 14px; display: flex; align-items: center; gap: 10px; }
+  .sgd-avatar { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.2); border: 2px solid rgba(255,255,255,.6); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .sgd-header-text { flex: 1; }
-  .sgd-header-text strong {
-    display: block;
-    font-family: 'Playfair Display', serif;
-    color: #fff;
-    font-size: 16px;
-    line-height: 1.2;
-  }
-  .sgd-header-text span {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    color: rgba(255,255,255,.75);
-    font-weight: 500;
-  }
-  .sgd-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 0 2px rgba(74,222,128,.3);
-    display: inline-block;
-    margin-right: 5px;
-    animation: sgd-blink 2s ease-in-out infinite;
-  }
+  .sgd-header-text strong { display: block; font-family: 'Playfair Display', serif; color: #fff; font-size: 16px; line-height: 1.2; }
+  .sgd-header-text span { font-family: 'Inter', sans-serif; font-size: 11px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .sgd-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 2px rgba(74,222,128,.3); display: inline-block; margin-right: 5px; animation: sgd-blink 2s ease-in-out infinite; }
   @keyframes sgd-blink { 0%,100%{opacity:1} 50%{opacity:.4} }
-  #sgd-close {
-    background: rgba(255,255,255,.15);
-    border: none;
-    color: #fff;
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    transition: background .2s;
-    flex-shrink: 0;
-  }
+  #sgd-close { background: rgba(255,255,255,.15); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background .2s; flex-shrink: 0; }
   #sgd-close:hover { background: rgba(255,255,255,.3); }
-
   .sgd-body { padding: 18px 18px 6px; }
-
-  /* Chat bubble */
-  .sgd-msg {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 14px;
-    animation: sgd-msg-in .35s ease forwards;
-  }
-  @keyframes sgd-msg-in {
-    from { opacity:0; transform: translateY(6px); }
-    to   { opacity:1; transform: translateY(0); }
-  }
-  .sgd-msg-icon {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg,#dc2626,#b91c1c);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .sgd-bubble-text {
-    background: #f9fafb;
-    border: 1px solid #f3f4f6;
-    border-radius: 4px 14px 14px 14px;
-    padding: 10px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #374151;
-    flex: 1;
-  }
+  .sgd-msg { display: flex; gap: 8px; margin-bottom: 14px; animation: sgd-msg-in .35s ease forwards; }
+  @keyframes sgd-msg-in { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+  .sgd-msg-icon { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,#dc2626,#b91c1c); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .sgd-bubble-text { background: #f9fafb; border: 1px solid #f3f4f6; border-radius: 4px 14px 14px 14px; padding: 10px 12px; font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.5; color: #374151; flex: 1; }
   .sgd-bubble-text strong { color: #111827; }
-  .sgd-badge {
-    display: inline-block;
-    background: linear-gradient(135deg,#fef3c7,#fde68a);
-    color: #92400e;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 20px;
-    margin-bottom: 6px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-
-  /* Form */
+  .sgd-badge { display: inline-block; background: linear-gradient(135deg,#fef3c7,#fde68a); color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
   .sgd-form { padding: 0 18px 18px; }
-  .sgd-field {
-    width: 100%;
-    border: 1.5px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #111827;
-    margin-bottom: 8px;
-    transition: border-color .2s;
-    box-sizing: border-box;
-    outline: none;
-  }
+  .sgd-field { width: 100%; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 10px 12px; font-family: 'Inter', sans-serif; font-size: 13px; color: #111827; margin-bottom: 8px; transition: border-color .2s; box-sizing: border-box; outline: none; }
   .sgd-field:focus { border-color: #dc2626; }
   .sgd-field::placeholder { color: #9ca3af; }
-  .sgd-submit {
-    width: 100%;
-    background: linear-gradient(135deg,#dc2626,#b91c1c);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 11px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity .2s, transform .15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
+  .sgd-submit { width: 100%; background: linear-gradient(135deg,#dc2626,#b91c1c); color: #fff; border: none; border-radius: 10px; padding: 11px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity .2s, transform .15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
   .sgd-submit:hover { opacity: .9; transform: translateY(-1px); }
-  .sgd-submit:active { transform: translateY(0); }
-
-  .sgd-thanks {
-    text-align: center;
-    padding: 8px 18px 18px;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #374151;
-    display: none;
-  }
+  .sgd-thanks { text-align: center; padding: 8px 18px 18px; font-family: 'Inter', sans-serif; font-size: 13px; color: #374151; display: none; }
   .sgd-thanks .sgd-thanks-icon { font-size: 32px; margin-bottom: 8px; }
   .sgd-thanks strong { display: block; color: #111827; font-size: 14px; margin-bottom: 4px; }
-
-  .sgd-footer {
-    padding: 10px 18px 12px;
-    border-top: 1px solid #f3f4f6;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 10.5px;
-    color: #9ca3af;
-  }
+  .sgd-footer { padding: 10px 18px 12px; border-top: 1px solid #f3f4f6; text-align: center; font-family: 'Inter', sans-serif; font-size: 10.5px; color: #9ca3af; }
   .sgd-footer a { color: #dc2626; text-decoration: none; font-weight: 600; }
   .sgd-footer a:hover { text-decoration: underline; }
 </style>
 
-<!-- Nudge tooltip (auto-hides after 6s) -->
 <div id="sgd-nudge" onclick="sgdOpen()" title="Chat with Holly">
   🧝‍♀️ <span>Chat with Holly!</span>
 </div>
 
-<!-- Floating bubble -->
 <div id="sgd-bubble" onclick="sgdToggle()" aria-label="Chat with Holly, Santa's Secret assistant" role="button" tabindex="0">
   <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
   </svg>
 </div>
 
-<!-- Panel -->
 <div id="sgd-panel" role="dialog" aria-label="Chat with Holly">
   <div class="sgd-header">
     <div class="sgd-avatar">🧝‍♀️</div>
@@ -781,7 +614,6 @@
     </div>
     <button id="sgd-close" onclick="sgdClose()" aria-label="Close chat">×</button>
   </div>
-
   <div class="sgd-body">
     <div class="sgd-msg">
       <div class="sgd-msg-icon">🧝‍♀️</div>
@@ -793,7 +625,6 @@
       </div>
     </div>
   </div>
-
   <form class="sgd-form" id="sgd-form" name="saygday-waitlist" netlify onsubmit="sgdSubmit(event)">
     <input type="hidden" name="form-name" value="saygday-waitlist" />
     <input class="sgd-field" type="text" name="name" placeholder="Your name" required autocomplete="name" />
@@ -803,69 +634,43 @@
       <span>🎁</span>
     </button>
   </form>
-
   <div class="sgd-thanks" id="sgd-thanks">
     <div class="sgd-thanks-icon">🎉</div>
     <strong>You're on the nice list!</strong>
     Holly will be in touch as soon as she's ready. See you in Bungendore! 🎄
   </div>
-
   <div class="sgd-footer">
     AI assistant by <a href="https://upd8.group" target="_blank" rel="noopener">UPD<span style="color:#4ade80">8</span> Group</a>
   </div>
 </div>
 
 <script>
-  // ── Config ──────────────────────────────────────────
-  const SAYGDAY_LIVE = false; // flip to true + set URL when backend is ready
+  const SAYGDAY_LIVE = false;
   const SAYGDAY_URL  = 'https://upd8.group/chat/santas-secret';
-  // ────────────────────────────────────────────────────
-
   let sgdIsOpen = false;
-
   function sgdOpen() {
-    if (SAYGDAY_LIVE) {
-      window.open(SAYGDAY_URL, '_blank', 'width=420,height=640,noopener');
-      return;
-    }
+    if (SAYGDAY_LIVE) { window.open(SAYGDAY_URL, '_blank', 'width=420,height=640,noopener'); return; }
     document.getElementById('sgd-panel').classList.add('sgd-open');
-    sgdIsOpen = true;
-    sgdHideNudge();
+    sgdIsOpen = true; sgdHideNudge();
   }
-
-  function sgdClose() {
-    document.getElementById('sgd-panel').classList.remove('sgd-open');
-    sgdIsOpen = false;
-  }
-
-  function sgdToggle() {
-    sgdIsOpen ? sgdClose() : sgdOpen();
-  }
-
+  function sgdClose() { document.getElementById('sgd-panel').classList.remove('sgd-open'); sgdIsOpen = false; }
+  function sgdToggle() { sgdIsOpen ? sgdClose() : sgdOpen(); }
   function sgdHideNudge() {
     const n = document.getElementById('sgd-nudge');
     if (n) { n.style.opacity = '0'; n.style.pointerEvents = 'none'; setTimeout(() => n.remove(), 400); }
   }
-
   function sgdSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('sgd-form');
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString() })
-      .catch(() => {});
+      body: new URLSearchParams(new FormData(form)).toString() }).catch(() => {});
     form.style.display = 'none';
     document.getElementById('sgd-thanks').style.display = 'block';
   }
-
-  // Auto-hide nudge after 6s
   setTimeout(sgdHideNudge, 6000);
-
-  // Keyboard support on bubble
-  document.getElementById('sgd-bubble').addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') sgdToggle();
-  });
+  document.getElementById('sgd-bubble').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') sgdToggle(); });
 </script>
 <!-- END HOLLY / SAY G'DAY WIDGET -->
-    
+
 </body>
 </html>
