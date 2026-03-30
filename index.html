@@ -47,8 +47,8 @@
             padding: 12px 32px;
             box-shadow: 0 2px 20px rgba(26,16,8,0.08);
         }
-        #mainNav .logo img { height: 52px; width: auto; mix-blend-mode: multiply; transition: height 0.4s ease; }
-        #mainNav.scrolled .logo img { height: 44px; }
+        #mainNav .logo img { height: 72px; width: auto; mix-blend-mode: multiply; transition: height 0.4s ease; }
+        #mainNav.scrolled .logo img { height: 56px; }
 
         #menuBtn {
             background: none; border: none; cursor: pointer;
@@ -176,19 +176,19 @@
         .photo-stack { position: relative; height: 520px; }
         @media(max-width:860px){ .photo-stack{ height: 380px; } }
         .photo-stack .photo-a {
-            position: absolute; top: 0; left: 40px; width: 72%;
+            position: absolute; top: 0; left: 20px; width: 75%;
             aspect-ratio: 4/5; object-fit: cover; border-radius: 4px;
-            box-shadow: 0 24px 60px rgba(26,16,8,0.18); transform: rotate(-2.5deg);
+            box-shadow: 0 24px 60px rgba(26,16,8,0.18); transform: rotate(0deg);
             transition: transform 0.5s; z-index: 2;
         }
         .photo-stack .photo-b {
             position: absolute; bottom: 0; right: 0; width: 62%;
             aspect-ratio: 3/4; object-fit: cover; border-radius: 4px;
-            box-shadow: 0 24px 60px rgba(26,16,8,0.14); transform: rotate(2deg);
+            box-shadow: 0 24px 60px rgba(26,16,8,0.14); transform: rotate(0deg);
             transition: transform 0.5s; z-index: 3; border: 6px solid white;
         }
-        .photo-stack:hover .photo-a { transform: rotate(-1deg) scale(1.02); }
-        .photo-stack:hover .photo-b { transform: rotate(0.5deg) scale(1.02); }
+        .photo-stack:hover .photo-a { transform: rotate(0deg) scale(1.02); }
+        .photo-stack:hover .photo-b { transform: rotate(0deg) scale(1.02); }
         .photo-label {
             position: absolute; bottom: 60px; left: 0; background: var(--red); color: white;
             font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem;
@@ -336,7 +336,6 @@
     <a href="#home"      onclick="closeMenu()">Home</a>
     <a href="#bespoke"   onclick="closeMenu()">Our Story</a>
     <a href="#about"     onclick="closeMenu()">Meet Kim</a>
-    <a href="#countdown" onclick="closeMenu()">Countdown</a>
     <a href="#gallery"   onclick="closeMenu()">Gallery</a>
     <a href="wreaths.html" onclick="closeMenu()">Wreaths</a>
     <a href="halloween.html" onclick="closeMenu()">Halloween 🎃</a>
@@ -625,7 +624,7 @@
   <div class="sgd-footer">AI assistant by <a href="https://1973.ai" target="_blank" rel="noopener">1973.ai</a></div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
 
 // NAV SCROLL
@@ -751,3 +750,15 @@ window.sgdSubmit = function(e) {
     e.preventDefault();
     var form = document.getElementById('sgd-form');
     fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(new FormData(form)).toString() }).catch(function(){});
+       form.style.display = 'none';
+    document.getElementById('sgd-thanks').style.display = 'block';
+};
+
+setTimeout(sgdHideNudge, 6000);
+var bubble = document.getElementById('sgd-bubble');
+if(bubble) bubble.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') window.sgdToggle(); });
+
+}); // end DOMContentLoaded
+</script>
+</body>
+</html>
