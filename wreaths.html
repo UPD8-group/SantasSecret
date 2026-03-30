@@ -7,571 +7,312 @@
     <link rel="icon" type="image/png" href="https://santasecret.com.au/boxicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-
         :root {
-            --wreath-green: #059669;
-            --wreath-gold: #f59e0b;
-            --wreath-burgundy: #991b1b;
-            --wreath-cream: #fef3c7;
-            --warm-white: #fef7ed;
-            --soft-gray: #f8fafc;
+            --red:       #c0392b;
+            --gold:      #c8973a;
+            --gold-light:#f0d080;
+            --gold-pale: #fdf6e3;
+            --cream:     #faf6f0;
+            --ink:       #1a1008;
+            --warm-mid:  #7a5c3a;
+            --green:     #2d6a4f;
+            --green-light:#52b788;
         }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+        .display { font-family: 'Cormorant Garamond', serif; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+        /* NAV */
+        #mainNav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 20px 32px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
         }
-
-        .heading-font {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-
-        .nav-glass {
-            background: rgba(255, 255, 255, 1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background: linear-gradient(90deg, var(--wreath-green), var(--wreath-gold));
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .wreath-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
-                        url('https://images.unsplash.com/photo-1666115079117-28e25113048b?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNocmlzdG1hcyUyMHdyZWF0aHxlbnwwfHwwfHx8MA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-wreath {
-            background: linear-gradient(135deg, var(--wreath-green) 0%, #047857 100%);
-            color: white;
-            font-weight: 600;
+        #mainNav.scrolled {
+            background: rgba(250,246,240,0.96);
+            backdrop-filter: blur(12px);
             padding: 12px 32px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(26,16,8,0.08);
         }
+        #mainNav .logo img { height: 52px; width: auto; mix-blend-mode: multiply; transition: height 0.4s; }
+        #mainNav.scrolled .logo img { height: 44px; }
 
-        .btn-wreath:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
-        }
+        #menuBtn { background: none; border: none; cursor: pointer; width: 40px; height: 40px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 4px; }
+        #menuBtn span { display: block; height: 1.5px; background: white; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+        #mainNav.scrolled #menuBtn span { background: var(--ink); }
+        #menuBtn.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        #menuBtn.open span:nth-child(2) { opacity: 0; }
+        #menuBtn.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-        .product-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(5, 150, 105, 0.1);
-        }
+        #mobileMenu { position: fixed; top: 0; right: -100%; width: min(360px,100vw); height: 100vh; background: var(--ink); z-index: 99; display: flex; flex-direction: column; justify-content: center; padding: 60px 48px; transition: right 0.45s cubic-bezier(0.77,0,0.175,1); }
+        #mobileMenu.open { right: 0; }
+        #mobileMenu a { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,5vw,3rem); font-weight: 300; color: var(--gold-pale); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(200,151,58,0.15); transition: color 0.2s, padding-left 0.2s; }
+        #mobileMenu a:hover { color: var(--gold); padding-left: 8px; }
+        #mobileMenu a.active { color: var(--green-light); }
+        #mobileMenu a:last-child { border-bottom: none; }
+        #menuOverlay { position: fixed; inset: 0; background: rgba(26,16,8,0.6); z-index: 98; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        #menuOverlay.open { opacity: 1; pointer-events: all; }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.35)),
+                        url('https://images.unsplash.com/photo-1666115079117-28e25113048b?w=1200&auto=format&fit=crop&q=80') center/cover no-repeat fixed;
+            position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
+        #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(45,106,79,0.2) 0%, transparent 60%); }
+        .hero-content { position: relative; z-index: 10; text-align: center; color: white; padding: 0 24px; max-width: 900px; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+        .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--gold-light); }
+        .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,8vw,6.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+        .hero-title em { font-style: italic; color: var(--gold-light); }
+        .hero-sub { font-size: clamp(1rem,2.5vw,1.2rem); font-weight: 300; color: rgba(255,255,255,0.82); margin-bottom: 48px; line-height: 1.7; opacity: 0; animation: fadeUp 0.9s 0.7s forwards; }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.9s forwards; }
 
-        .product-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
+        .btn-primary { background: var(--green); color: white; padding: 14px 36px; border-radius: 2px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--green); transition: all 0.3s; display: inline-block; }
+        .btn-primary:hover { background: #1b4332; border-color: #1b4332; transform: translateY(-2px); }
+        .btn-ghost { background: transparent; color: white; padding: 14px 36px; border-radius: 2px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 2px solid rgba(255,255,255,0.4); transition: all 0.3s; display: inline-block; }
+        .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-        .product-card:hover .product-image {
-            transform: scale(1.1);
-        }
+        .scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-        .text-gradient-wreath {
-            background: linear-gradient(135deg, var(--wreath-green) 0%, var(--wreath-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        /* SECTION LABEL */
+        .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+        .section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
 
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
+        /* INK UNDERLINE */
+        .ink-underline { display: block; width: 180px; height: 12px; margin: -8px 0 32px; }
 
-        .lightbox.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* GALLERY */
+        #gallery { background: white; padding: 120px 40px; }
+        .gallery-inner { max-width: 1300px; margin: 0 auto; }
+        .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 16px; }
+        .gallery-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; line-height: 1.1; }
+        .gallery-header h2 em { font-style: italic; color: var(--green); }
+        .gallery-grid { columns: 2; column-gap: 20px; margin-top: 48px; }
+        @media(min-width:640px){ .gallery-grid{ columns: 3; } }
+        @media(min-width:1024px){ .gallery-grid{ columns: 4; } }
 
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-        }
+        .wreath-card { break-inside: avoid; margin-bottom: 20px; background: var(--cream); border: 1px solid rgba(26,16,8,0.06); border-radius: 4px; overflow: hidden; cursor: zoom-in; transition: transform 0.4s, box-shadow 0.4s, border-color 0.3s; }
+        .wreath-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(26,16,8,0.12); border-color: rgba(45,106,79,0.3); }
+        .wreath-card img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.4s; }
+        .wreath-card:hover img { transform: scale(1.04); }
+        .wreath-info { padding: 16px 20px 20px; }
+        .wreath-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+        .wreath-info p { font-size: 0.8rem; color: var(--warm-mid); line-height: 1.5; }
 
-        .lightbox-image {
-            width: 100%;
-            height: auto;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 15px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-        }
+        /* CTA */
+        .gallery-cta { text-align: center; margin-top: 72px; padding-top: 64px; border-top: 1px solid rgba(26,16,8,0.06); }
+        .gallery-cta p { color: var(--warm-mid); margin-bottom: 28px; font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto; }
 
-        .lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: -10px;
-            color: white;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
+        /* FOOTER */
+        footer { background: var(--ink); padding: 72px 40px 40px; color: rgba(253,246,227,0.6); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+        @media(max-width:760px){ .footer-inner{ grid-template-columns:1fr; gap:36px; } }
+        .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold-pale); margin-bottom: 12px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 24px; }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a { width: 38px; height: 38px; border: 1px solid rgba(200,151,58,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(253,246,227,0.5); font-size: 13px; text-decoration: none; transition: all 0.2s; }
+        .social-links a:hover { border-color: var(--gold); color: var(--gold); }
+        .footer-col h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: rgba(253,246,227,0.55); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-col ul li a:hover { color: var(--gold-pale); }
+        .footer-col ul li a.active { color: var(--green-light); }
+        .footer-col address { font-style: normal; font-size: 0.9rem; line-height: 1.8; }
+        .footer-col address a { color: rgba(253,246,227,0.55); text-decoration: none; transition: color 0.2s; }
+        .footer-col address a:hover { color: var(--gold-pale); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 28px; border-top: 1px solid rgba(200,151,58,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 12px; }
+        .footer-bottom a { color: var(--gold); text-decoration: none; }
 
-        .lightbox-close:hover {
-            background: rgba(220, 38, 38, 0.8);
-            transform: scale(1.1);
-        }
+        /* LIGHTBOX */
+        #lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(26,16,8,0.97); display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+        #lightbox.visible { display: flex; }
+        #lightbox.open { opacity: 1; }
+        #lightbox img { max-height: 88vh; max-width: 90vw; border-radius: 3px; box-shadow: 0 32px 80px rgba(0,0,0,0.6); transform: scale(0.95); transition: transform 0.3s; }
+        #lightbox.open img { transform: scale(1); }
+        #lb-close { position: absolute; top: 24px; right: 28px; color: rgba(253,246,227,0.5); font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; }
+        #lb-close:hover { color: white; }
+        #lb-hint { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(253,246,227,0.25); }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav-glass sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-2">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <a href="index.html" class="w-16 h-16 flex items-center justify-center rounded-lg shadow-sm">
-                        <img src="https://santasecret.com.au/SantaLogo_whitebg.webp" alt="Santa's Secret Logo" class="w-full h-full object-contain">
-                    </a>
-                </div>
 
-                <div class="hidden md:flex space-x-6 items-center">
-                    <a href="index.html" class="nav-link text-gray-800 hover:text-green-600 py-2">Home</a>
-                    <a href="index.html#about" class="nav-link text-gray-800 hover:text-green-600 py-2">About</a>
-                    <a href="index.html#countdown" class="nav-link text-gray-800 hover:text-green-600 py-2">Countdown</a>
-                    <a href="index.html#gallery" class="nav-link text-gray-800 hover:text-green-600 py-2">Gallery</a>
-                    <a href="wreaths.html" class="nav-link text-green-600 py-2 font-semibold">Wreaths</a>
-                    <a href="index.html#visitus" class="nav-link text-gray-800 hover:text-green-600 py-2">Visit Us</a>
-                </div>
+<!-- NAV -->
+<nav id="mainNav">
+    <a href="index.html" class="logo"><img src="https://santasecret.com.au/SantaLogo.png" alt="Santa's Secret"></a>
+    <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="menuOverlay" onclick="closeMenu()"></div>
+<div id="mobileMenu">
+    <a href="index.html"         onclick="closeMenu()">Home</a>
+    <a href="index.html#bespoke" onclick="closeMenu()">Our Story</a>
+    <a href="index.html#about"   onclick="closeMenu()">Meet Kim</a>
+    <a href="index.html#gallery" onclick="closeMenu()">Gallery</a>
+    <a href="halloween.html"     onclick="closeMenu()">Halloween</a>
+    <a href="wreaths.html" class="active" onclick="closeMenu()">Wreaths</a>
+    <a href="index.html#visitus" onclick="closeMenu()">Visit Us ↗</a>
+</div>
 
-                <div class="flex items-center">
-                    <button class="md:hidden focus:outline-none text-gray-800" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div id="mobileMenu" class="hidden md:hidden mt-3 pb-3">
-                <div class="flex flex-col space-y-2">
-                    <a href="index.html" class="py-2 text-gray-800 hover:text-green-600">Home</a>
-                    <a href="index.html#about" class="py-2 text-gray-800 hover:text-green-600">About</a>
-                    <a href="index.html#countdown" class="py-2 text-gray-800 hover:text-green-600">Countdown</a>
-                    <a href="index.html#gallery" class="py-2 text-gray-800 hover:text-green-600">Gallery</a>
-                    <a href="wreaths.html" class="py-2 text-green-600 font-semibold">Wreaths</a>
-                    <a href="index.html#visitus" class="py-2 text-gray-800 hover:text-green-600">Visit Us</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden min-h-screen flex items-center justify-center wreath-hero">
-        <div class="container mx-auto px-6 z-20 text-center text-white relative">
-            <div class="max-w-5xl mx-auto">
-                <h1 class="heading-font text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-8 leading-tight drop-shadow-lg">
-                    Handcrafted Wreaths for 
-                    <span class="text-yellow-300">Every Season</span>
-                </h1>
-                <p class="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-95 drop-shadow-md">
-                    Beautiful, bespoke wreaths that celebrate the changing seasons and bring natural elegance to your home year-round
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#wreath-gallery" class="btn-wreath text-lg transform hover:scale-105">
-                        <i class="fas fa-leaf mr-3"></i>Explore Our Wreaths
-                    </a>
-                    <a href="index.html#visitus" class="text-white border-2 border-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-green-800 transition-all duration-300">
-                        <i class="fas fa-store mr-2"></i>Visit Our Workshop
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wreath Gallery -->
-    <section id="wreath-gallery" class="py-20 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="heading-font text-4xl md:text-5xl font-extrabold mb-6 text-gradient-wreath">Our Wreath Gallery</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                    Examples of Kim's beautiful handcrafted wreaths - each one unique and made with love for her clients.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Lime Gold and Emerald -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp', 'Lime Gold and Emerald')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp" alt="Lime Gold and Emerald Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Lime Gold and Emerald</h3>
-                            <p class="text-gray-600 text-sm mb-4">Vibrant lime, gold, and emerald Christmas wreath with luxurious ribbon details.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Purple Envy -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/PurpleEnvy.webp', 'Purple Envy')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/PurpleEnvy.webp" alt="Purple Envy Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Purple Envy</h3>
-                            <p class="text-gray-600 text-sm mb-4">Elegant purple-themed wreath with sophisticated metallic accents.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rosegold and Reindeer -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp', 'Rosegold and Reindeer')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp" alt="Rosegold and Reindeer Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Rosegold and Reindeer</h3>
-                            <p class="text-gray-600 text-sm mb-4">Rustic charm meets elegance with rose gold tones and reindeer motifs.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Peacock -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Peacock.webp', 'Peacock Plume')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/Peacock.webp" alt="Peacock Plume Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Peacock Plume</h3>
-                            <p class="text-gray-600 text-sm mb-4">Stunning peacock-inspired wreath with rich blues, greens, and gold accents.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Nutcrackers -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Nutcrackers.webp', 'Nutcrackers Watch')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/Nutcrackers.webp" alt="Nutcrackers Watch Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Nutcrackers Watch</h3>
-                            <p class="text-gray-600 text-sm mb-4">Traditional Christmas magic with charming nutcracker decorations.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Maple -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Maple.webp', 'Maple Leaves')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/Maple.webp" alt="Maple Leaves Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Maple Leaves</h3>
-                            <p class="text-gray-600 text-sm mb-4">Beautiful autumn-inspired wreath featuring rich maple leaf colors.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Candy Swirl -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/CandySwirl.webp', 'Candy Swirl')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/CandySwirl.webp" alt="Candy Swirl Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Candy Swirl</h3>
-                            <p class="text-gray-600 text-sm mb-4">Sweet and playful wreath with candy cane colors and whimsical details.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grinch -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/Grinch.webp', 'Grinch Inspired')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/Grinch.webp" alt="Grinch Inspired Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Grinch Inspired</h3>
-                            <p class="text-gray-600 text-sm mb-4">Whimsical Grinch-themed wreath bringing Christmas mischief to your door.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Navy and Silver -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/NavySilver.webp', 'Navy and Silver')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/NavySilver.webp" alt="Navy and Silver Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Navy and Silver</h3>
-                            <p class="text-gray-600 text-sm mb-4">Sophisticated navy blue and silver wreath with modern elegance.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Christmas Polka Dots -->
-                <div class="wreath-item">
-                    <div class="product-card cursor-pointer relative" onclick="openLightbox('https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp', 'Christmas with Polka Dots')">
-                        <div class="overflow-hidden">
-                            <img src="https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp" alt="Christmas Polka Dots Wreath" class="product-image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold mb-2">Christmas with Polka Dots</h3>
-                            <p class="text-gray-600 text-sm mb-4">Fun and festive with playful polka dot patterns and Christmas cheer.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-green-600">Handcrafted</span>
-                                <button class="text-green-600 hover:text-green-800 font-semibold">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <p class="text-gray-600 mb-6">Love what you see? Kim can create custom wreaths inspired by these designs or something completely new just for you!</p>
-                <a href="index.html#visitus" class="btn-wreath text-lg">
-                    <i class="fas fa-store mr-2"></i>Visit Our Workshop
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div>
-                    <h3 class="heading-font text-2xl font-bold mb-4 text-gradient-wreath">Santa's Secret</h3>
-                    <p class="text-gray-300 mb-6">Creating beautiful seasonal wreaths and decorations in Bungendore. From spring's first blooms to winter's festive magic - handcrafted with love.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="mailto:info.santasecret@gmail.com" class="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-6 text-lg">Quick Links</h4>
-                    <ul class="space-y-3">
-                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-home mr-2 text-sm"></i>Home
-                        </a></li>
-                        <li><a href="index.html#about" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-user mr-2 text-sm"></i>About Kim
-                        </a></li>
-                        <li><a href="index.html#gallery" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-images mr-2 text-sm"></i>Gallery
-                        </a></li>
-                        <li><a href="halloween.html" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-ghost mr-2 text-sm"></i>Halloween
-                        </a></li>
-                        <li><a href="wreaths.html" class="text-green-400 hover:text-green-300 transition-colors flex items-center">
-                            <i class="fas fa-circle-notch mr-2 text-sm"></i>Wreaths
-                        </a></li>
-                        <li><a href="index.html#visitus" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2 text-sm"></i>Visit Us
-                        </a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-6 text-lg">Contact Info</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-center text-gray-300">
-                            <i class="fas fa-map-marker-alt mr-3 text-green-400"></i>
-                            <span>24b Malbon St, Bungendore NSW</span>
-                        </div>
-                        <div class="flex items-center text-gray-300">
-                            <i class="fas fa-phone mr-3 text-yellow-400"></i>
-                            <a href="tel:0480784317" class="hover:text-white transition-colors">0480 784 317</a>
-                        </div>
-                        <div class="flex items-center text-gray-300">
-                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                            <a href="mailto:info.santasecret@gmail.com" class="hover:text-white transition-colors">info.santasecret@gmail.com</a>
-                        </div>
-                        <div class="mt-4 p-3 bg-gray-800 rounded-lg">
-                            <p class="text-sm text-gray-400 mb-2">Store Hours:</p>
-                            <p class="text-sm text-gray-300">Fri: 10am-2pm | Sat: 10am-3pm | Sun: 10am-2pm</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
-                <div class="flex flex-col md:flex-row justify-between items-center text-gray-400">
-                    <p>&copy; 2024 Santa's Secret. All rights reserved. Made with love in Bungendore.</p>
-                    <div class="mt-4 md:mt-0">
-                        <a href="https://codepluscanvas.com" target="_blank" rel="noopener noreferrer" class="text-white hover:opacity-80 transition-opacity" title="Created with Code+Canvas">
-                            <span class="text-white">code</span><span class="text-blue-400">+</span><span class="text-white">canvas</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-image" class="lightbox-image" src="" alt="">
-            <div class="text-center mt-4">
-                <p id="lightbox-caption" class="text-white text-lg"></p>
-            </div>
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-content">
+        <div class="hero-eyebrow">Handcrafted in Bungendore</div>
+        <h1 class="hero-title display">Wreaths for<br><em>Every Season</em></h1>
+        <p class="hero-sub">Beautiful, bespoke wreaths that celebrate the changing seasons<br>and bring natural elegance to your home year-round.</p>
+        <div class="hero-btns">
+            <a href="#gallery" class="btn-primary"><i class="fas fa-leaf" style="margin-right:8px"></i>Explore Our Wreaths</a>
+            <a href="index.html#visitus" class="btn-ghost"><i class="fas fa-store" style="margin-right:8px"></i>Visit Our Workshop</a>
         </div>
     </div>
+    <div class="scroll-cue"><i class="fas fa-chevron-down"></i><span>Scroll</span></div>
+</section>
 
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
-        }
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="gallery-inner">
+        <div class="gallery-header">
+            <div>
+                <div class="section-label">Kim's Collection</div>
+                <h2 class="display">Our Wreath<br><em>Gallery</em></h2>
+                <svg class="ink-underline" viewBox="0 0 180 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 9 C30 3, 60 11, 90 7 C120 3, 150 10, 178 6" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+                    <path d="M10 11 C40 6, 70 10, 100 8 C130 6, 155 9, 175 7" stroke="#c8973a" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.35"/>
+                </svg>
+            </div>
+        </div>
+        <p style="color:var(--warm-mid);font-size:0.95rem;">Each one unique, made with love for her clients. Click any wreath to see the full detail. ✨</p>
 
-        function filterGallery(category) {
-            const items = document.querySelectorAll('.wreath-item');
-            const filters = document.querySelectorAll('.gallery-filter');
-            
-            filters.forEach(filter => {
-                filter.classList.remove('active', 'bg-green-600', 'text-white');
-                filter.classList.add('bg-gray-200', 'text-gray-700');
-            });
-            
-            const activeFilter = document.querySelector(`[data-filter="${category}"]`);
-            activeFilter.classList.add('active', 'bg-green-600', 'text-white');
-            activeFilter.classList.remove('bg-gray-200', 'text-gray-700');
-            
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+        <div class="gallery-grid">
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/LimeGoldEmerald.webp" alt="Lime Gold and Emerald">
+                <div class="wreath-info"><h3>Lime Gold &amp; Emerald</h3><p>Vibrant lime, gold, and emerald with luxurious ribbon details.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/PurpleEnvy.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/PurpleEnvy.webp" alt="Purple Envy">
+                <div class="wreath-info"><h3>Purple Envy</h3><p>Elegant purple-themed with sophisticated metallic accents.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/RosegoldReindeer.webp" alt="Rosegold and Reindeer">
+                <div class="wreath-info"><h3>Rosegold &amp; Reindeer</h3><p>Rustic charm meets elegance with rose gold and reindeer motifs.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/Peacock.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/Peacock.webp" alt="Peacock Plume">
+                <div class="wreath-info"><h3>Peacock Plume</h3><p>Rich blues, greens, and gold in a stunning peacock-inspired design.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/Nutcrackers.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/Nutcrackers.webp" alt="Nutcrackers Watch">
+                <div class="wreath-info"><h3>Nutcrackers Watch</h3><p>Traditional Christmas magic with charming nutcracker decorations.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/Maple.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/Maple.webp" alt="Maple Leaves">
+                <div class="wreath-info"><h3>Maple Leaves</h3><p>Autumn-inspired with rich, warm maple leaf colours.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/CandySwirl.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/CandySwirl.webp" alt="Candy Swirl">
+                <div class="wreath-info"><h3>Candy Swirl</h3><p>Sweet and playful with candy cane colours and whimsical details.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/Grinch.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/Grinch.webp" alt="Grinch Inspired">
+                <div class="wreath-info"><h3>Grinch Inspired</h3><p>Whimsical Grinch-themed bringing Christmas mischief to your door.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/NavySilver.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/NavySilver.webp" alt="Navy and Silver">
+                <div class="wreath-info"><h3>Navy &amp; Silver</h3><p>Sophisticated navy blue and silver with modern elegance.</p></div>
+            </div>
+            <div class="wreath-card" onclick="openLb('https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp')">
+                <img src="https://santasecret.com.au/images/wreaths/ChristmasPolkaDots.webp" alt="Christmas Polka Dots">
+                <div class="wreath-info"><h3>Christmas Polka Dots</h3><p>Fun and festive with playful polka dot patterns.</p></div>
+            </div>
+        </div>
 
-        function openLightbox(imageSrc, caption) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            
-            lightboxImage.src = imageSrc;
-            lightboxCaption.textContent = caption;
-            lightbox.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
+        <div class="gallery-cta">
+            <p>Love what you see? Kim can create custom wreaths inspired by these designs or something completely new just for you!</p>
+            <a href="index.html#visitus" class="btn-primary"><i class="fas fa-store" style="margin-right:8px"></i>Visit Our Workshop</a>
+        </div>
+    </div>
+</section>
 
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3 class="display">Santa's Secret</h3>
+            <p>Creating beautiful seasonal wreaths and decorations in Bungendore. From spring's first blooms to winter's festive magic — handcrafted with love.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:info.santasecret@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navigate</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#bespoke">Our Story</a></li>
+                <li><a href="index.html#about">About Kim</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="halloween.html">Halloween</a></li>
+                <li><a href="wreaths.html" class="active">Wreaths</a></li>
+                <li><a href="index.html#visitus">Visit Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <address>
+                24b Malbon St,<br>Bungendore NSW 2621<br><br>
+                <a href="tel:+61480784317">0480 784 317</a><br>
+                <a href="mailto:info.santasecret@gmail.com">info.santasecret@gmail.com</a>
+            </address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2025 Santa's Secret. Made with ❤️ in Bungendore.</span>
+        <span>website by <a href="https://jaybergmann.com" target="_blank">Jay</a></span>
+    </div>
+</footer>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.gallery-filter').forEach(button => {
-                button.addEventListener('click', function() {
-                    filterGallery(this.dataset.filter);
-                });
-            });
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLb()">
+    <button id="lb-close" onclick="closeLb()">×</button>
+    <img id="lb-img" src="" alt="">
+    <p id="lb-hint">Click anywhere to close</p>
+</div>
 
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeLightbox();
-                }
-            });
-        });
-    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // NAV
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+    // MENU
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var menuOverlay = document.getElementById('menuOverlay');
+    function openMenu(){ menuBtn.classList.add('open'); mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+    window.closeMenu = function(){ menuBtn.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow=''; };
+    menuBtn.addEventListener('click', function(){ mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+
+    // LIGHTBOX
+    window.openLb = function(src){
+        var lb = document.getElementById('lightbox');
+        document.getElementById('lb-img').src = src;
+        lb.classList.add('visible');
+        requestAnimationFrame(function(){ lb.classList.add('open'); });
+    };
+    window.closeLb = function(){
+        var lb = document.getElementById('lightbox');
+        lb.classList.remove('open');
+        setTimeout(function(){ lb.classList.remove('visible'); }, 300);
+    };
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+});
+</script>
 </body>
 </html>
