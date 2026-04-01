@@ -108,10 +108,8 @@
         .logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:24px}
         .logo-item a{display:flex;align-items:center;justify-content:center;position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:24px 16px;transition:border-color .3s,background .3s;aspect-ratio:3/2;overflow:hidden}
         .logo-item a:hover{border-color:var(--orange);background:rgba(232,98,26,0.05)}
-        .logo-item a img.gray{position:absolute;width:80%;object-fit:contain;opacity:.65;transition:opacity .3s}
-        .logo-item a img.color{position:absolute;width:80%;object-fit:contain;opacity:0;transition:opacity .3s,transform .3s}
-        .logo-item a:hover img.gray{opacity:0}
-        .logo-item a:hover img.color{opacity:1;transform:scale(1.05)}
+        .logo-item a img{width:80%;object-fit:contain;filter:grayscale(1);opacity:.65;transition:filter .3s,opacity .3s,transform .3s}
+        .logo-item a:hover img{filter:grayscale(0);opacity:1;transform:scale(1.05)}
         .logo-item span{display:block;font-size:11px;color:rgba(255,255,255,0.35);margin-top:10px;text-align:center;letter-spacing:.05em}
         #hats{background:#000;padding:120px 40px;border-top:1px solid rgba(91,33,182,0.2)}
         .hats-inner{max-width:1000px;margin:0 auto}
@@ -269,25 +267,24 @@
         <p>None of this would have happened without the generosity of Bungendore's incredible business community. A heartfelt thank you to every single business that opened their doors.</p>
         <p class="sub">Click any logo to visit them online and show your support!</p>
         <div class="logo-grid">
-            <div class="logo-item"><a href="https://www.facebook.com/villgae.antiques.bungendore" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/antiques_resized_gray.png" alt="Village Antiques"><img class="color" src="https://santasecret.com.au/images/logos/antiques_resized_web.png" alt="Village Antiques"></a><span>Village Antiques</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/btownkids/" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/btown_resized_gray.png" alt="Btown Kids"><img class="color" src="https://santasecret.com.au/images/logos/btown_resized_web.png" alt="Btown Kids"></a><span>Btown Kids</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/BungendoreLeather" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/leather_resized_gray.png" alt="Bungendore Leather"><img class="color" src="https://santasecret.com.au/images/logos/leather_resized_web.png" alt="Bungendore Leather"></a><span>Bungendore Leather</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/profile.php?id=100089768420719" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/lollyshop_resized_gray.png" alt="Lolly Shop"><img class="color" src="https://santasecret.com.au/images/logos/lollyshop_resized_web.png" alt="Lolly Shop"></a><span>Lolly Shop</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/nersonspastries/" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/nersons_resized_gray.png" alt="Nersons"><img class="color" src="https://santasecret.com.au/images/logos/nersons_resized_web.png" alt="Nersons"></a><span>Nersons Pie Place</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/royalhotelbungendore" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/royal_resized_gray.png" alt="Royal Hotel"><img class="color" src="https://santasecret.com.au/images/logos/royal_resized_web.png" alt="Royal Hotel"></a><span>Royal Hotel</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/sagenaturallivingnsw" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/sage_resized_gray.png" alt="Sage Natural Living"><img class="color" src="https://santasecret.com.au/images/logos/sage_resized_web.png" alt="Sage Natural Living"></a><span>Sage Natural Living</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/scrumperskitchen/" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/scrumpers_resized_gray.png" alt="Scrumpers Kitchen"><img class="color" src="https://santasecret.com.au/images/logos/scrumpers_resized_web.png" alt="Scrumpers Kitchen"></a><span>Scrumpers Kitchen</span></div>
-            <div class="logo-item"><a href="https://www.instagram.com/taymhair" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/tayn_resized_gray.png" alt="Taym Hair"><img class="color" src="https://santasecret.com.au/images/logos/tayn_resized_web.png" alt="Taym Hair"></a><span>Taym Hair Studio</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/themalbon.jpg" alt="The Malbon" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/themalbon.jpg" alt="The Malbon"></a><span>The Malbon</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/platform6-logo.webp" alt="Platform Six" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/platform6-logo.webp" alt="Platform Six"></a><span>Platform Six</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/wellness-logo.avif" alt="W Wellness Centre" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/wellness-logo.avif" alt="W Wellness Centre"></a><span>W Wellness Centre</span></div>
-            <div class="logo-item"><a href="https://www.priceline.com.au" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/priceline-logo.webp" alt="Priceline Pharmacy" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/priceline-logo.webp" alt="Priceline Pharmacy"></a><span>Priceline Pharmacy</span></div>
-            <div class="logo-item"><a href="https://www.bendigobank.com.au" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/bendigobank-logo.webp" alt="Bendigo Bank" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/bendigobank-logo.webp" alt="Bendigo Bank"></a><span>Bendigo Bank</span></div>
-            <div class="logo-item"><a href="https://www.facebook.com/scrumperskitchen/" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/scrumpers-kitchen-logo.jpg" alt="Scrumpers Kitchen" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/scrumpers-kitchen-logo.jpg" alt="Scrumpers Kitchen"></a><span>Scrumpers Kitchen</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/darmody-logo.jpg" alt="Darmody Rayner" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/darmody-logo.jpg" alt="Darmody Rayner"></a><span>Darmody Rayner</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/flourish-logo.jpg" alt="Flourish Maintenance" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/flourish-logo.jpg" alt="Flourish Maintenance"></a><span>Flourish Maintenance</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/blissful-dog-logo.webp" alt="The Blissful Dog" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/blissful-dog-logo.webp" alt="The Blissful Dog"></a><span>The Blissful Dog</span></div>
-            <div class="logo-item"><a href="#" target="_blank"><img class="gray" src="https://santasecret.com.au/images/logos/southern-harvest-logo.jpg" alt="Southern Harvest" style="filter:grayscale(100%)"><img class="color" src="https://santasecret.com.au/images/logos/southern-harvest-logo.jpg" alt="Southern Harvest"></a><span>Southern Harvest</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/villgae.antiques.bungendore" target="_blank"><img src="images/antiques.jpg" alt="Village Antiques"></a><span>Village Antiques</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/btownkids/" target="_blank"><img src="images/btown.jpg" alt="Btown Kids"></a><span>Btown Kids</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/BungendoreLeather" target="_blank"><img src="images/leather.jpg" alt="Bungendore Leather"></a><span>Bungendore Leather</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/profile.php?id=100089768420719" target="_blank"><img src="images/lollyshop.jpg" alt="Lolly Shop"></a><span>Lolly Shop</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/nersonspastries/" target="_blank"><img src="images/nersons.jpg" alt="Nersons Pie Place"></a><span>Nersons Pie Place</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/royalhotelbungendore" target="_blank"><img src="images/royal.jpg" alt="Royal Hotel"></a><span>Royal Hotel</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/sagenaturallivingnsw" target="_blank"><img src="images/sage.jpg" alt="Sage Natural Living"></a><span>Sage Natural Living</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/scrumperskitchen/" target="_blank"><img src="images/scrumpers.jpg" alt="Scrumpers Kitchen"></a><span>Scrumpers Kitchen</span></div>
+            <div class="logo-item"><a href="https://www.instagram.com/taymhair" target="_blank"><img src="images/taym.jpg" alt="Taym Hair Studio"></a><span>Taym Hair Studio</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/themalbon.jpg" alt="The Malbon"></a><span>The Malbon</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/platformsix.jpg" alt="Platform Six"></a><span>Platform Six</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/wwellness.jpg" alt="W Wellness Centre"></a><span>W Wellness Centre</span></div>
+            <div class="logo-item"><a href="https://www.priceline.com.au" target="_blank"><img src="images/priceline.jpg" alt="Priceline Pharmacy"></a><span>Priceline Pharmacy</span></div>
+            <div class="logo-item"><a href="https://www.bendigobank.com.au" target="_blank"><img src="images/bendigo.jpg" alt="Bendigo Bank"></a><span>Bendigo Bank</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/darmodyrayner.jpg" alt="Darmody Rayner"></a><span>Darmody Rayner</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/flourish.jpg" alt="Flourish Maintenance"></a><span>Flourish Maintenance</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/blissfuldog.jpg" alt="The Blissful Dog"></a><span>The Blissful Dog</span></div>
+            <div class="logo-item"><a href="#" target="_blank"><img src="images/southernharvest.jpg" alt="Southern Harvest"></a><span>Southern Harvest</span></div>
         </div>
     </div>
 </section>
@@ -330,7 +327,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>© 2026 Santa's Secret. Made with ❤️ in Bungendore.</span>
+        <span>© 2025 Santa's Secret. Made with ❤️ in Bungendore.</span>
         <span>website by <a href="https://theviking.io" target="_blank">theViking</a></span>
     </div>
 </footer>
