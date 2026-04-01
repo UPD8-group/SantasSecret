@@ -190,6 +190,15 @@
     #hw-send:disabled { opacity: 0.4; cursor: default; transform: none; }
     #hw-send svg { width: 16px; height: 16px; fill: #fff; }
 
+    /* ── Footer ── */
+    #hw-footer {
+      text-align: center; padding: 8px; font-size: 10.5px;
+      color: #b5ada5; background: #fff; border-top: 1px solid #f0ece6;
+      flex-shrink: 0;
+    }
+    #hw-footer a { color: #c41e3a; text-decoration: none; font-weight: 600; }
+    #hw-footer a:hover { text-decoration: underline; }
+
     /* ── Mobile ── */
     @media (max-width: 440px) {
       #hw-window {
@@ -229,6 +238,7 @@
           <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
         </button>
       </div>
+      <div id="hw-footer">Powered by <a href="https://theviking.io" target="_blank" rel="noopener">theViking</a></div>
     </div>
 
     <button id="hw-bubble" aria-label="Chat with Holly">
@@ -288,6 +298,12 @@
     quickEl.style.display = 'none';
   }
 
+  function showQuickReplies() {
+    renderQuickReplies();
+    quickEl.style.display = '';
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
   // ── Send message ──
   async function sendMessage(text) {
     if (isLoading || !text.trim()) return;
@@ -331,6 +347,7 @@
     } finally {
       isLoading = false;
       sendBtn.disabled = false;
+      showQuickReplies();
       input.focus();
     }
   }
