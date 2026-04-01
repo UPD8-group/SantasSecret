@@ -19,12 +19,16 @@ ${bot.personality}
 
 BUSINESS INFORMATION:
 - Name: ${business.name}
+- Description: ${business.description}
 - Owner: ${business.owner}
 - Address: ${business.address}
 - Phone: ${business.phone}
 - Email: ${business.email}
 - Website: ${business.website}
 - Location: ${business.location_context}
+- Facebook: ${business.social_media.facebook}
+- Instagram: ${business.social_media.instagram}
+- Newsletter: ${business.newsletter}
 
 OPENING HOURS:
 - Thursday: ${business.hours.thursday}
