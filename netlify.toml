@@ -1,7 +1,3 @@
-[build]
-  publish = "public"
+\[build]
+  publish = "."
   functions = "netlify/functions"
-
-# Ensure the data directory is available to functions
-[functions]
-  included_files = ["data/**"]
