@@ -111,6 +111,7 @@
       display: flex; flex-direction: column; gap: 10px;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
     }
     #hw-messages::-webkit-scrollbar { width: 4px; }
     #hw-messages::-webkit-scrollbar-track { background: transparent; }
@@ -171,7 +172,7 @@
     }
     #hw-input {
       flex: 1; border: 1.5px solid #e5ddd5; border-radius: 100px;
-      padding: 10px 16px; font-size: 14px; outline: none;
+      padding: 10px 16px; font-size: 16px; outline: none;
       background: #faf8f5; color: #1a1816;
       -webkit-appearance: none; transition: border-color 0.15s;
     }
@@ -199,15 +200,30 @@
     #hw-footer a { color: #c41e3a; text-decoration: none; font-weight: 600; }
     #hw-footer a:hover { text-decoration: underline; }
 
+    /* ── Header close button ── */
+    #hw-close {
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      font-size: 20px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent; line-height: 1;
+    }
+    #hw-close:hover { background: rgba(255,255,255,0.3); }
+    @media (max-width: 440px) {
+      #hw-close { width: 36px; height: 36px; font-size: 22px; }
+    }
+
     /* ── Mobile ── */
     @media (max-width: 440px) {
       #hw-window {
         bottom: 0; right: 0; left: 0;
         width: 100%; max-width: 100%;
         height: 100vh; max-height: 100vh;
+        height: 100dvh; max-height: 100dvh;
         border-radius: 0;
       }
       #hw-bubble { bottom: 16px; right: 16px; }
+      #hw-bubble.open { display: none; }
       #hw-badge { display: none; }
     }
   `;
@@ -221,6 +237,7 @@
 
     <div id="hw-window">
       <div id="hw-header">
+        <button id="hw-close" aria-label="Close chat">×</button>
         <div id="hw-avatar">🧝‍♀️</div>
         <div id="hw-header-text">
           <div id="hw-header-name">${CONFIG.botName} · ${CONFIG.businessName}</div>
@@ -327,6 +344,15 @@
 
       hideTyping();
 
+      if (res.status === 429) {
+        const data = await res.json().catch(() => ({}));
+        addMessage(
+          data.error || "You've sent quite a few messages! Please try again in a little while, or call Kim on 0480 784 317. 🎄",
+          'bot'
+        );
+        return;
+      }
+
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const data = await res.json();
@@ -353,13 +379,23 @@
   }
 
   // ── Events ──
-  bubble.addEventListener('click', () => {
+  const closeBtn = document.getElementById('hw-close');
+
+  function toggleChat() {
     isOpen = !isOpen;
     bubble.classList.toggle('open', isOpen);
     win.classList.toggle('open', isOpen);
     badge.style.display = 'none';
-    if (isOpen) input.focus();
-  });
+    // Prevent background scroll on mobile when chat is open
+    if (window.innerWidth <= 440) {
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    // Only auto-focus on desktop — mobile keyboard is intrusive
+    if (isOpen && window.innerWidth > 440) input.focus();
+  }
+
+  bubble.addEventListener('click', toggleChat);
+  closeBtn.addEventListener('click', toggleChat);
 
   sendBtn.addEventListener('click', () => sendMessage(input.value));
 
@@ -378,6 +414,28 @@
   // ── Init ──
   addMessage(CONFIG.greeting, 'bot');
   renderQuickReplies();
+
+  // iOS keyboard handling — resize chat window when keyboard opens/closes
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      if (isOpen && window.innerWidth <= 440) {
+        win.style.height = window.visualViewport.height + 'px';
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+    });
+    window.visualViewport.addEventListener('scroll', () => {
+      if (isOpen && window.innerWidth <= 440) {
+        win.style.transform = `translateY(0)`;
+      }
+    });
+  }
+
+  // Reset height when input loses focus (keyboard closes)
+  input.addEventListener('blur', () => {
+    if (window.innerWidth <= 440) {
+      win.style.height = '';
+    }
+  });
 
   // Auto-hide badge after 8s
   setTimeout(() => {
