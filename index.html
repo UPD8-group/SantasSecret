@@ -120,9 +120,6 @@
         .gallery-inner{max-width:1300px;margin:0 auto}
         .gallery-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px}
         .gallery-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1}
-        .gallery-filters{display:flex;gap:8px;flex-wrap:wrap}
-        .filter-btn{background:none;border:1px solid rgba(26,16,8,0.15);border-radius:2px;padding:7px 18px;font-family:'Jost',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--warm-mid);cursor:pointer;transition:all .2s}
-        .filter-btn:hover,.filter-btn.active{background:var(--ink);border-color:var(--ink);color:var(--gold-pale)}
         .gallery-grid{columns:2;column-gap:16px}
         @media(min-width:640px){.gallery-grid{columns:3}}
         @media(min-width:1024px){.gallery-grid{columns:4}}
@@ -253,7 +250,7 @@
             <div class="section-label">A Message from the Workshop</div>
             <h2 class="display">Where Christmas<br>is Reimagined</h2>
             <blockquote>"At Santa's Secret, we believe the holidays should be as unique as you are. From upcycled trees to oversized, handcrafted ornaments, our collection transforms tradition into something extraordinary."</blockquote>
-            <blockquote>"Step into a world where Christmas is reimagined—bold, beautiful, and waiting to be discovered."</blockquote>
+            <blockquote>"Step into a world where Christmas is reimagined — bold, beautiful, and unmistakably yours."</blockquote>
             <div class="kim-sig"><div class="line"></div><span>Kim, Owner &amp; Artisan</span></div>
         </div>
     </div>
@@ -289,28 +286,21 @@
                 <div class="section-label">Our Work</div>
                 <h2 class="display">Christmas<br>Gallery</h2>
             </div>
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="trees">Trees</button>
-                <button class="filter-btn" data-filter="ornaments">Ornaments</button>
-                <button class="filter-btn" data-filter="custom">Custom</button>
-                <button class="filter-btn" data-filter="easter">Easter</button>
-            </div>
         </div>
         <p style="color:var(--warm-mid);margin-bottom:36px;font-size:.9rem">Click any image to see the magic up close ✨</p>
         <div class="gallery-grid">
-            <img src="/photo1.jpg"  alt="Christmas Decoration" data-cat="trees"     class="gallery-item">
-            <img src="/photo2.jpg"  alt="Christmas Decoration" data-cat="ornaments" class="gallery-item">
-            <img src="/photo3.jpg"  alt="Christmas Decoration" data-cat="custom"    class="gallery-item">
-            <img src="/photo4.jpg"  alt="Christmas Decoration" data-cat="trees"     class="gallery-item">
-            <img src="/photo5.jpg"  alt="Christmas Decoration" data-cat="ornaments" class="gallery-item">
-            <img src="/photo6.jpg"  alt="Christmas Decoration" data-cat="custom"    class="gallery-item">
-            <img src="/photo7.jpg"  alt="Christmas Decoration" data-cat="easter"    class="gallery-item">
-            <img src="/photo8.jpg"  alt="Christmas Decoration" data-cat="trees"     class="gallery-item">
-            <img src="/photo9.jpg"  alt="Christmas Decoration" data-cat="ornaments" class="gallery-item">
-            <img src="/photo10.jpg" alt="Christmas Decoration" data-cat="custom"    class="gallery-item">
-            <img src="/photo11.jpg" alt="Christmas Decoration" data-cat="easter"    class="gallery-item">
-            <img src="/photo12.jpg" alt="Christmas Decoration" data-cat="trees"     class="gallery-item">
+            <img src="/photo1.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo2.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo3.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo4.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo5.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo6.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo7.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo8.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo9.jpg"  alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo10.jpg" alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo11.jpg" alt="Christmas Decoration" class="gallery-item">
+            <img src="/photo12.jpg" alt="Christmas Decoration" class="gallery-item">
         </div>
     </div>
 </section>
@@ -441,21 +431,6 @@ menuBtn.addEventListener('click', function(){ mobileMenu.classList.contains('ope
     }
     draw();
 })();
-
-// GALLERY FILTERS
-document.querySelectorAll('.filter-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-        document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-        btn.classList.add('active');
-        var filter = btn.dataset.filter;
-        document.querySelectorAll('.gallery-item').forEach(function(img){
-            var show = filter==='all' || img.dataset.cat===filter;
-            img.style.opacity = show ? '1' : '0.15';
-            img.style.transform = show ? '' : 'scale(0.95)';
-            img.style.transition = 'opacity 0.4s, transform 0.4s';
-        });
-    });
-});
 
 // LIGHTBOX
 document.querySelectorAll('.gallery-item').forEach(function(img){
