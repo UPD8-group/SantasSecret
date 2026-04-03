@@ -255,7 +255,7 @@
           <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
         </button>
       </div>
-      <div id="hw-footer">Powered by <a href="https://theviking.io" target="_blank" rel="noopener">theViking</a></div>
+      <div id="hw-footer">Powered by <a href="https://upd8.group" target="_blank" rel="noopener">the UPD8 Group</a></div>
     </div>
 
     <button id="hw-bubble" aria-label="Chat with Holly">
