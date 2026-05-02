@@ -1,304 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{title}} – Santa's Secret Blog</title>
-  <meta name="description" content="{{excerpt}}" />
-  <link rel="icon" href="/SantaLogo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post – Santa's Secret</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" href="/boxicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--red:#c0392b;--red-deep:#96281b;--gold:#c8973a;--gold-light:#f0d080;--gold-pale:#fdf6e3;--cream:#faf6f0;--ink:#1a1008;--warm-mid:#7a5c3a}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+        .display{font-family:'Cormorant Garamond',serif}
 
-    :root {
-      --red:    #c0392b;
-      --gold:   #c9a84c;
-      --cream:  #fdf6ec;
-      --dark:   #1a1a1a;
-      --mid:    #555;
-      --border: #e8d8c4;
-    }
+        /* ── NAV ── */
+        #mainNav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;transition:background .4s ease,padding .4s ease,box-shadow .4s ease}
+        #mainNav.scrolled{background:rgba(250,246,240,0.96);backdrop-filter:blur(12px);padding:12px 32px;box-shadow:0 2px 20px rgba(26,16,8,0.08)}
+        #mainNav .logo img{height:72px;width:auto;mix-blend-mode:multiply;transition:height .4s ease}
+        #mainNav.scrolled .logo img{height:56px}
+        #menuBtn{background:none;border:none;cursor:pointer;width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:4px}
+        #menuBtn span{display:block;height:1.5px;background:white;transition:background .3s,transform .3s,opacity .3s;transform-origin:center}
+        #mainNav.scrolled #menuBtn span{background:var(--ink)}
+        #menuBtn.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+        #menuBtn.open span:nth-child(2){opacity:0}
+        #menuBtn.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+        #mobileMenu{position:fixed;top:0;right:-100%;width:min(360px,100vw);height:100vh;background:var(--ink);z-index:99;display:flex;flex-direction:column;justify-content:center;padding:60px 48px;transition:right .45s cubic-bezier(0.77,0,0.175,1)}
+        #mobileMenu.open{right:0}
+        #mobileMenu a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--gold-pale);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(200,151,58,0.15);transition:color .2s,padding-left .2s;letter-spacing:.02em}
+        #mobileMenu a:hover{color:var(--gold);padding-left:8px}
+        #mobileMenu a.active{color:var(--gold)}
+        #mobileMenu a:last-child{border-bottom:none}
+        #mobileMenu a.visit-us{margin-top:16px;color:var(--gold)}
+        #menuOverlay{position:fixed;inset:0;background:rgba(26,16,8,0.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s}
+        #menuOverlay.open{opacity:1;pointer-events:all}
 
-    body {
-      font-family: 'Lato', sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-    }
+        /* ── HERO IMAGE ── */
+        .post-hero-img{width:100%;max-height:520px;object-fit:cover;display:block;margin-top:0}
+        .post-hero-placeholder{height:280px;background:linear-gradient(135deg,var(--ink),rgba(192,57,43,0.35));display:flex;align-items:center;justify-content:center;font-size:6rem}
 
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(26,26,26,0.97);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      height: 64px;
-      border-bottom: 2px solid var(--gold);
-    }
-    nav .logo {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      text-decoration: none;
-    }
-    nav .logo img { height: 38px; }
-    nav .logo span {
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      font-size: 1.1rem;
-    }
-    nav ul { list-style: none; display: flex; gap: 1.5rem; }
-    nav ul a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: .85rem;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-    nav ul a:hover { color: var(--gold); }
+        /* ── ARTICLE ── */
+        .post-wrap{max-width:780px;margin:0 auto;padding:60px 32px 100px}
 
-    .post-hero {
-      width: 100%;
-      max-height: 480px;
-      object-fit: cover;
-      display: block;
-    }
-    .post-hero-placeholder {
-      height: 320px;
-      background: linear-gradient(135deg, #2d1a1a, #c0392b33);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6rem;
-    }
+        .post-back{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;margin-bottom:36px;transition:opacity .2s}
+        .post-back:hover{opacity:.7}
+        .post-back i{font-size:.85em}
 
-    .post-container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 3rem 2rem 5rem;
-    }
-    .post-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .82rem;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--gold);
-      text-decoration: none;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      transition: opacity .2s;
-    }
-    .post-back:hover { opacity: .7; }
-    .post-back::before { content: '←'; }
+        .post-meta{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 
-    .post-meta {
-      font-size: .8rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: .75rem;
-    }
+        .post-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:600;line-height:1.15;margin-bottom:16px;color:var(--ink)}
 
-    .post-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
+        .post-divider{width:60px;height:2px;background:var(--red);margin:24px 0 36px}
 
-    .post-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--gold);
-      margin: 1.5rem 0;
-    }
+        /* ── BODY CONTENT ── */
+        .post-body{font-size:1.05rem;line-height:1.85;color:#3a2a1a}
+        .post-body p{margin-bottom:1.5rem}
+        .post-body h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--ink);margin:2.5rem 0 1rem}
+        .post-body h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink);margin:2rem 0 .75rem}
+        .post-body img{width:100%;border-radius:3px;margin:1.5rem 0;display:block}
+        .post-body ul,.post-body ol{padding-left:1.5rem;margin-bottom:1.5rem}
+        .post-body li{margin-bottom:.5rem}
+        .post-body blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--warm-mid);border-left:3px solid var(--gold);padding:8px 0 8px 20px;margin:2rem 0}
+        .post-body a{color:var(--red);text-decoration:underline}
 
-    .post-body {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: #333;
-    }
-    .post-body p { margin-bottom: 1.4rem; }
-    .post-body h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin: 2rem 0 .75rem;
-      color: var(--dark);
-    }
-    .post-body h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      margin: 1.5rem 0 .5rem;
-    }
-    .post-body img {
-      width: 100%;
-      border-radius: 4px;
-      margin: 1.5rem 0;
-    }
-    .post-body ul, .post-body ol {
-      padding-left: 1.5rem;
-      margin-bottom: 1.4rem;
-    }
-    .post-body li { margin-bottom: .4rem; }
-    .post-body blockquote {
-      border-left: 3px solid var(--gold);
-      padding: .75rem 1.25rem;
-      margin: 1.5rem 0;
-      background: #fff;
-      font-style: italic;
-      color: var(--mid);
-    }
+        /* ── AUTHOR / FOOTER ROW ── */
+        .post-author{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(26,16,8,0.08)}
+        .author-info{display:flex;align-items:center;gap:14px}
+        .author-avatar{width:48px;height:48px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:white;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;flex-shrink:0}
+        .author-text strong{display:block;font-size:.85rem;font-weight:600;color:var(--ink)}
+        .author-text span{font-size:.8rem;color:var(--warm-mid)}
+        .btn-back{background:var(--ink);color:white;padding:10px 24px;border-radius:2px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+        .btn-back:hover{background:var(--red)}
 
-    .post-footer {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .post-footer .author {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      font-size: .9rem;
-      color: var(--mid);
-    }
-    .post-footer .author strong { color: var(--dark); }
-    .post-footer .author .avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.2rem;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .btn-back {
-      display: inline-block;
-      padding: .6rem 1.4rem;
-      background: var(--dark);
-      color: #fff;
-      text-decoration: none;
-      font-size: .82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      border-radius: 2px;
-      transition: background .2s;
-    }
-    .btn-back:hover { background: var(--red); }
-
-    footer {
-      background: #111;
-      color: #888;
-      text-align: center;
-      padding: 2rem;
-      font-size: .82rem;
-    }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer .footer-logo {
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      font-size: 1.1rem;
-      margin-bottom: .5rem;
-    }
-  </style>
+        /* ── FOOTER ── */
+        footer{background:var(--ink);padding:72px 40px 40px;color:rgba(253,246,227,0.6)}
+        .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:56px}
+        @media(max-width:760px){.footer-inner{grid-template-columns:1fr;gap:36px}}
+        .footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold-pale);margin-bottom:12px}
+        .footer-brand p{font-size:.9rem;line-height:1.7;margin-bottom:24px}
+        .social-links{display:flex;gap:12px}
+        .social-links a{width:38px;height:38px;border:1px solid rgba(200,151,58,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(253,246,227,0.5);font-size:13px;text-decoration:none;transition:all .2s}
+        .social-links a:hover{border-color:var(--gold);color:var(--gold)}
+        .footer-col h4{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+        .footer-col ul{list-style:none}
+        .footer-col ul li{margin-bottom:10px}
+        .footer-col ul li a{color:rgba(253,246,227,0.55);text-decoration:none;font-size:.9rem;transition:color .2s}
+        .footer-col ul li a:hover{color:var(--gold-pale)}
+        .footer-col ul li a.active{color:var(--gold)}
+        .footer-col address{font-style:normal;font-size:.9rem;line-height:1.8}
+        .footer-col address a{color:rgba(253,246,227,0.55);text-decoration:none;transition:color .2s}
+        .footer-col address a:hover{color:var(--gold-pale)}
+        .footer-bottom{max-width:1200px;margin:0 auto;padding-top:28px;border-top:1px solid rgba(200,151,58,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px}
+        .footer-bottom a{color:var(--gold);text-decoration:none}
+    </style>
 </head>
 <body>
 
-  <nav>
-    <a class="logo" href="/">
-      <img src="/SantaLogo.png" alt="Santa's Secret" />
-      <span>Santa's Secret</span>
-    </a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/#gallery">Gallery</a></li>
-      <li><a href="/shop/">Shop</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="/#visitus">Visit Us ↗</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav id="mainNav">
+    <a href="/index.html" class="logo"><img src="https://santasecret.com.au/SantaLogo.png" alt="Santa's Secret"></a>
+    <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="menuOverlay" onclick="closeMenu()"></div>
+<div id="mobileMenu">
+    <a href="/index.html"            onclick="closeMenu()">Home</a>
+    <a href="/index.html#bespoke"    onclick="closeMenu()">Our Story</a>
+    <a href="/index.html#about"      onclick="closeMenu()">Meet Kim</a>
+    <a href="/index.html#gallery"    onclick="closeMenu()">Gallery</a>
+    <a href="/wreaths.html"          onclick="closeMenu()">Wreaths</a>
+    <a href="/halloween.html"        onclick="closeMenu()">Halloween 🎃</a>
+    <a href="/shop/index.html"       onclick="closeMenu()">Shop 🛍️</a>
+    <a href="/blog/index.html" class="active" onclick="closeMenu()">Blog ✍️</a>
+    <a href="/index.html#visitus" class="visit-us" onclick="closeMenu()">Visit Us ↗</a>
+</div>
 
-  <!-- Hero image or placeholder — populated by Decap CMS -->
-  <div id="heroWrap"></div>
+<!-- HERO: populated by JS -->
+<div style="margin-top:0" id="heroWrap"></div>
 
-  <div class="post-container">
-    <a class="post-back" href="/blog/">Back to Blog</a>
+<!-- ARTICLE -->
+<article class="post-wrap">
+    <a class="post-back" href="/blog/index.html"><i class="fas fa-arrow-left"></i> Back to Blog</a>
     <div class="post-meta" id="postMeta"></div>
-    <h1 class="post-title" id="postTitle">Loading…</h1>
+    <h1 class="post-title display" id="postTitle">Loading…</h1>
     <div class="post-divider"></div>
     <div class="post-body" id="postBody"></div>
-    <div class="post-footer">
-      <div class="author">
-        <div class="avatar">K</div>
-        <div>
-          <strong>Kim Barlow</strong><br>
-          Owner &amp; Artisan, Santa's Secret
+    <div class="post-author">
+        <div class="author-info">
+            <div class="author-avatar">K</div>
+            <div class="author-text">
+                <strong>Kim Barlow</strong>
+                <span>Owner &amp; Artisan, Santa's Secret</span>
+            </div>
         </div>
-      </div>
-      <a class="btn-back" href="/blog/">← All Posts</a>
+        <a class="btn-back" href="/blog/index.html"><i class="fas fa-arrow-left" style="margin-right:6px"></i>All Posts</a>
     </div>
-  </div>
+</article>
 
-  <footer>
-    <div class="footer-logo">Santa's Secret</div>
-    <p>24b Malbon St, Bungendore NSW 2621 &nbsp;·&nbsp; <a href="tel:0480784317">0480 784 317</a></p>
-    <p style="margin-top:.5rem;">© 2026 Santa's Secret. Website by <a href="https://jaybergmann.com">Jay</a></p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3 class="display">Santa's Secret</h3>
+            <p>Creating magical Christmas memories in Bungendore. Where tradition meets imagination.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="js-email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navigate</h4>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/index.html#bespoke">Our Story</a></li>
+                <li><a href="/index.html#about">About Kim</a></li>
+                <li><a href="/index.html#gallery">Gallery</a></li>
+                <li><a href="/wreaths.html">Wreaths</a></li>
+                <li><a href="/halloween.html">Halloween 🎃</a></li>
+                <li><a href="/shop/index.html">Shop 🛍️</a></li>
+                <li><a href="/blog/index.html" class="active">Blog ✍️</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <address>24b Malbon St,<br>Bungendore NSW 2621<br><br><a href="tel:+61480784317">0480 784 317</a><br><a href="#" class="js-email-text">info.santasecret@gmail.com</a></address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Santa's Secret. Made with ❤️ in Bungendore.</span>
+        <span>website by <a href="https://jaybergmann.com" target="_blank">Jay</a></span>
+    </div>
+</footer>
 
-  <!-- marked.js for markdown rendering -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
-  <script>
-    // Get slug from URL: /blog/my-post/ → my-post
-    const slug = location.pathname.replace(/\/blog\//,'').replace(/\//g,'');
+<!-- marked.js for markdown rendering -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script data-cfasync="false">
+document.addEventListener('DOMContentLoaded', function() {
 
-    async function loadPost() {
-      try {
-        const res = await fetch(`/blog/posts/${slug}.json`);
-        if (!res.ok) throw new Error('not found');
-        const post = await res.json();
+    // NAV
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
 
-        document.title = `${post.title} – Santa's Secret Blog`;
+    // MENU
+    var menuBtn     = document.getElementById('menuBtn');
+    var mobileMenu  = document.getElementById('mobileMenu');
+    var menuOverlay = document.getElementById('menuOverlay');
+    function openMenu(){ menuBtn.classList.add('open'); mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ menuBtn.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow=''; }
+    window.closeMenu = closeMenu;
+    menuBtn.addEventListener('click', function(){ mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
 
-        const heroWrap = document.getElementById('heroWrap');
-        if (post.image) {
-          heroWrap.innerHTML = `<img class="post-hero" src="${post.image}" alt="${post.title}" />`;
-        } else {
-          heroWrap.innerHTML = `<div class="post-hero-placeholder">🎄</div>`;
-        }
+    // EMAIL
+    (function(){ var u="info.santasecret",d="gmail.com",e=u+"@"+d; document.querySelectorAll(".js-email").forEach(function(a){a.href="mailto:"+e;}); document.querySelectorAll(".js-email-text").forEach(function(a){a.href="mailto:"+e;a.textContent=e;}); })();
 
-        document.getElementById('postMeta').textContent = post.date
-          ? new Date(post.date).toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' })
-          : '';
+    // LOAD POST — slug from URL: /blog/my-post/ → my-post
+    var slug = location.pathname.replace(/\/blog\//,'').replace(/\//g,'');
 
-        document.getElementById('postTitle').textContent = post.title;
-        document.getElementById('postBody').innerHTML = marked.parse(post.body || '');
-      } catch(e) {
-        document.getElementById('postTitle').textContent = 'Post not found';
-        document.getElementById('postBody').innerHTML = '<p>Sorry, this post could not be loaded. <a href="/blog/">Return to blog →</a></p>';
-      }
-    }
+    fetch('/blog/posts/' + slug + '.json')
+        .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+        .then(function(post) {
+            document.title = post.title + ' – Santa\'s Secret Blog';
 
-    loadPost();
-  </script>
+            var heroWrap = document.getElementById('heroWrap');
+            if (post.image) {
+                heroWrap.innerHTML = '<img class="post-hero-img" src="' + post.image + '" alt="' + post.title + '">';
+            } else {
+                heroWrap.innerHTML = '<div class="post-hero-placeholder">🎄</div>';
+            }
+
+            var meta = document.getElementById('postMeta');
+            meta.textContent = post.date
+                ? new Date(post.date).toLocaleDateString('en-AU', {day:'numeric',month:'long',year:'numeric'})
+                : '';
+
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postBody').innerHTML = marked.parse(post.body || '');
+        })
+        .catch(function() {
+            document.getElementById('postTitle').textContent = 'Post not found';
+            document.getElementById('postBody').innerHTML = '<p>Sorry, this post could not be loaded. <a href="/blog/index.html">Return to blog →</a></p>';
+        });
+});
+</script>
+<!-- Holly Chat Widget -->
+<script src="/public/holly-widget.js" defer></script>
 </body>
 </html>
