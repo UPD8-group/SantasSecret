@@ -1,1 +1,363 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Santa's Secret</title>
+  <meta name="description" content="Stories, inspiration, and festive ideas from Kim's workshop in Bungendore." />
+  <link rel="icon" href="/SantaLogo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:       #c0392b;
+      --red-dark:  #922b21;
+      --gold:      #c9a84c;
+      --cream:     #fdf6ec;
+      --dark:      #1a1a1a;
+      --mid:       #555;
+      --border:    #e8d8c4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── NAV (matches main site) ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,26,26,0.97);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      border-bottom: 2px solid var(--gold);
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      text-decoration: none;
+    }
+    nav .logo img {
+      height: 38px;
+      width: auto;
+    }
+    nav .logo span {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: .03em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover, nav ul a.active { color: var(--gold); }
+
+    /* ── HERO ── */
+    .blog-hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a1a 50%, #1a1a1a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-hero::before {
+      content: '🎄';
+      position: absolute;
+      font-size: 12rem;
+      opacity: .04;
+      top: -2rem;
+      left: -2rem;
+      pointer-events: none;
+    }
+    .blog-hero::after {
+      content: '⭐';
+      position: absolute;
+      font-size: 8rem;
+      opacity: .05;
+      bottom: -1rem;
+      right: 2rem;
+      pointer-events: none;
+    }
+    .blog-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      margin-bottom: .75rem;
+    }
+    .blog-hero h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .blog-hero p {
+      color: #bbb;
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+    }
+
+    /* ── GRID ── */
+    .blog-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ── CARD ── */
+    .post-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s, box-shadow .25s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.12);
+    }
+    .post-card .thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .post-card .thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #2d1a1a, #c0392b22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+    .post-card .card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card .card-meta {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--gold);
+      margin-bottom: .6rem;
+      font-weight: 700;
+    }
+    .post-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: .75rem;
+      color: var(--dark);
+    }
+    .post-card p {
+      font-size: .9rem;
+      color: var(--mid);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .post-card .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1.2rem;
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--red);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .post-card:hover .read-more { color: var(--red-dark); }
+    .read-more::after { content: '→'; }
+
+    /* ── FEATURED (first post) ── */
+    .post-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+    .post-card.featured .thumb,
+    .post-card.featured .thumb-placeholder {
+      width: 45%;
+      aspect-ratio: unset;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .post-card.featured { flex-direction: column; }
+      .post-card.featured .thumb,
+      .post-card.featured .thumb-placeholder { width: 100%; aspect-ratio: 16/9; }
+    }
+    .post-card.featured h2 { font-size: 1.6rem; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--mid);
+    }
+    .empty-state .icon { font-size: 4rem; margin-bottom: 1rem; }
+    .empty-state h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: .75rem;
+      color: var(--dark);
+    }
+    .empty-state p { font-size: .95rem; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 2rem;
+      font-size: .82rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: .5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="/">
+      <img src="/SantaLogo.png" alt="Santa's Secret" />
+      <span>Santa's Secret</span>
+    </a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/#gallery">Gallery</a></li>
+      <li><a href="/shop/">Shop</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+      <li><a href="/#visitus">Visit Us ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="blog-hero">
+    <h1>From Kim's <em>Workshop</em></h1>
+    <div class="gold-line"></div>
+    <p>Stories, seasonal inspiration, and a peek behind the scenes of Bungendore's most magical Christmas shop.</p>
+  </header>
+
+  <!-- POSTS -->
+  <section class="blog-section">
+    <div class="blog-grid" id="postGrid">
+      <!-- Posts injected by JS from CMS -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Santa's Secret</div>
+    <p>24b Malbon St, Bungendore NSW 2621 &nbsp;·&nbsp; <a href="tel:0480784317">0480 784 317</a></p>
+    <p style="margin-top:.5rem;">© 2026 Santa's Secret. Website by <a href="https://jaybergmann.com">Jay</a></p>
+  </footer>
+
+  <script>
+    // Loads posts from the /blog/posts/ JSON files generated by Decap CMS
+    // Each post is a markdown file — we fetch the manifest and render cards
+
+    const grid = document.getElementById('postGrid');
+
+    async function loadPosts() {
+      let posts = [];
+
+      try {
+        // Fetch the post index generated at build time (see netlify.toml / build script)
+        const res = await fetch('/blog/posts.json');
+        if (res.ok) posts = await res.json();
+      } catch (e) {
+        console.warn('Could not load posts.json:', e);
+      }
+
+      if (!posts.length) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <div class="icon">🎄</div>
+            <h2>First post coming soon!</h2>
+            <p>Kim is busy in the workshop — check back shortly for stories,<br>inspiration, and festive news from Bungendore.</p>
+          </div>`;
+        return;
+      }
+
+      posts.forEach((post, i) => {
+        const card = document.createElement('a');
+        card.className = 'post-card' + (i === 0 ? ' featured' : '');
+        card.href = `/blog/${post.slug}/`;
+
+        const thumb = post.image
+          ? `<img class="thumb" src="${post.image}" alt="${post.title}" loading="lazy" />`
+          : `<div class="thumb-placeholder">🎄</div>`;
+
+        const date = post.date
+          ? new Date(post.date).toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' })
+          : '';
+
+        card.innerHTML = `
+          ${thumb}
+          <div class="card-body">
+            <div class="card-meta">${date}</div>
+            <h2>${post.title}</h2>
+            <p>${post.excerpt || ''}</p>
+            <span class="read-more">Read more</span>
+          </div>`;
+
+        grid.appendChild(card);
+      });
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>

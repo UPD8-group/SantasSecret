@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}} – Santa's Secret Blog</title>
+  <meta name="description" content="{{excerpt}}" />
+  <link rel="icon" href="/SantaLogo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #c0392b;
+      --gold:   #c9a84c;
+      --cream:  #fdf6ec;
+      --dark:   #1a1a1a;
+      --mid:    #555;
+      --border: #e8d8c4;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,26,26,0.97);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      border-bottom: 2px solid var(--gold);
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      text-decoration: none;
+    }
+    nav .logo img { height: 38px; }
+    nav .logo span {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--gold); }
+
+    .post-hero {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    .post-hero-placeholder {
+      height: 320px;
+      background: linear-gradient(135deg, #2d1a1a, #c0392b33);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+
+    .post-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+    .post-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      transition: opacity .2s;
+    }
+    .post-back:hover { opacity: .7; }
+    .post-back::before { content: '←'; }
+
+    .post-meta {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .post-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    .post-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #333;
+    }
+    .post-body p { margin-bottom: 1.4rem; }
+    .post-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin: 2rem 0 .75rem;
+      color: var(--dark);
+    }
+    .post-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin: 1.5rem 0 .5rem;
+    }
+    .post-body img {
+      width: 100%;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+    }
+    .post-body ul, .post-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+    .post-body li { margin-bottom: .4rem; }
+    .post-body blockquote {
+      border-left: 3px solid var(--gold);
+      padding: .75rem 1.25rem;
+      margin: 1.5rem 0;
+      background: #fff;
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .post-footer .author {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .9rem;
+      color: var(--mid);
+    }
+    .post-footer .author strong { color: var(--dark); }
+    .post-footer .author .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .btn-back {
+      display: inline-block;
+      padding: .6rem 1.4rem;
+      background: var(--dark);
+      color: #fff;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border-radius: 2px;
+      transition: background .2s;
+    }
+    .btn-back:hover { background: var(--red); }
+
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 2rem;
+      font-size: .82rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: .5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <img src="/SantaLogo.png" alt="Santa's Secret" />
+      <span>Santa's Secret</span>
+    </a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/#gallery">Gallery</a></li>
+      <li><a href="/shop/">Shop</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/#visitus">Visit Us ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero image or placeholder — populated by Decap CMS -->
+  <div id="heroWrap"></div>
+
+  <div class="post-container">
+    <a class="post-back" href="/blog/">Back to Blog</a>
+    <div class="post-meta" id="postMeta"></div>
+    <h1 class="post-title" id="postTitle">Loading…</h1>
+    <div class="post-divider"></div>
+    <div class="post-body" id="postBody"></div>
+    <div class="post-footer">
+      <div class="author">
+        <div class="avatar">K</div>
+        <div>
+          <strong>Kim Barlow</strong><br>
+          Owner &amp; Artisan, Santa's Secret
+        </div>
+      </div>
+      <a class="btn-back" href="/blog/">← All Posts</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Santa's Secret</div>
+    <p>24b Malbon St, Bungendore NSW 2621 &nbsp;·&nbsp; <a href="tel:0480784317">0480 784 317</a></p>
+    <p style="margin-top:.5rem;">© 2026 Santa's Secret. Website by <a href="https://jaybergmann.com">Jay</a></p>
+  </footer>
+
+  <!-- marked.js for markdown rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script>
+    // Get slug from URL: /blog/my-post/ → my-post
+    const slug = location.pathname.replace(/\/blog\//,'').replace(/\//g,'');
+
+    async function loadPost() {
+      try {
+        const res = await fetch(`/blog/posts/${slug}.json`);
+        if (!res.ok) throw new Error('not found');
+        const post = await res.json();
+
+        document.title = `${post.title} – Santa's Secret Blog`;
+
+        const heroWrap = document.getElementById('heroWrap');
+        if (post.image) {
+          heroWrap.innerHTML = `<img class="post-hero" src="${post.image}" alt="${post.title}" />`;
+        } else {
+          heroWrap.innerHTML = `<div class="post-hero-placeholder">🎄</div>`;
+        }
+
+        document.getElementById('postMeta').textContent = post.date
+          ? new Date(post.date).toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' })
+          : '';
+
+        document.getElementById('postTitle').textContent = post.title;
+        document.getElementById('postBody').innerHTML = marked.parse(post.body || '');
+      } catch(e) {
+        document.getElementById('postTitle').textContent = 'Post not found';
+        document.getElementById('postBody').innerHTML = '<p>Sorry, this post could not be loaded. <a href="/blog/">Return to blog →</a></p>';
+      }
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>
