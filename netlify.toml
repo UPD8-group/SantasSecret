@@ -1,3 +1,20 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+  command   = "node build-posts.js"
+  publish   = "."
+
+# Pretty URLs: /blog/my-post/ → /blog/post-template.html
+[[redirects]]
+  from   = "/blog/:slug/"
+  to     = "/blog/post-template.html"
+  status = 200
+
+[[redirects]]
+  from   = "/blog/:slug"
+  to     = "/blog/post-template.html"
+  status = 200
+
+# Identity redirect for Netlify CMS
+[[redirects]]
+  from   = "/api/auth"
+  to     = "/.netlify/identity"
+  status = 200
