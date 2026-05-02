@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween Spooktacular 2025 - Santa's Secret</title>
+    <link rel="icon" type="image/png" href="https://santasecret.com.au/boxicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&family=Creepster&display=swap" rel="stylesheet">
+    <style>
+        :root{--red:#c0392b;--gold:#c8973a;--gold-light:#f0d080;--gold-pale:#fdf6e3;--cream:#faf6f0;--ink:#1a1008;--warm-mid:#7a5c3a;--orange:#e8621a;--orange-deep:#b84d12;--purple:#5b21b6;--purple-deep:#3b0764;--spook-bg:#0f0a04}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Jost',sans-serif;background:var(--spook-bg);color:#f5f0e8;overflow-x:hidden}
+        .display{font-family:'Cormorant Garamond',serif}
+        .creepy{font-family:'Creepster',cursive}
+        #mainNav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;transition:background .4s ease,padding .4s ease,box-shadow .4s ease}
+        #mainNav.scrolled{background:rgba(15,10,4,0.96);backdrop-filter:blur(12px);padding:12px 32px;box-shadow:0 2px 20px rgba(0,0,0,0.4);border-bottom:1px solid rgba(232,98,26,0.15)}
+        #mainNav .logo img{height:72px;width:auto;mix-blend-mode:multiply;filter:brightness(0) invert(1);transition:height .4s}
+        #mainNav.scrolled .logo img{height:56px}
+        #menuBtn{background:none;border:none;cursor:pointer;width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:4px}
+        #menuBtn span{display:block;height:1.5px;background:white;transition:transform .3s,opacity .3s;transform-origin:center}
+        #menuBtn.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+        #menuBtn.open span:nth-child(2){opacity:0}
+        #menuBtn.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+        #mobileMenu{position:fixed;top:0;right:-100%;width:min(360px,100vw);height:100vh;background:var(--spook-bg);z-index:99;display:flex;flex-direction:column;justify-content:center;padding:60px 48px;transition:right .45s cubic-bezier(0.77,0,0.175,1);border-left:1px solid rgba(232,98,26,0.2);overflow-y:auto}
+        #mobileMenu.open{right:0}
+        #mobileMenu a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:300;color:var(--gold-pale);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(232,98,26,0.15);transition:color .2s,padding-left .2s}
+        #mobileMenu a:hover{color:var(--orange);padding-left:8px}
+        #mobileMenu a.active{color:var(--orange)}
+        #mobileMenu a:last-child{border-bottom:none}
+        #menuOverlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s}
+        #menuOverlay.open{opacity:1;pointer-events:all}
+        #hero{min-height:100vh;background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.45)),url('https://images.unsplash.com/photo-1508361001413-7a9dca21d08a') center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(232,98,26,0.25) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(91,33,182,0.25) 0%,transparent 50%);animation:spookyGlow 4s ease-in-out infinite alternate}
+        @keyframes spookyGlow{0%{opacity:.4}100%{opacity:.9}}
+        .hero-content{position:relative;z-index:10;text-align:center;padding:0 24px;max-width:900px}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards}
+        .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:32px;height:1px;background:var(--orange)}
+        .hero-title{font-family:'Creepster',cursive;font-size:clamp(3.5rem,10vw,7rem);line-height:1;margin-bottom:16px;color:var(--orange);text-shadow:0 0 40px rgba(232,98,26,0.5);opacity:0;animation:fadeUp .9s .5s forwards}
+        .hero-year{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,2rem);font-weight:300;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:24px;opacity:0;animation:fadeUp .9s .6s forwards;letter-spacing:.1em}
+        .hero-sub{font-size:clamp(1rem,2.5vw,1.2rem);font-weight:300;color:rgba(255,255,255,0.8);margin-bottom:48px;line-height:1.7;opacity:0;animation:fadeUp .9s .7s forwards}
+        .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards}
+        .btn-orange{background:var(--orange);color:white;padding:14px 36px;border-radius:2px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:2px solid var(--orange);transition:all .3s;display:inline-block}
+        .btn-orange:hover{background:var(--orange-deep);border-color:var(--orange-deep);transform:translateY(-2px)}
+        .btn-purple{background:var(--purple);color:white;padding:14px 36px;border-radius:2px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:2px solid var(--purple);transition:all .3s;display:inline-block}
+        .btn-purple:hover{background:var(--purple-deep);border-color:var(--purple-deep);transform:translateY(-2px)}
+        .scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:.2em;text-transform:uppercase;animation:bounce 2s infinite}
+        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+        .section-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+        .section-label::before{content:'';width:24px;height:1px;background:var(--orange)}
+        #rda{background:linear-gradient(135deg,#0a1628 0%,#0f1f3d 100%);padding:80px 40px;border-top:1px solid rgba(200,151,58,0.2);border-bottom:1px solid rgba(200,151,58,0.2);position:relative;overflow:hidden}
+        #rda::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(200,151,58,0.08) 0%,transparent 70%);pointer-events:none}
+        .rda-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1}
+        .rda-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(200,151,58,0.12);border:1px solid rgba(200,151,58,0.3);border-radius:2px;padding:10px 20px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+        .rda-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:white;margin-bottom:24px;line-height:1.2}
+        .rda-inner h2 em{font-style:italic;color:var(--gold)}
+        .rda-inner p{font-size:1.05rem;color:rgba(255,255,255,0.7);line-height:1.8;max-width:700px;margin:0 auto 32px}
+        .rda-quote{background:rgba(200,151,58,0.06);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:24px 32px;text-align:left;margin-top:32px}
+        .rda-quote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.5vw,1.35rem);color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:12px}
+        .rda-quote span{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+        #beetlejuice{background:#000;padding:120px 40px;position:relative;overflow:hidden}
+        #beetlejuice::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2322c55e' fill-opacity='0.03'%3E%3Cpath d='M20 20.5V18H0v5h5v5H0v5h20v-2.5h5V20.5h-5zm-1 4.5h-4v-4h4v4zm-4-10h4v4h-4V15zm-4 0h4v4H11V15zm0 10h4v4h-4v-4zm10 0h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+        .bj-card{max-width:1000px;margin:0 auto;background:#050f05;border:2px solid #22c55e;border-radius:8px;padding:64px;position:relative;overflow:hidden}
+        .bj-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(34,197,94,0.06),transparent);animation:shimmer 3s infinite}
+        @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+        .bj-badge{display:inline-flex;align-items:center;gap:8px;background:#22c55e;color:#000;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:10px 24px;border-radius:2px;margin-bottom:32px}
+        .bj-title{font-family:'Creepster',cursive;font-size:clamp(2.5rem,6vw,4.5rem);color:#22c55e;line-height:1.1;margin-bottom:24px;text-shadow:0 0 30px rgba(34,197,94,0.3)}
+        .bj-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+        @media(max-width:700px){.bj-grid{grid-template-columns:1fr}}
+        .bj-grid h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:#22c55e;margin-bottom:20px}
+        .detail-row{display:flex;gap:12px;margin-bottom:14px;color:rgba(255,255,255,0.75);font-size:.9rem;line-height:1.5}
+        .detail-row i{color:#a855f7;margin-top:3px;flex-shrink:0;width:16px}
+        .prize-row{display:flex;gap:12px;align-items:center;margin-bottom:10px;color:rgba(255,255,255,0.75);font-size:.9rem}
+        .prize-row i{color:#fbbf24;flex-shrink:0}
+        .ig-box{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:6px;padding:24px;text-align:center;margin-top:40px}
+        .ig-box p{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+        .ig-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#ec4899,#a855f7);color:white;padding:12px 28px;border-radius:4px;font-weight:700;font-size:13px;text-decoration:none;transition:opacity .2s,transform .2s}
+        .ig-btn:hover{opacity:.9;transform:translateY(-2px)}
+        #trickortreat{background:#0a0604;padding:120px 40px;position:relative}
+        #trickortreat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent)}
+        .tot-inner{max-width:1000px;margin:0 auto}
+        .tot-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:white;margin-bottom:16px;line-height:1.2}
+        .tot-inner h2 em{font-style:italic;color:var(--orange)}
+        .tot-inner>p{color:rgba(255,255,255,0.6);margin-bottom:56px;font-size:1.05rem;line-height:1.7}
+        .tot-card{background:rgba(255,255,255,0.03);border:1px solid rgba(232,98,26,0.2);border-radius:8px;padding:48px;margin-bottom:24px;position:relative;overflow:hidden}
+        .tot-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(232,98,26,0.05),transparent);animation:shimmer 4s infinite}
+        .tot-date{display:inline-flex;align-items:center;gap:8px;background:rgba(232,98,26,0.15);border:1px solid rgba(232,98,26,0.3);color:var(--orange);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;border-radius:2px;margin-bottom:28px}
+        .tot-card h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:white;margin-bottom:16px;line-height:1.2}
+        .tot-card>p{color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:36px}
+        .biz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:6px;padding:32px;margin-bottom:24px}
+        @media(max-width:600px){.biz-grid{grid-template-columns:1fr}}
+        .biz-grid h4{grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+        .biz-item{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:rgba(255,255,255,0.65)}
+        .biz-item i{color:var(--orange);margin-top:3px;flex-shrink:0}
+        .biz-item span{color:white;font-weight:500}
+        .sizzle-box{background:linear-gradient(135deg,rgba(232,98,26,0.1),rgba(184,77,18,0.08));border:1px solid rgba(232,98,26,0.25);border-radius:6px;padding:28px 32px;text-align:center}
+        .sizzle-box h4{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--orange);margin-bottom:10px}
+        .sizzle-box p{color:rgba(255,255,255,0.65);font-size:.9rem;line-height:1.7}
+        #community{background:#050302;padding:120px 40px;position:relative}
+        #community::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent)}
+        .community-inner{max-width:1100px;margin:0 auto;text-align:center}
+        .community-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:white;margin-bottom:16px}
+        .community-inner>p{color:rgba(255,255,255,0.55);margin-bottom:12px;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.7}
+        .community-inner>p.sub{color:var(--orange);font-weight:500;font-size:.9rem;letter-spacing:.05em;margin-bottom:56px}
+        .logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:24px}
+        .logo-item a{display:flex;align-items:center;justify-content:center;position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:24px 16px;transition:border-color .3s,background .3s;aspect-ratio:3/2;overflow:hidden}
+        .logo-item a:hover{border-color:var(--orange);background:rgba(232,98,26,0.05)}
+        .logo-item a img{width:80%;object-fit:contain;filter:grayscale(1);opacity:.65;transition:filter .3s,opacity .3s,transform .3s}
+        .logo-item a:hover img{filter:grayscale(0);opacity:1;transform:scale(1.05)}
+        .logo-item span{display:block;font-size:11px;color:rgba(255,255,255,0.35);margin-top:10px;text-align:center;letter-spacing:.05em}
+        #hats{background:#000;padding:120px 40px;border-top:1px solid rgba(91,33,182,0.2)}
+        .hats-inner{max-width:1000px;margin:0 auto}
+        .hats-inner>h2{font-family:'Creepster',cursive;font-size:clamp(2.5rem,6vw,4.5rem);color:var(--purple);line-height:1;margin-bottom:16px;text-shadow:0 0 30px rgba(91,33,182,0.4)}
+        .hats-inner>p{color:rgba(255,255,255,0.6);margin-bottom:56px;font-size:1.05rem;line-height:1.7}
+        .hats-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+        @media(max-width:640px){.hats-grid{grid-template-columns:1fr}}
+        .hat-card{background:rgba(255,255,255,0.03);border:1px solid rgba(91,33,182,0.3);border-radius:6px;overflow:hidden;cursor:zoom-in;transition:border-color .3s,transform .4s}
+        .hat-card:hover{border-color:var(--purple);transform:translateY(-6px)}
+        .hat-card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .4s;display:block}
+        .hat-card:hover img{transform:scale(1.05)}
+        .hat-info{padding:24px}
+        .hat-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:white;margin-bottom:8px}
+        .hat-info p{font-size:.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:16px}
+        .hat-info span{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+        footer{background:#050302;padding:72px 40px 40px;color:rgba(253,246,227,0.5);border-top:1px solid rgba(232,98,26,0.15)}
+        .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:48px}
+        @media(max-width:760px){.footer-inner{grid-template-columns:1fr;gap:32px}}
+        .footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold-pale);margin-bottom:12px}
+        .footer-brand p{font-size:.9rem;line-height:1.7;margin-bottom:24px}
+        .social-links{display:flex;gap:12px}
+        .social-links a{width:38px;height:38px;border:1px solid rgba(232,98,26,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(253,246,227,0.4);font-size:13px;text-decoration:none;transition:all .2s}
+        .social-links a:hover{border-color:var(--orange);color:var(--orange)}
+        .footer-col h4{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+        .footer-col ul{list-style:none}
+        .footer-col ul li{margin-bottom:10px}
+        .footer-col ul li a{color:rgba(253,246,227,0.45);text-decoration:none;font-size:.9rem;transition:color .2s}
+        .footer-col ul li a:hover,.footer-col ul li a.active{color:var(--orange)}
+        .footer-col address{font-style:normal;font-size:.9rem;line-height:1.9}
+        .footer-col address a{color:rgba(253,246,227,0.45);text-decoration:none;transition:color .2s}
+        .footer-col address a:hover{color:var(--gold-pale)}
+        .footer-bottom{max-width:1100px;margin:0 auto;padding-top:28px;border-top:1px solid rgba(232,98,26,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px}
+        .footer-bottom a{color:var(--orange);text-decoration:none}
+        #lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.97);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+        #lightbox.visible{display:flex}
+        #lightbox.open{opacity:1}
+        #lightbox img{max-height:88vh;max-width:90vw;border-radius:3px;box-shadow:0 32px 80px rgba(0,0,0,0.8);transform:scale(0.95);transition:transform .3s}
+        #lightbox.open img{transform:scale(1)}
+        #lb-close{position:absolute;top:24px;right:28px;color:rgba(255,255,255,0.5);font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;transition:color .2s}
+        #lb-close:hover{color:white}
+        #lb-hint{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+    </style>
+</head>
+<body>
+<nav id="mainNav">
+    <a href="index.html" class="logo"><img src="https://santasecret.com.au/SantaLogo.png" alt="Santa's Secret"></a>
+    <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="menuOverlay" onclick="closeMenu()"></div>
+<div id="mobileMenu">
+    <a href="index.html"          onclick="closeMenu()">Home</a>
+    <a href="index.html#bespoke"  onclick="closeMenu()">Our Story</a>
+    <a href="index.html#about"    onclick="closeMenu()">Meet Kim</a>
+    <a href="index.html#gallery"  onclick="closeMenu()">Gallery</a>
+    <a href="wreaths.html"        onclick="closeMenu()">Wreaths</a>
+    <a href="halloween.html" class="active" onclick="closeMenu()">Halloween 🎃</a>
+    <a href="shop/index.html"     onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"     onclick="closeMenu()">Blog ✍️</a>
+    <a href="index.html#visitus"  onclick="closeMenu()">Visit Us ↗</a>
+</div>
+<section id="hero">
+    <div class="hero-content">
+        <div class="hero-eyebrow">Bungendore, NSW</div>
+        <h1 class="hero-title creepy">Halloween Spooktacular!</h1>
+        <div class="hero-year display">Friday 31st October 2025</div>
+        <p class="hero-sub">What a frighteningly wonderful night it was. Bungendore came alive with costumes, candy, community spirit — and a little Beetlejuice magic. Thank you to everyone who made it happen.</p>
+        <div class="hero-btns">
+            <a href="#rda" class="btn-orange"><i class="fas fa-star" style="margin-right:8px"></i>See the Recognition</a>
+            <a href="#community" class="btn-purple"><i class="fas fa-heart" style="margin-right:8px"></i>Our Local Heroes</a>
+        </div>
+    </div>
+    <div class="scroll-cue"><i class="fas fa-chevron-down"></i><span>Scroll</span></div>
+</section>
+<section id="rda">
+    <div class="rda-inner">
+        <div class="rda-badge"><i class="fas fa-award"></i>Regional Recognition</div>
+        <h2 class="display">A Model for<br><em>Community Events</em></h2>
+        <p>What started as a simple idea — invite families into the Bungendore business district for a free trick-or-treat event — turned into something much bigger. The event was so well received that it has now been recognised and encouraged by <strong style="color:white">Regional Development Australia Southern NSW &amp; ACT</strong> as a model for community engagement across the region.</p>
+        <p style="color:rgba(255,255,255,0.6);font-size:.95rem;max-width:700px;margin:0 auto">A completely free event that brought hundreds of families together, supported local businesses, and strengthened the fabric of our town. This is what community looks like.</p>
+        <div class="rda-quote">
+            <p>"A free event that invited families into the Bungendore business district to trick or treat — encouraging families to visit their local businesses — is now being encouraged by Regional Development Australia Southern NSW &amp; ACT."</p>
+            <span>— Kim Barlow, Santa's Secret</span>
+        </div>
+    </div>
+</section>
+<section id="beetlejuice">
+    <div class="bj-card">
+        <div class="section-label">The Night's Highlight</div>
+        <div class="bj-badge"><i class="fas fa-calendar-check"></i>Friday 31st Oct 2025, 3:30pm – 7:30pm</div>
+        <h2 class="bj-title">Beetlejuice Came to<br>Santa's Secret!</h2>
+        <p style="color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.7;max-width:600px;margin-bottom:0">Families came along, grabbed a photo with Beetlejuice, and showed off their incredible Halloween costumes. The prize categories brought out some seriously creative outfits!</p>
+        <div class="bj-grid">
+            <div>
+                <h3>What Happened</h3>
+                <div class="detail-row"><i class="fas fa-clock"></i><div>The fun ran from 3:30pm all the way to 7:30pm</div></div>
+                <div class="detail-row"><i class="fas fa-mask"></i><div>Families dressed up in spectacular Halloween costumes</div></div>
+                <div class="detail-row"><i class="fas fa-camera"></i><div>Photos with Beetlejuice were a huge hit</div></div>
+                <div class="detail-row"><i class="fas fa-gift"></i><div>Amazing prizes were awarded across all categories</div></div>
+            </div>
+            <div>
+                <h3>Prize Categories</h3>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Family</span></div>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Male &amp; Female Adult</span></div>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Kids 1–18 yrs</span></div>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Baby up to 1yr</span></div>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Pet</span></div>
+                <div class="prize-row"><i class="fas fa-trophy"></i><span>Best Dressed Group</span></div>
+            </div>
+        </div>
+        <div class="ig-box">
+            <p>Relive the night — photos &amp; more on Instagram</p>
+            <a href="https://www.instagram.com/santassecretbungendore" target="_blank" class="ig-btn"><i class="fab fa-instagram"></i>@santassecretbungendore</a>
+        </div>
+    </div>
+</section>
+<section id="trickortreat">
+    <div class="tot-inner">
+        <div class="section-label">Community Event Recap</div>
+        <h2 class="display">Bungendore's Halloween<br><em>Trick or Treat</em></h2>
+        <p>On Friday, October 31st 2025, the streets of Bungendore came alive. Local businesses threw open their doors and families poured in — it was exactly the kind of evening that makes this town so special.</p>
+        <div class="tot-card">
+            <div class="tot-date"><i class="fas fa-calendar-check"></i>Friday, October 31st 2025</div>
+            <h3>The Whole Town Got Involved</h3>
+            <p>Multiple local Bungendore businesses opened their doors for trick or treating, creating a trail of Halloween magic right through the heart of town. Families with kids, babies, pets and all — everyone was welcome, and it was completely free.</p>
+            <div class="biz-grid">
+                <h4><i class="fas fa-store" style="margin-right:8px"></i>Businesses That Participated</h4>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div><span>Santa's Secret</span></div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Bungendore Leather &amp; Trading</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Nersons Pie Place</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Village Antiques</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Sage Natural Living</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Taym Hair Studio</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Btown Kids</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Bungendore Lolly Shop</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Royal Hotel Bungendore</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Scrumpers Kitchen</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Bliss Fur — Best Dressed Pet</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>The Malbon</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Platform Six</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>W Wellness Centre</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Priceline Pharmacy</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Bendigo Bank</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Darmody Raynor Livestock &amp; Property</div></div>
+                <div class="biz-item"><i class="fas fa-check-circle"></i><div>Flourish Garden Maintenance</div></div>
+            </div>
+            <div class="sizzle-box">
+                <h4><i class="fas fa-utensils" style="margin-right:8px"></i>Sausage Sizzle!</h4>
+                <p>The <strong>Lions Club of Bungendore &amp; Districts</strong> kept everyone fuelled. The perfect addition to a perfect community night.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="community">
+    <div class="community-inner">
+        <div class="section-label" style="justify-content:center;margin:0 auto 16px">Thank You</div>
+        <h2 class="display">Our Local Heroes</h2>
+        <p>None of this would have happened without the generosity of Bungendore's incredible business community. A heartfelt thank you to every single business that opened their doors.</p>
+        <p class="sub">Click any logo to visit them online and show your support!</p>
+        <div class="logo-grid">
+            <div class="logo-item"><a href="https://www.facebook.com/villgae.antiques.bungendore" target="_blank"><img src="images/antiques.jpg" alt="Village Antiques"></a><span>Village Antiques</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/btownkids/" target="_blank"><img src="images/btown.jpg" alt="Btown Kids"></a><span>Btown Kids</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/BungendoreLeather" target="_blank"><img src="images/leather.jpg" alt="Bungendore Leather"></a><span>Bungendore Leather</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/profile.php?id=100089768420719" target="_blank"><img src="images/lollyshop.jpg" alt="Lolly Shop"></a><span>Lolly Shop</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/nersonspastries/" target="_blank"><img src="images/nersons.jpg" alt="Nersons Pie Place"></a><span>Nersons Pie Place</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/royalhotelbungendore" target="_blank"><img src="images/royal.jpg" alt="Royal Hotel"></a><span>Royal Hotel</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/sagenaturallivingnsw" target="_blank"><img src="images/sage.jpg" alt="Sage Natural Living"></a><span>Sage Natural Living</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/scrumperskitchen/" target="_blank"><img src="images/scrumpers.jpg" alt="Scrumpers Kitchen"></a><span>Scrumpers Kitchen</span></div>
+            <div class="logo-item"><a href="https://www.instagram.com/taymhair" target="_blank"><img src="images/taym.jpg" alt="Taym Hair Studio"></a><span>Taym Hair Studio</span></div>
+            <div class="logo-item"><a href="https://www.instagram.com/themalbon_bungendore/" target="_blank"><img src="images/themalbon.jpg" alt="The Malbon"></a><span>The Malbon</span></div>
+            <div class="logo-item"><a href="https://www.instagram.com/platformsixstudio/" target="_blank"><img src="images/platformsix.jpg" alt="Platform Six"></a><span>Platform Six</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/wwellnesscentre/" target="_blank"><img src="images/wwellness.jpg" alt="W Wellness Centre"></a><span>W Wellness Centre</span></div>
+            <div class="logo-item"><a href="https://www.priceline.com.au" target="_blank"><img src="images/priceline.jpg" alt="Priceline Pharmacy"></a><span>Priceline Pharmacy</span></div>
+            <div class="logo-item"><a href="https://www.bendigobank.com.au" target="_blank"><img src="images/bendigo.jpg" alt="Bendigo Bank"></a><span>Bendigo Bank</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/p/Darmody-Rayner-Livestock-Property-61550530753698/" target="_blank"><img src="images/darmodyrayner.jpg" alt="Darmody Rayner"></a><span>Darmody Rayner</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/p/Flourish-Maintenance-61564722940362/" target="_blank"><img src="images/flourish.jpg" alt="Flourish Maintenance"></a><span>Flourish Maintenance</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/blissfurdogs/" target="_blank"><img src="images/blissfurdogs.jpg" alt="Bliss Fur Dogs"></a><span>Bliss Fur Dogs</span></div>
+            <div class="logo-item"><a href="https://www.facebook.com/SouthernHarvestAssociation/" target="_blank"><img src="images/southernharvest.jpg" alt="Southern Harvest"></a><span>Southern Harvest</span></div>
+        </div>
+    </div>
+</section>
+<section id="hats">
+    <div class="hats-inner">
+        <div class="section-label">Handcrafted by Kim</div>
+        <h2 class="creepy">Spooky Halloween Hats</h2>
+        <p>Kim's handcrafted Halloween hats were a highlight of the evening — each one unique and made with frightening attention to detail.</p>
+        <div class="hats-grid">
+            <div class="hat-card" onclick="openLb('https://santasecret.com.au/images/spooky/halloweenHat.webp')"><img src="https://santasecret.com.au/images/spooky/halloweenHat.webp" alt="Spooky Halloween Hat"><div class="hat-info"><h3>Spooky Halloween Hat</h3><p>A perfectly spooky hat to complete any Halloween costume with style and fright!</p><span>Handcrafted ✦ One of a kind</span></div></div>
+            <div class="hat-card" onclick="openLb('https://santasecret.com.au/images/spooky/halloweenHat2.webp')"><img src="https://santasecret.com.au/images/spooky/halloweenHat2.webp" alt="Enchanted Halloween Hat"><div class="hat-info"><h3>Enchanted Halloween Hat</h3><p>An enchanting creation that cast a spell on everyone who saw it!</p><span>Handcrafted ✦ One of a kind</span></div></div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3 class="display">Santa's Secret</h3>
+            <p>Creating spook-tacular Halloween magic and year-round handcrafted decorations in Bungendore.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="js-email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navigate</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#bespoke">Our Story</a></li>
+                <li><a href="index.html#about">About Kim</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="wreaths.html">Wreaths</a></li>
+                <li><a href="halloween.html" class="active">Halloween 🎃</a></li>
+                <li><a href="shop/index.html">Shop 🛍️</a></li>
+                <li><a href="blog/index.html">Blog ✍️</a></li>
+                <li><a href="index.html#visitus">Visit Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <address>24b Malbon St,<br>Bungendore NSW 2621<br><br><a href="tel:+61480784317">0480 784 317</a><br><a href="#" class="js-email-text">info.santasecret@gmail.com</a></address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Santa's Secret. Made with ❤️ in Bungendore.</span>
+        <span>website by <a href="https://jaybergmann.com" target="_blank">Jay</a></span>
+    </div>
+</footer>
+<div id="lightbox" onclick="closeLb()">
+    <button id="lb-close" onclick="closeLb()">×</button>
+    <img id="lb-img" src="" alt="">
+    <p id="lb-hint">Click anywhere to close</p>
+</div>
+<script data-cfasync="false">
+document.addEventListener('DOMContentLoaded', function() {
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var menuOverlay = document.getElementById('menuOverlay');
+    function openMenu(){ menuBtn.classList.add('open'); mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ menuBtn.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow=''; }
+    window.closeMenu = closeMenu;
+    menuBtn.addEventListener('click', function(){ mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+    window.openLb = function(src){ var lb=document.getElementById('lightbox'); document.getElementById('lb-img').src=src; lb.classList.add('visible'); requestAnimationFrame(function(){ lb.classList.add('open'); }); };
+    window.closeLb = function(){ var lb=document.getElementById('lightbox'); lb.classList.remove('open'); setTimeout(function(){ lb.classList.remove('visible'); },300); };
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+    function mkGhost(){ var g=['👻','🎃','🦇'],el=document.createElement('div'); el.innerHTML=g[Math.floor(Math.random()*g.length)]; el.style.cssText='position:fixed;font-size:'+(Math.random()*10+16)+'px;pointer-events:none;z-index:1;opacity:0.2;left:'+(Math.random()*window.innerWidth)+'px;top:'+(window.innerHeight+10)+'px;'; document.body.appendChild(el); var a=el.animate([{transform:'translateY(0) rotate(0deg)',opacity:.2},{transform:'translateY(-'+(window.innerHeight+100)+'px) rotate('+(Math.random()*360)+'deg)',opacity:0}],{duration:8000+Math.random()*4000,easing:'ease-out'}); a.addEventListener('finish',function(){el.remove();}); }
+    setInterval(mkGhost,6000); setTimeout(mkGhost,2000);
+    (function(){ var u="info.santasecret",d="gmail.com",e=u+"@"+d; document.querySelectorAll(".js-email").forEach(function(a){a.href="mailto:"+e;}); document.querySelectorAll(".js-email-text").forEach(function(a){a.href="mailto:"+e;a.textContent=e;}); })();
+});
+</script>
+<!-- Holly Chat Widget (live AI) -->
+<script src="/public/holly-widget.js" defer></script>
+</body>
+</html>

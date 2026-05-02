@@ -19,14 +19,14 @@
         #mainNav .logo img{height:72px;width:auto;mix-blend-mode:multiply;transition:height .4s}
         #mainNav.scrolled .logo img{height:56px}
         #menuBtn{background:none;border:none;cursor:pointer;width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:4px}
-        #menuBtn span{display:block;height:1.5px;background:white;transition:transform .3s,opacity .3s;transform-origin:center}
+        #menuBtn span{display:block;height:1.5px;background:white;transition:background .3s,transform .3s,opacity .3s;transform-origin:center}
         #mainNav.scrolled #menuBtn span{background:var(--ink)}
         #menuBtn.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
         #menuBtn.open span:nth-child(2){opacity:0}
         #menuBtn.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-        #mobileMenu{position:fixed;top:0;right:-100%;width:min(360px,100vw);height:100vh;background:var(--ink);z-index:99;display:flex;flex-direction:column;justify-content:center;padding:60px 48px;transition:right .45s cubic-bezier(0.77,0,0.175,1)}
+        #mobileMenu{position:fixed;top:0;right:-100%;width:min(360px,100vw);height:100vh;background:var(--ink);z-index:99;display:flex;flex-direction:column;justify-content:center;padding:60px 48px;transition:right .45s cubic-bezier(0.77,0,0.175,1);overflow-y:auto}
         #mobileMenu.open{right:0}
-        #mobileMenu a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--gold-pale);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(200,151,58,0.15);transition:color .2s,padding-left .2s}
+        #mobileMenu a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:300;color:var(--gold-pale);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(200,151,58,0.15);transition:color .2s,padding-left .2s}
         #mobileMenu a:hover{color:var(--gold);padding-left:8px}
         #mobileMenu a.active{color:var(--green-light)}
         #mobileMenu a:last-child{border-bottom:none}
@@ -104,13 +104,15 @@
 </nav>
 <div id="menuOverlay" onclick="closeMenu()"></div>
 <div id="mobileMenu">
-    <a href="index.html"         onclick="closeMenu()">Home</a>
-    <a href="index.html#bespoke" onclick="closeMenu()">Our Story</a>
-    <a href="index.html#about"   onclick="closeMenu()">Meet Kim</a>
-    <a href="index.html#gallery" onclick="closeMenu()">Gallery</a>
-    <a href="halloween.html"     onclick="closeMenu()">Halloween 🎃</a>
+    <a href="index.html"          onclick="closeMenu()">Home</a>
+    <a href="index.html#bespoke"  onclick="closeMenu()">Our Story</a>
+    <a href="index.html#about"    onclick="closeMenu()">Meet Kim</a>
+    <a href="index.html#gallery"  onclick="closeMenu()">Gallery</a>
     <a href="wreaths.html" class="active" onclick="closeMenu()">Wreaths</a>
-    <a href="index.html#visitus" onclick="closeMenu()">Visit Us ↗</a>
+    <a href="halloween.html"      onclick="closeMenu()">Halloween 🎃</a>
+    <a href="shop/index.html"     onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"     onclick="closeMenu()">Blog ✍️</a>
+    <a href="index.html#visitus"  onclick="closeMenu()">Visit Us ↗</a>
 </div>
 <section id="hero">
     <div class="hero-content">
@@ -172,8 +174,10 @@
                 <li><a href="index.html#bespoke">Our Story</a></li>
                 <li><a href="index.html#about">About Kim</a></li>
                 <li><a href="index.html#gallery">Gallery</a></li>
-                <li><a href="halloween.html">Halloween 🎃</a></li>
                 <li><a href="wreaths.html" class="active">Wreaths</a></li>
+                <li><a href="halloween.html">Halloween 🎃</a></li>
+                <li><a href="shop/index.html">Shop 🛍️</a></li>
+                <li><a href="blog/index.html">Blog ✍️</a></li>
                 <li><a href="index.html#visitus">Visit Us</a></li>
             </ul>
         </div>
@@ -206,7 +210,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.openLb = function(src){ var lb=document.getElementById('lightbox'); document.getElementById('lb-img').src=src; lb.classList.add('visible'); requestAnimationFrame(function(){ lb.classList.add('open'); }); };
     window.closeLb = function(){ var lb=document.getElementById('lightbox'); lb.classList.remove('open'); setTimeout(function(){ lb.classList.remove('visible'); },300); };
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
-    // EMAIL — Cloudflare-proof
     (function(){ var u="info.santasecret",d="gmail.com",e=u+"@"+d; document.querySelectorAll(".js-email").forEach(function(a){a.href="mailto:"+e;}); document.querySelectorAll(".js-email-text").forEach(function(a){a.href="mailto:"+e;a.textContent=e;}); })();
 });
 </script>
