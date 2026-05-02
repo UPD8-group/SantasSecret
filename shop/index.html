@@ -1,390 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop – Santa's Secret</title>
-  <meta name="description" content="Shop handcrafted Christmas decorations and bespoke ornaments from Santa's Secret in Bungendore. Inventory synced with our physical store." />
-  <link rel="icon" href="/SantaLogo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop – Santa's Secret</title>
+    <meta name="description" content="Shop handcrafted Christmas decorations and bespoke ornaments from Santa's Secret in Bungendore. Inventory synced with our physical store.">
+    <link rel="icon" type="image/png" href="/boxicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--red:#c0392b;--red-deep:#96281b;--gold:#c8973a;--gold-light:#f0d080;--gold-pale:#fdf6e3;--cream:#faf6f0;--ink:#1a1008;--warm-mid:#7a5c3a}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+        .display{font-family:'Cormorant Garamond',serif}
 
-    :root {
-      --red:    #c0392b;
-      --gold:   #c9a84c;
-      --cream:  #fdf6ec;
-      --dark:   #1a1a1a;
-      --mid:    #555;
-      --border: #e8d8c4;
-    }
+        /* ── NAV (exact match) ── */
+        #mainNav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;transition:background .4s ease,padding .4s ease,box-shadow .4s ease}
+        #mainNav.scrolled{background:rgba(250,246,240,0.96);backdrop-filter:blur(12px);padding:12px 32px;box-shadow:0 2px 20px rgba(26,16,8,0.08)}
+        #mainNav .logo img{height:72px;width:auto;mix-blend-mode:multiply;transition:height .4s ease}
+        #mainNav.scrolled .logo img{height:56px}
+        #menuBtn{background:none;border:none;cursor:pointer;width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:4px}
+        #menuBtn span{display:block;height:1.5px;background:white;transition:background .3s,transform .3s,opacity .3s;transform-origin:center}
+        #mainNav.scrolled #menuBtn span{background:var(--ink)}
+        #menuBtn.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+        #menuBtn.open span:nth-child(2){opacity:0}
+        #menuBtn.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+        #mobileMenu{position:fixed;top:0;right:-100%;width:min(360px,100vw);height:100vh;background:var(--ink);z-index:99;display:flex;flex-direction:column;justify-content:center;padding:60px 48px;transition:right .45s cubic-bezier(0.77,0,0.175,1)}
+        #mobileMenu.open{right:0}
+        #mobileMenu a{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--gold-pale);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(200,151,58,0.15);transition:color .2s,padding-left .2s;letter-spacing:.02em}
+        #mobileMenu a:hover{color:var(--gold);padding-left:8px}
+        #mobileMenu a.active{color:var(--gold)}
+        #mobileMenu a:last-child{border-bottom:none}
+        #mobileMenu a.visit-us{margin-top:16px;color:var(--gold)}
+        #menuOverlay{position:fixed;inset:0;background:rgba(26,16,8,0.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s}
+        #menuOverlay.open{opacity:1;pointer-events:all}
 
-    body {
-      font-family: 'Lato', sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-      min-height: 100vh;
-    }
+        /* ── HERO ── */
+        #hero{min-height:60vh;background:linear-gradient(160deg,rgba(26,16,8,0.72) 0%,rgba(96,40,27,0.55) 60%,rgba(26,16,8,0.78) 100%),url('https://santasecret.com.au/ss4.webp') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;position:relative;overflow:hidden}
+        #hero::before{content:'🎁';position:absolute;font-size:18rem;opacity:.03;top:-3rem;right:-2rem;pointer-events:none}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards}
+        .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:32px;height:1px;background:var(--gold-light)}
+        .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:300;line-height:1.05;color:white;margin-bottom:20px;opacity:0;animation:fadeUp .9s .5s forwards}
+        .hero-title em{font-style:italic;color:var(--gold-light)}
+        .hero-sub{font-size:clamp(.95rem,2vw,1.15rem);font-weight:300;color:rgba(255,255,255,0.8);line-height:1.75;max-width:560px;margin:0 auto;opacity:0;animation:fadeUp .9s .7s forwards}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(26,26,26,0.97);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      height: 64px;
-      border-bottom: 2px solid var(--gold);
-    }
-    nav .logo {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      text-decoration: none;
-    }
-    nav .logo img { height: 38px; }
-    nav .logo span {
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      font-size: 1.1rem;
-    }
-    nav ul { list-style: none; display: flex; gap: 1.5rem; }
-    nav ul a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: .85rem;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-    nav ul a:hover, nav ul a.active { color: var(--gold); }
+        /* ── TRUST STRIP ── */
+        #trustStrip{background:white;border-bottom:1px solid rgba(26,16,8,0.08);display:flex;justify-content:center;gap:3rem;padding:1.25rem 2rem;flex-wrap:wrap}
+        .trust-item{display:flex;align-items:center;gap:.6rem;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-mid)}
+        .trust-item i{color:var(--gold);font-size:.95rem}
 
-    /* HERO */
-    .shop-hero {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a1a 50%, #1a1a1a 100%);
-      color: #fff;
-      text-align: center;
-      padding: 5rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .shop-hero::before {
-      content: '🎁';
-      position: absolute;
-      font-size: 14rem;
-      opacity: .04;
-      top: -3rem;
-      right: -2rem;
-      pointer-events: none;
-    }
-    .shop-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 400;
-    }
-    .shop-hero h1 em { color: var(--gold); font-style: italic; }
-    .shop-hero p {
-      color: #bbb;
-      font-size: 1.05rem;
-      font-weight: 300;
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-    .gold-line { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem auto; }
+        /* ── SHOP SECTION ── */
+        #shop{background:var(--cream);padding:100px 40px}
+        .shop-inner{max-width:1200px;margin:0 auto}
+        .section-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+        .section-label::before{content:'';width:24px;height:1px;background:var(--gold)}
+        .shop-intro{margin-bottom:48px}
+        .shop-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;margin-bottom:12px}
+        .shop-intro h2 em{font-style:italic;color:var(--red)}
+        .shop-intro p{color:var(--warm-mid);font-size:1rem;line-height:1.7;max-width:580px}
 
-    /* TRUST BADGES */
-    .trust-strip {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      padding: 1.25rem 2rem;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .82rem;
-      color: var(--mid);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      font-weight: 700;
-    }
-    .trust-item .icon { font-size: 1.2rem; }
+        /* ── SQUARE EMBED ── */
+        .square-wrap{background:white;border:1px solid rgba(26,16,8,0.07);border-radius:4px;overflow:hidden;min-height:700px;position:relative;box-shadow:0 4px 24px rgba(26,16,8,0.05)}
+        .square-wrap iframe{width:100%;min-height:700px;border:none;display:block}
+        .embed-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:white;color:var(--warm-mid);font-size:.9rem;pointer-events:none;transition:opacity .4s}
+        .spinner{width:40px;height:40px;border:2px solid rgba(200,151,58,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .embed-loading.hidden{opacity:0}
 
-    /* SQUARE EMBED */
-    .shop-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem 5rem;
-    }
+        /* ── COMING SOON (pre-Square setup) ── */
+        .setup-notice{background:var(--gold-pale);border:2px dashed rgba(200,151,58,0.4);border-radius:4px;padding:64px 32px;text-align:center;display:none}
+        .setup-notice h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--ink);margin-bottom:12px}
+        .setup-notice p{color:var(--warm-mid);font-size:.95rem;line-height:1.7;margin-bottom:8px}
+        .setup-notice a{color:var(--red)}
+        .setup-notice code{display:inline-block;background:rgba(200,151,58,0.15);padding:.15rem .5rem;border-radius:3px;font-size:.82rem;font-family:monospace;color:var(--ink)}
 
-    .shop-intro {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .shop-intro h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      margin-bottom: .75rem;
-    }
-    .shop-intro p {
-      color: var(--mid);
-      font-size: .95rem;
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+        /* ── IN-STORE CALLOUT ── */
+        .instore-callout{margin-top:48px;background:var(--ink);border-radius:4px;overflow:hidden;display:flex;align-items:stretch}
+        .callout-accent{background:var(--red);width:5px;flex-shrink:0}
+        .callout-body{padding:32px 36px;flex:1}
+        .callout-body h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--gold-light);margin-bottom:10px}
+        .callout-body p{color:rgba(253,246,227,0.65);font-size:.9rem;line-height:1.7}
+        .callout-body .details{margin-top:12px;font-size:.85rem;color:rgba(253,246,227,0.5)}
+        .callout-body .details strong{color:rgba(253,246,227,0.85)}
+        .callout-body .details a{color:var(--gold);text-decoration:none}
+        @media(max-width:600px){.instore-callout{flex-direction:column}.callout-accent{width:100%;height:5px}}
 
-    /* The Square Online store is embedded via iframe */
-    .square-embed-wrapper {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      min-height: 700px;
-      position: relative;
-    }
-
-    .square-embed-wrapper iframe {
-      width: 100%;
-      min-height: 700px;
-      border: none;
-      display: block;
-    }
-
-    /* Loading state shown until iframe loads */
-    .embed-loading {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: #fff;
-      color: var(--mid);
-      font-size: .9rem;
-      pointer-events: none;
-      transition: opacity .4s;
-    }
-    .embed-loading .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .embed-loading.hidden { opacity: 0; }
-
-    /* Setup notice — shown if Square URL not yet configured */
-    .setup-notice {
-      background: #fff8e8;
-      border: 2px dashed var(--gold);
-      border-radius: 4px;
-      padding: 3rem 2rem;
-      text-align: center;
-      color: var(--mid);
-      display: none; /* hidden by default; JS shows if no URL configured */
-    }
-    .setup-notice h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--dark);
-      margin-bottom: .75rem;
-    }
-    .setup-notice p { font-size: .9rem; line-height: 1.7; margin-bottom .5rem; }
-    .setup-notice code {
-      display: inline-block;
-      background: #f0e8d0;
-      padding: .15rem .5rem;
-      border-radius: 3px;
-      font-size: .85rem;
-      font-family: monospace;
-    }
-
-    /* IN-STORE CALLOUT */
-    .instore-callout {
-      margin-top: 3rem;
-      display: flex;
-      gap: 1.5rem;
-      background: var(--dark);
-      color: #fff;
-      border-radius: 4px;
-      overflow: hidden;
-      align-items: stretch;
-    }
-    .instore-callout .callout-accent {
-      background: var(--red);
-      width: 6px;
-      flex-shrink: 0;
-    }
-    .instore-callout .callout-body {
-      padding: 1.75rem 1.5rem;
-      flex: 1;
-    }
-    .instore-callout h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--gold);
-      margin-bottom: .5rem;
-    }
-    .instore-callout p {
-      font-size: .9rem;
-      color: #ccc;
-      line-height: 1.65;
-    }
-    .instore-callout .callout-details {
-      margin-top: .75rem;
-      font-size: .85rem;
-      color: #bbb;
-    }
-    .instore-callout .callout-details strong { color: #fff; }
-
-    footer {
-      background: #111;
-      color: #888;
-      text-align: center;
-      padding: 2rem;
-      font-size: .82rem;
-    }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer .footer-logo {
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      font-size: 1.1rem;
-      margin-bottom: .5rem;
-    }
-
-    @media (max-width: 600px) {
-      .trust-strip { gap: 1.25rem; }
-      .instore-callout { flex-direction: column; }
-      .instore-callout .callout-accent { width: 100%; height: 5px; }
-    }
-  </style>
+        /* ── FOOTER ── */
+        footer{background:var(--ink);padding:72px 40px 40px;color:rgba(253,246,227,0.6)}
+        .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:56px}
+        @media(max-width:760px){.footer-inner{grid-template-columns:1fr;gap:36px}}
+        .footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--gold-pale);margin-bottom:12px}
+        .footer-brand p{font-size:.9rem;line-height:1.7;margin-bottom:24px}
+        .social-links{display:flex;gap:12px}
+        .social-links a{width:38px;height:38px;border:1px solid rgba(200,151,58,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(253,246,227,0.5);font-size:13px;text-decoration:none;transition:all .2s}
+        .social-links a:hover{border-color:var(--gold);color:var(--gold)}
+        .footer-col h4{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+        .footer-col ul{list-style:none}
+        .footer-col ul li{margin-bottom:10px}
+        .footer-col ul li a{color:rgba(253,246,227,0.55);text-decoration:none;font-size:.9rem;transition:color .2s}
+        .footer-col ul li a:hover{color:var(--gold-pale)}
+        .footer-col ul li a.active{color:var(--gold)}
+        .footer-col address{font-style:normal;font-size:.9rem;line-height:1.8}
+        .footer-col address a{color:rgba(253,246,227,0.55);text-decoration:none;transition:color .2s}
+        .footer-col address a:hover{color:var(--gold-pale)}
+        .footer-bottom{max-width:1200px;margin:0 auto;padding-top:28px;border-top:1px solid rgba(200,151,58,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px}
+        .footer-bottom a{color:var(--gold);text-decoration:none}
+    </style>
 </head>
 <body>
 
-  <nav>
-    <a class="logo" href="/">
-      <img src="/SantaLogo.png" alt="Santa's Secret" />
-      <span>Santa's Secret</span>
-    </a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/#gallery">Gallery</a></li>
-      <li><a href="/shop/" class="active">Shop</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="/#visitus">Visit Us ↗</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav id="mainNav">
+    <a href="index.html" class="logo"><img src="https://santasecret.com.au/SantaLogo.png" alt="Santa's Secret"></a>
+    <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="menuOverlay" onclick="closeMenu()"></div>
+<div id="mobileMenu">
+    <a href="index.html"            onclick="closeMenu()">Home</a>
+    <a href="index.html#bespoke"    onclick="closeMenu()">Our Story</a>
+    <a href="index.html#about"      onclick="closeMenu()">Meet Kim</a>
+    <a href="index.html#gallery"    onclick="closeMenu()">Gallery</a>
+    <a href="wreaths.html"          onclick="closeMenu()">Wreaths</a>
+    <a href="halloween.html"        onclick="closeMenu()">Halloween 🎃</a>
+    <a href="shop/index.html" class="active" onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"       onclick="closeMenu()">Blog ✍️</a>
+    <a href="index.html#visitus" class="visit-us" onclick="closeMenu()">Visit Us ↗</a>
+</div>
 
-  <header class="shop-hero">
-    <h1>Shop <em>Santa's Secret</em></h1>
-    <div class="gold-line"></div>
-    <p>Handcrafted decorations and bespoke gifts — the same inventory as our Bungendore workshop, available online.</p>
-  </header>
-
-  <div class="trust-strip">
-    <div class="trust-item"><span class="icon">🔒</span> Secure Checkout via Square</div>
-    <div class="trust-item"><span class="icon">🏪</span> Same Stock as In-Store</div>
-    <div class="trust-item"><span class="icon">🤲</span> Handcrafted by Kim</div>
-    <div class="trust-item"><span class="icon">📦</span> Australia-Wide Shipping</div>
-  </div>
-
-  <div class="shop-container">
-
-    <div class="shop-intro">
-      <h2>Our Collection</h2>
-      <p>Every piece is made or personally curated by Kim in the Bungendore workshop. Stock is limited — if you love it, grab it!</p>
+<!-- HERO -->
+<section id="hero">
+    <div>
+        <div class="hero-eyebrow">Bungendore, NSW</div>
+        <h1 class="hero-title display">Shop <em>Santa's Secret</em></h1>
+        <p class="hero-sub">Handcrafted decorations and bespoke gifts — the same inventory as our Bungendore workshop, available online.</p>
     </div>
+</section>
 
-    <!-- Square Online Store Embed -->
-    <!--
-      HOW TO CONFIGURE:
-      1. Log in to Square Dashboard → Online → Overview
-      2. Copy your Square Online store URL (e.g. https://squareup.com/store/your-store-id)
-         OR use your custom Square domain if you've set one up
-      3. Replace SQUARE_STORE_URL below with your actual URL
-      4. Square's "Buy Button" embed code can also go here instead if preferred
-    -->
-    <div class="square-embed-wrapper" id="embedWrapper">
-      <div class="embed-loading" id="embedLoading">
-        <div class="spinner"></div>
-        <span>Loading the shop…</span>
-      </div>
-      <!-- SQUARE IFRAME — replace src with Kim's Square Online store URL -->
-      <iframe
-        id="squareFrame"
-        src="SQUARE_STORE_URL"
-        title="Santa's Secret Online Shop"
-        allow="payment"
-        loading="lazy"
-      ></iframe>
+<!-- TRUST STRIP -->
+<div id="trustStrip">
+    <div class="trust-item"><i class="fas fa-lock"></i> Secure Checkout via Square</div>
+    <div class="trust-item"><i class="fas fa-store"></i> Same Stock as In-Store</div>
+    <div class="trust-item"><i class="fas fa-hand-holding-heart"></i> Handcrafted by Kim</div>
+    <div class="trust-item"><i class="fas fa-box"></i> Australia-Wide Shipping</div>
+</div>
 
-      <!-- This notice shows only if URL not yet configured -->
-      <div class="setup-notice" id="setupNotice">
-        <h3>🎄 Shop coming very soon!</h3>
-        <p>We're finishing setting up our online store. In the meantime, visit us in-store or call us to place an order.</p>
-        <p style="margin-top:.75rem;">
-          <strong>Kim, Owner</strong> — <a href="tel:0480784317" style="color:var(--red)">0480 784 317</a>
-        </p>
-        <p style="margin-top:1.5rem; font-size:.8rem; color:#999;">
-          <em>Dev note: replace <code>SQUARE_STORE_URL</code> in <code>/shop/index.html</code> with your Square Online store URL.</em>
-        </p>
-      </div>
-    </div>
-
-    <!-- In-store callout -->
-    <div class="instore-callout">
-      <div class="callout-accent"></div>
-      <div class="callout-body">
-        <h3>Prefer to shop in person?</h3>
-        <p>Our online store and physical workshop share the same inventory — so what you see here is exactly what's on the shelf in Bungendore.</p>
-        <div class="callout-details">
-          <strong>24b Malbon St, Bungendore NSW 2621</strong><br>
-          Thu–Mon, 10 am – 3 pm &nbsp;·&nbsp; <a href="tel:0480784317" style="color:var(--gold)">0480 784 317</a>
+<!-- SHOP -->
+<section id="shop">
+    <div class="shop-inner">
+        <div class="shop-intro">
+            <div class="section-label">Our Collection</div>
+            <h2 class="display">Kim's <em>Creations</em></h2>
+            <p>Every piece is made or personally curated by Kim in the Bungendore workshop. Stock is limited — if you love it, grab it!</p>
         </div>
-      </div>
+
+        <!--
+            HOW TO CONFIGURE THE SQUARE EMBED:
+            1. Log in to Square Dashboard → Online → Overview
+            2. Copy your Square Online store URL
+               (e.g. https://squareup.com/store/YOUR-STORE-ID)
+            3. Replace SQUARE_STORE_URL below with that URL
+            4. Save & push — the iframe will load automatically
+        -->
+        <div class="square-wrap" id="squareWrap">
+            <div class="embed-loading" id="embedLoading">
+                <div class="spinner"></div>
+                <span>Loading the shop…</span>
+            </div>
+            <iframe
+                id="squareFrame"
+                src="SQUARE_STORE_URL"
+                title="Santa's Secret Online Shop"
+                allow="payment"
+                loading="lazy"
+            ></iframe>
+            <div class="setup-notice" id="setupNotice">
+                <h3 class="display">🎄 Shop coming very soon!</h3>
+                <p>We're putting the finishing touches on our online store.<br>In the meantime, visit us in-store or give us a call to place an order.</p>
+                <p style="margin-top:12px"><strong>Kim</strong> — <a href="tel:0480784317">0480 784 317</a></p>
+                <p style="margin-top:28px;font-size:.78rem;color:#aaa"><em>Dev note: replace <code>SQUARE_STORE_URL</code> in <code>/shop/index.html</code> with Kim's Square Online store URL.</em></p>
+            </div>
+        </div>
+
+        <!-- In-store callout -->
+        <div class="instore-callout">
+            <div class="callout-accent"></div>
+            <div class="callout-body">
+                <h3 class="display">Prefer to shop in person?</h3>
+                <p>Our online store and physical workshop share the same inventory — so what you see here is exactly what's on the shelf in Bungendore.</p>
+                <div class="details">
+                    <strong>24b Malbon St, Bungendore NSW 2621</strong><br>
+                    Thu–Mon, 10 am – 3 pm &nbsp;·&nbsp; <a href="tel:0480784317">0480 784 317</a>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-  </div>
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3 class="display">Santa's Secret</h3>
+            <p>Creating magical Christmas memories in Bungendore. Where tradition meets imagination.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/SantasSecretBungendore" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="js-email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navigate</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#bespoke">Our Story</a></li>
+                <li><a href="index.html#about">About Kim</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="wreaths.html">Wreaths</a></li>
+                <li><a href="halloween.html">Halloween 🎃</a></li>
+                <li><a href="shop/index.html" class="active">Shop 🛍️</a></li>
+                <li><a href="blog/index.html">Blog ✍️</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <address>24b Malbon St,<br>Bungendore NSW 2621<br><br><a href="tel:+61480784317">0480 784 317</a><br><a href="#" class="js-email-text">info.santasecret@gmail.com</a></address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Santa's Secret. Made with ❤️ in Bungendore.</span>
+        <span>website by <a href="https://jaybergmann.com" target="_blank">Jay</a></span>
+    </div>
+</footer>
 
-  <footer>
-    <div class="footer-logo">Santa's Secret</div>
-    <p>24b Malbon St, Bungendore NSW 2621 &nbsp;·&nbsp; <a href="tel:0480784317">0480 784 317</a></p>
-    <p style="margin-top:.5rem;">© 2026 Santa's Secret. Website by <a href="https://jaybergmann.com">Jay</a></p>
-  </footer>
+<script data-cfasync="false">
+document.addEventListener('DOMContentLoaded', function() {
 
-  <script>
-    const frame = document.getElementById('squareFrame');
-    const loading = document.getElementById('embedLoading');
-    const notice = document.getElementById('setupNotice');
+    // NAV
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
 
-    // Show "coming soon" if URL not configured
-    if (frame.src.includes('SQUARE_STORE_URL') || !frame.src || frame.src === location.href) {
-      frame.style.display = 'none';
-      loading.style.display = 'none';
-      notice.style.display = 'block';
+    // MENU
+    var menuBtn     = document.getElementById('menuBtn');
+    var mobileMenu  = document.getElementById('mobileMenu');
+    var menuOverlay = document.getElementById('menuOverlay');
+    function openMenu(){ menuBtn.classList.add('open'); mobileMenu.classList.add('open'); menuOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ menuBtn.classList.remove('open'); mobileMenu.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow=''; }
+    window.closeMenu = closeMenu;
+    menuBtn.addEventListener('click', function(){ mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+
+    // SQUARE — show notice if not configured
+    var frame   = document.getElementById('squareFrame');
+    var loading = document.getElementById('embedLoading');
+    var notice  = document.getElementById('setupNotice');
+    if (!frame.src || frame.src.indexOf('SQUARE_STORE_URL') !== -1 || frame.src === location.href) {
+        frame.style.display  = 'none';
+        loading.style.display = 'none';
+        notice.style.display  = 'block';
     } else {
-      frame.addEventListener('load', () => {
-        loading.classList.add('hidden');
-        setTimeout(() => loading.remove(), 400);
-      });
+        frame.addEventListener('load', function() {
+            loading.classList.add('hidden');
+            setTimeout(function(){ loading.remove(); }, 400);
+        });
     }
-  </script>
 
+    // EMAIL — Cloudflare-proof
+    (function(){ var u="info.santasecret",d="gmail.com",e=u+"@"+d; document.querySelectorAll(".js-email").forEach(function(a){a.href="mailto:"+e;}); document.querySelectorAll(".js-email-text").forEach(function(a){a.href="mailto:"+e;a.textContent=e;}); })();
+});
+</script>
+<!-- Holly Chat Widget -->
+<script src="/public/holly-widget.js" defer></script>
 </body>
 </html>
