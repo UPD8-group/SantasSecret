@@ -1,0 +1,59 @@
+=======================================================
+CHANGES TO MAKE IN index.html
+=======================================================
+
+1. MOBILE MENU — add two lines after "Halloween 🎃":
+-------------------------------------------------------
+FIND this line:
+    <a href="halloween.html" onclick="closeMenu()">Halloween 🎃</a>
+
+ADD AFTER IT:
+    <a href="shop/index.html"  onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"  onclick="closeMenu()">Blog ✍️</a>
+
+
+2. FOOTER NAVIGATE LIST — add two items after Halloween:
+-------------------------------------------------------
+FIND this block:
+    <li><a href="halloween.html">Halloween 🎃</a></li>
+
+ADD AFTER IT:
+    <li><a href="shop/index.html">Shop 🛍️</a></li>
+    <li><a href="blog/index.html">Blog ✍️</a></li>
+
+
+=======================================================
+SAME CHANGES TO MAKE IN halloween.html AND wreaths.html
+=======================================================
+
+Both files use the same mobile menu and footer structure.
+Make the identical two additions in each file.
+
+halloween.html mobile menu — add after:
+    <a href="wreaths.html" onclick="closeMenu()">Wreaths</a>
+
+ADD:
+    <a href="shop/index.html"  onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"  onclick="closeMenu()">Blog ✍️</a>
+
+halloween.html footer nav — add after:
+    <li><a href="wreaths.html">Wreaths</a></li>
+
+ADD:
+    <li><a href="shop/index.html">Shop 🛍️</a></li>
+    <li><a href="blog/index.html">Blog ✍️</a></li>
+
+
+wreaths.html mobile menu — add after:
+    <a href="halloween.html" onclick="closeMenu()">Halloween 🎃</a>
+
+ADD:
+    <a href="shop/index.html"  onclick="closeMenu()">Shop 🛍️</a>
+    <a href="blog/index.html"  onclick="closeMenu()">Blog ✍️</a>
+
+wreaths.html footer nav — add after:
+    <li><a href="halloween.html">Halloween 🎃</a></li>
+
+ADD:
+    <li><a href="shop/index.html">Shop 🛍️</a></li>
+    <li><a href="blog/index.html">Blog ✍️</a></li>
