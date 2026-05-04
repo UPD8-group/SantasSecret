@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normal Is Overrated — Halloween in Bungendore | Santa's Secret</title>
+<meta name="description" content="Halloween in Bungendore — Saturday 31st October, 3–6PM. Trick-or-treat through the local business district, meet the Addams Family, step inside a vintage 1934 Packard limousine. Free family event hosted by Santa's Secret.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Normal Is Overrated — Halloween in Bungendore">
+<meta property="og:description" content="Saturday 31st October, 3–6PM. Trick-or-treat, meet the Addams Family, vintage limousine photo experience. Free community event.">
+<meta property="og:image" content="https://santasecret.com.au/halloween-poster.jpg">
+<meta property="og:url" content="https://santasecret.com.au/halloween">
+<meta property="og:type" content="event">
+
+<!-- Schema.org Event -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Normal Is Overrated — Halloween in Bungendore",
+  "startDate": "2026-10-31T15:00:00+11:00",
+  "endDate": "2026-10-31T18:00:00+11:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@type": "Place",
+    "name": "Bungendore Business District",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "24b Malbon St",
+      "addressLocality": "Bungendore",
+      "addressRegion": "NSW",
+      "postalCode": "2621",
+      "addressCountry": "AU"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Santa's Secret Bungendore",
+    "url": "https://santasecret.com.au"
+  },
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "AUD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0a0606;
+    --ink-2: #14090a;
+    --cream: #f0e6d2;
+    --cream-dim: rgba(240, 230, 210, 0.72);
+    --blood: #a8201a;
+    --blood-bright: #c8261d;
+    --gold: #c9a961;
+    --gold-dim: #8a7340;
+    --rule: rgba(201, 169, 97, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle film grain across the whole page */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
+    mix-blend-mode: overlay;
+  }
+
+  /* ===== Top bar ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 6, 6, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .topbar a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .topbar a:hover { color: var(--gold); }
+  .topbar .brand { color: var(--gold); }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 1.5rem 3rem;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 80% 10%, rgba(201, 169, 97, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 90%, rgba(168, 32, 26, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0a0606 0%, #14090a 100%);
+  }
+
+  /* Atmospheric moon */
+  .moon {
+    position: absolute;
+    top: 8%;
+    right: 8%;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f0e6d2 0%, #d4c4a0 40%, #8a7340 100%);
+    box-shadow:
+      0 0 80px rgba(240, 230, 210, 0.15),
+      0 0 160px rgba(240, 230, 210, 0.08),
+      inset -20px -20px 40px rgba(0,0,0,0.4);
+    opacity: 0.5;
+    animation: drift 20s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-10px, 8px); }
+  }
+
+  /* Drifting bats */
+  .bat {
+    position: absolute;
+    color: var(--ink);
+    opacity: 0.4;
+    animation: fly 25s linear infinite;
+  }
+  .bat-1 { top: 18%; left: -5%; animation-delay: 0s; font-size: 1.4rem; }
+  .bat-2 { top: 35%; left: -5%; animation-delay: -8s; font-size: 1rem; opacity: 0.25; }
+  .bat-3 { top: 55%; left: -5%; animation-delay: -15s; font-size: 1.6rem; opacity: 0.3; }
+  @keyframes fly {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(30vw) translateY(-20px); }
+    50% { transform: translateX(60vw) translateY(15px); }
+    75% { transform: translateX(85vw) translateY(-10px); }
+    100% { transform: translateX(110vw) translateY(0); }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: rise 1s ease-out 0.2s forwards;
+  }
+  .eyebrow::before {
+    content: '◆';
+    margin-right: 0.8rem;
+    color: var(--blood);
+  }
+
+  .headline {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .headline .normal-is {
+    display: block;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: var(--cream);
+    opacity: 0;
+    animation: rise 1s ease-out 0.4s forwards;
+  }
+  .headline .overrated {
+    display: block;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    color: var(--blood);
+    text-shadow: 0 2px 0 rgba(0,0,0,0.4);
+    opacity: 0;
+    animation: rise 1s ease-out 0.6s forwards;
+  }
+
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: rise 1s ease-out 0.8s forwards;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    opacity: 0;
+    animation: rise 1s ease-out 1s forwards;
+  }
+  .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    max-width: 200px;
+  }
+  .ornament-diamond {
+    color: var(--blood);
+    font-size: 0.8rem;
+  }
+
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-top: 1rem;
+    opacity: 0;
+    animation: rise 1s ease-out 1.2s forwards;
+  }
+  .meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .meta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .meta-value {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--cream);
+  }
+  .meta-value .accent { color: var(--blood); }
+
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: rise 1s ease-out 1.4s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--blood);
+    color: var(--cream);
+  }
+  .btn-primary:hover {
+    background: var(--blood-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(168, 32, 26, 0.4);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold);
+    border-color: var(--gold-dim);
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--cream);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Countdown ===== */
+  .countdown-section {
+    padding: 4rem 1.5rem;
+    background: var(--ink-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .countdown-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .countdown-unit {
+    min-width: 90px;
+  }
+  .countdown-num {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--cream);
+    line-height: 1;
+    display: block;
+  }
+  .countdown-label-small {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.6rem;
+    display: block;
+  }
+  .countdown-divider {
+    color: var(--blood);
+    font-size: 2rem;
+    align-self: center;
+    opacity: 0.5;
+  }
+
+  /* ===== Section foundations ===== */
+  section { padding: 6rem 1.5rem; position: relative; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--blood);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .section-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 4rem;
+  }
+
+  /* ===== Categories grid ===== */
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .category-card {
+    background: linear-gradient(180deg, rgba(20, 9, 10, 0.6), rgba(10, 6, 6, 0.9));
+    border: 1px solid var(--rule);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.05), transparent);
+    transition: left 0.8s;
+  }
+  .category-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .category-card:hover::before { left: 100%; }
+  .category-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    transition: all 0.3s;
+  }
+  .category-card:hover .category-icon {
+    background: rgba(201, 169, 97, 0.08);
+    transform: rotate(-5deg);
+  }
+  .category-icon svg { width: 32px; height: 32px; }
+  .category-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .category-title .accent { color: var(--blood); display: block; }
+  .category-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--cream-dim);
+    line-height: 1.5;
+  }
+
+  /* ===== Highlights bar ===== */
+  .highlights {
+    background: var(--ink-2);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 3rem 1.5rem;
+  }
+  .highlights-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .highlights-list li {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .highlights-list li::before {
+    content: '●';
+    color: var(--blood);
+    font-size: 0.7rem;
+  }
+
+  /* ===== Visit section ===== */
+  .visit {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(168, 32, 26, 0.08) 0%, transparent 60%),
+      var(--ink);
+  }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .visit-block h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .visit-block p,
+  .visit-block address {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-size: 1.25rem;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .visit-block a {
+    color: var(--blood-bright);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .visit-block a:hover { border-bottom-color: var(--blood-bright); }
+
+  /* ===== Socials ===== */
+  .socials {
+    text-align: center;
+    padding: 5rem 1.5rem;
+    background: var(--ink-2);
+  }
+  .socials-handle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .socials-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .social-link {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .social-link:hover {
+    background: var(--blood);
+    border-color: var(--blood);
+    color: var(--cream);
+    transform: translateY(-3px);
+  }
+  .social-link svg { width: 22px; height: 22px; }
+
+  /* ===== Footer ===== */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid var(--rule);
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+  }
+  .footer-key {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .footer-banner {
+    display: inline-block;
+    background: var(--blood);
+    color: var(--cream);
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    margin-top: 0.5rem;
+  }
+  .footer-meta {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: var(--cream-dim);
+    letter-spacing: 0.05em;
+  }
+  .footer-meta a { color: var(--gold); text-decoration: none; }
+  .footer-meta a:hover { color: var(--cream); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .moon { width: 140px; height: 140px; top: 4%; right: 4%; opacity: 0.35; }
+    .hero { padding-top: 3rem; }
+    .event-meta { gap: 1.5rem; }
+    .visit-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .countdown { gap: 0.8rem; }
+    .countdown-unit { min-width: 70px; }
+    .countdown-divider { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bat, .moon { animation: none; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<nav class="topbar">
+  <a href="https://santasecret.com.au" class="brand">Santa's Secret</a>
+  <a href="https://santasecret.com.au">← Back to home</a>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="moon" aria-hidden="true"></div>
+  <div class="bat bat-1" aria-hidden="true">🦇</div>
+  <div class="bat bat-2" aria-hidden="true">🦇</div>
+  <div class="bat bat-3" aria-hidden="true">🦇</div>
+
+  <div class="hero-inner">
+    <div class="eyebrow">Halloween in Bungendore</div>
+    <h1 class="headline">
+      <span class="normal-is">Normal Is</span>
+      <span class="overrated">Overrated</span>
+    </h1>
+    <p class="tagline">A spooky stroll through the heart of Bungendore.</p>
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond">◆ ❦ ◆</div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <div class="event-meta">
+      <div class="meta-block">
+        <span class="meta-label">When</span>
+        <span class="meta-value">Saturday <span class="accent">31</span> October</span>
+      </div>
+      <div class="meta-block">
+        <span class="meta-label">Time</span>
+        <span class="meta-value"><span class="accent">3</span>PM – <span class="accent">6</span>PM</span>
+      </div>
+      <div class="meta-block">
+        <span class="meta-label">Entry</span>
+        <span class="meta-value">Free Community Event</span>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="#categories" class="btn btn-primary">What's Happening →</a>
+      <a href="#visit" class="btn btn-ghost">Plan your visit</a>
+    </div>
+  </div>
+</header>
+
+<!-- Countdown -->
+<section class="countdown-section" aria-label="Countdown to Halloween">
+  <p class="countdown-label">— The witching hour approaches —</p>
+  <div class="countdown" id="countdown">
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-days">00</span>
+      <span class="countdown-label-small">Days</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-hours">00</span>
+      <span class="countdown-label-small">Hours</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-mins">00</span>
+      <span class="countdown-label-small">Minutes</span>
+    </div>
+    <div class="countdown-divider">:</div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-secs">00</span>
+      <span class="countdown-label-small">Seconds</span>
+    </div>
+  </div>
+</section>
+
+<!-- Categories / What's happening -->
+<section id="categories">
+  <div class="container">
+    <div class="section-eyebrow">◆ The Programme ◆</div>
+    <h2 class="section-title">What Awaits You</h2>
+    <p class="section-subtitle">Three reasons to put on the costume and come into town.</p>
+
+    <div class="categories">
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 8h12l-1 12H7L6 8z"/>
+            <path d="M9 8V6a3 3 0 116 0v2"/>
+            <circle cx="10" cy="13" r="0.8" fill="currentColor"/>
+            <circle cx="14" cy="13" r="0.8" fill="currentColor"/>
+            <path d="M10 16c1 1 3 1 4 0"/>
+          </svg>
+        </div>
+        <h3 class="category-title">Trick-or-Treat <span class="accent">The District</span></h3>
+        <p class="category-body">Wander through the local business district collecting treats from participating shops. A spooky stroll through the heart of Bungendore.</p>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 16h10v-1c0-.5-.3-.9-.7-1L14 13V8h-4v5l-2.3 1c-.4.1-.7.5-.7 1v1z"/>
+            <path d="M5 16h14v2H5z"/>
+            <path d="M10 8h4V5h-4z"/>
+          </svg>
+        </div>
+        <h3 class="category-title">Meet The <span class="accent">Addams Family</span></h3>
+        <p class="category-body">Step inside a vintage 1934 Packard limousine for a free family photo experience. Mysterious, kooky, altogether ooky.</p>
+      </article>
+
+      <article class="category-card">
+        <div class="category-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3l-2 5L4 9l4.5 4-1 6 4.5-3 4.5 3-1-6L20 9l-6-1z"/>
+          </svg>
+        </div>
+        <h3 class="category-title">Costume <span class="accent">Prizes</span></h3>
+        <p class="category-body">Come as your favourite character — the more unconventional, the better. Prizes to be won across all ages.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Highlights bar -->
+<aside class="highlights">
+  <ul class="highlights-list">
+    <li>Free community event</li>
+    <li>Fun for all ages</li>
+    <li>Prizes to be won</li>
+    <li>Family photo experience</li>
+  </ul>
+</aside>
+
+<!-- Halloween Cabinet teaser -->
+<section style="text-align:center;">
+  <div class="container">
+    <div class="section-eyebrow">◆ At The Shop ◆</div>
+    <h2 class="section-title">Step Inside Our<br><span style="color:var(--blood)">Halloween Cabinet</span></h2>
+    <p class="section-subtitle">Bespoke decorations, handcrafted curiosities, and a few things best not described in writing.</p>
+    <a href="https://santasecret.com.au/shop/" class="btn btn-ghost">Visit the Shop →</a>
+  </div>
+</section>
+
+<!-- Visit -->
+<section id="visit" class="visit">
+  <div class="container">
+    <div class="section-eyebrow">◆ Find Us ◆</div>
+    <h2 class="section-title">Plan Your Spooky Stroll</h2>
+    <p class="section-subtitle">Bungendore, NSW</p>
+
+    <div class="visit-grid">
+      <div class="visit-block">
+        <h3>The Workshop</h3>
+        <address>
+          24b Malbon St<br>
+          Bungendore NSW 2621
+        </address>
+        <a href="https://www.google.com/maps/dir//24b+Malbon+St,+Bungendore+NSW+2621" target="_blank" rel="noopener">Get directions →</a>
+      </div>
+      <div class="visit-block">
+        <h3>Get In Touch</h3>
+        <p>
+          <a href="tel:+61480784317">0480 784 317</a><br>
+          <a href="mailto:info.santasecret@gmail.com">info.santasecret@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Socials -->
+<section class="socials">
+  <div class="section-eyebrow">◆ Follow The Trail ◆</div>
+  <h2 class="section-title">Stay In The Loop</h2>
+  <p class="socials-handle">@santassecretbungendore</p>
+  <div class="socials-row">
+    <a href="https://www.facebook.com/santassecretbungendore" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.2-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/santassecretbungendore" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r="0.8" fill="currentColor"/></svg>
+    </a>
+    <a href="https://santasecret.com.au" class="social-link" aria-label="Website">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-key">Hosted by Santa's Secret</div>
+  <div class="footer-banner">Bungendore</div>
+  <div class="footer-meta">
+    © 2026 Santa's Secret · Made with ❤️ in Bungendore<br>
+    Website by <a href="https://jaybergmann.com">Jay</a>
+  </div>
+</footer>
+
+<script>
+  // Countdown to Saturday 31 October 2026, 3:00 PM AEDT (UTC+11)
+  const target = new Date('2026-10-31T15:00:00+11:00').getTime();
+  const els = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs')
+  };
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      els.days.textContent = '00';
+      els.hours.textContent = '00';
+      els.mins.textContent = '00';
+      els.secs.textContent = '00';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    els.days.textContent = pad(d);
+    els.hours.textContent = pad(h);
+    els.mins.textContent = pad(m);
+    els.secs.textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
