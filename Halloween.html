@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Normal Is Overrated — Halloween in Bungendore | Santa's Secret</title>
-<meta name="description" content="Halloween in Bungendore — Saturday 31st October, 3–6PM. Trick-or-treat through the local business district, meet the Addams Family, step inside a vintage 1934 Packard limousine. Free family event hosted by Santa's Secret.">
+<meta name="description" content="Halloween in Bungendore — Saturday 31st October, 3–6PM. Trick-or-treat through the local business district, step inside a vintage 1934 Packard limousine for a free family photo. Free community event hosted by Santa's Secret.">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Normal Is Overrated — Halloween in Bungendore">
-<meta property="og:description" content="Saturday 31st October, 3–6PM. Trick-or-treat, meet the Addams Family, vintage limousine photo experience. Free community event.">
-<meta property="og:image" content="https://santasecret.com.au/halloween-poster.jpg">
+<meta property="og:description" content="Saturday 31st October, 3–6PM. Trick-or-treat, vintage limousine photo experience, costume prizes. Free community event.">
+<meta property="og:image" content="https://santasecret.com.au/images/halloween/limousine.jpg">
 <meta property="og:url" content="https://santasecret.com.au/halloween">
 <meta property="og:type" content="event">
 
@@ -40,6 +40,7 @@
     "name": "Santa's Secret Bungendore",
     "url": "https://santasecret.com.au"
   },
+  "image": "https://santasecret.com.au/images/halloween/limousine.jpg",
   "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
@@ -52,7 +53,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700;1,900&family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Preload the hero image so the page paints atmospherically from the first frame -->
+<link rel="preload" as="image" href="https://santasecret.com.au/images/halloween/limousine.jpg">
 
 <style>
   :root {
@@ -63,113 +67,162 @@
     --blood: #a8201a;
     --blood-bright: #c8261d;
     --gold: #c9a961;
+    --gold-bright: #e0c179;
     --gold-dim: #8a7340;
-    --rule: rgba(201, 169, 97, 0.3);
+    --rule: rgba(201, 169, 97, 0.32);
+    --rule-strong: rgba(201, 169, 97, 0.55);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
     background: var(--ink);
     color: var(--cream);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.65;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Subtle film grain across the whole page */
+  /* Subtle film grain across everything */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 100;
-    opacity: 0.06;
+    opacity: 0.05;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
     mix-blend-mode: overlay;
   }
 
-  /* ===== Top bar ===== */
+  /* ============ FLOURISHES ============ */
+  .flourish-h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 2.5rem auto;
+    width: 100%;
+    max-width: 600px;
+    color: var(--gold);
+  }
+  .flourish-h::before,
+  .flourish-h::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  }
+  .flourish-h svg { width: 60px; height: 24px; flex-shrink: 0; }
+
+  .flourish-v {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .flourish-v::before {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--blood);
+    font-size: 0.7rem;
+    background: var(--ink);
+    padding: 0.4rem 0;
+  }
+
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--blood);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  /* ============ TOP BAR ============ */
   .topbar {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(10, 6, 6, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 6, 6, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--rule);
     padding: 0.9rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
-  .topbar a {
-    color: var(--cream-dim);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .topbar a { color: var(--cream-dim); text-decoration: none; transition: color 0.2s; }
   .topbar a:hover { color: var(--gold); }
   .topbar .brand { color: var(--gold); }
 
-  /* ===== Hero ===== */
+  /* ============ HERO — full-bleed limousine ============ */
   .hero {
     position: relative;
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
-    padding: 4rem 1.5rem 3rem;
+    padding: 5rem 1.5rem 4rem;
     overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url('https://santasecret.com.au/images/halloween/limousine.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    background-color: #0a0606;
+    transform: scale(1.05);
+    animation: ken-burns 30s ease-in-out infinite alternate;
+  }
+  @keyframes ken-burns {
+    0%   { transform: scale(1.05) translate(0, 0); }
+    100% { transform: scale(1.12) translate(-1.5%, -1%); }
+  }
+
+  /* Cinematic overlay — heavier on the left where the type sits */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background:
-      radial-gradient(ellipse at 80% 10%, rgba(201, 169, 97, 0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 20% 90%, rgba(168, 32, 26, 0.08) 0%, transparent 60%),
-      linear-gradient(180deg, #0a0606 0%, #14090a 100%);
+      linear-gradient(90deg, rgba(10, 6, 6, 0.92) 0%, rgba(10, 6, 6, 0.55) 45%, rgba(10, 6, 6, 0.25) 75%, rgba(10, 6, 6, 0.4) 100%),
+      linear-gradient(180deg, rgba(10, 6, 6, 0.6) 0%, transparent 30%, transparent 70%, rgba(10, 6, 6, 0.85) 100%);
   }
-
-  /* Atmospheric moon */
-  .moon {
+  .hero-vignette {
     position: absolute;
-    top: 8%;
-    right: 8%;
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #f0e6d2 0%, #d4c4a0 40%, #8a7340 100%);
-    box-shadow:
-      0 0 80px rgba(240, 230, 210, 0.15),
-      0 0 160px rgba(240, 230, 210, 0.08),
-      inset -20px -20px 40px rgba(0,0,0,0.4);
-    opacity: 0.5;
-    animation: drift 20s ease-in-out infinite;
-  }
-  @keyframes drift {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-10px, 8px); }
-  }
-
-  /* Drifting bats */
-  .bat {
-    position: absolute;
-    color: var(--ink);
-    opacity: 0.4;
-    animation: fly 25s linear infinite;
-  }
-  .bat-1 { top: 18%; left: -5%; animation-delay: 0s; font-size: 1.4rem; }
-  .bat-2 { top: 35%; left: -5%; animation-delay: -8s; font-size: 1rem; opacity: 0.25; }
-  .bat-3 { top: 55%; left: -5%; animation-delay: -15s; font-size: 1.6rem; opacity: 0.3; }
-  @keyframes fly {
-    0% { transform: translateX(0) translateY(0); }
-    25% { transform: translateX(30vw) translateY(-20px); }
-    50% { transform: translateX(60vw) translateY(15px); }
-    75% { transform: translateX(85vw) translateY(-10px); }
-    100% { transform: translateX(110vw) translateY(0); }
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    box-shadow: inset 0 0 200px 80px rgba(10, 6, 6, 0.7);
   }
 
   .hero-inner {
@@ -180,41 +233,50 @@
     width: 100%;
   }
 
-  .eyebrow {
+  .hero-eyebrow {
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.45em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     opacity: 0;
     animation: rise 1s ease-out 0.2s forwards;
   }
-  .eyebrow::before {
-    content: '◆';
-    margin-right: 0.8rem;
-    color: var(--blood);
+  .hero-eyebrow::before {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
   }
 
   .headline {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    line-height: 0.95;
+    font-family: 'Playfair Display', serif;
+    line-height: 0.92;
     letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
   }
   .headline .normal-is {
     display: block;
-    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 7rem);
     color: var(--cream);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
     opacity: 0;
     animation: rise 1s ease-out 0.4s forwards;
   }
   .headline .overrated {
     display: block;
-    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(3.5rem, 11vw, 8.5rem);
     color: var(--blood);
-    text-shadow: 0 2px 0 rgba(0,0,0,0.4);
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 32, 26, 0.3);
+    margin-top: -0.05em;
     opacity: 0;
     animation: rise 1s ease-out 0.6s forwards;
   }
@@ -222,65 +284,74 @@
   .tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    color: var(--gold);
-    margin-bottom: 2.5rem;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    color: var(--gold-bright);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     opacity: 0;
     animation: rise 1s ease-out 0.8s forwards;
   }
 
-  .ornament {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem 0;
+  .hero-ornament {
+    margin: 2.2rem 0;
     opacity: 0;
     animation: rise 1s ease-out 1s forwards;
   }
-  .ornament-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    max-width: 200px;
-  }
-  .ornament-diamond {
-    color: var(--blood);
-    font-size: 0.8rem;
+  .hero-ornament svg {
+    width: 280px;
+    max-width: 100%;
+    height: 28px;
+    color: var(--gold);
   }
 
   .event-meta {
     display: flex;
+    align-items: stretch;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 0;
     margin-top: 1rem;
+    margin-bottom: 2.5rem;
+    border-top: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+    padding: 1.5rem 0;
     opacity: 0;
     animation: rise 1s ease-out 1.2s forwards;
   }
   .meta-block {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
+    padding: 0 1.8rem;
+    flex: 1;
+    min-width: 140px;
   }
+  .meta-block:first-child { padding-left: 0; }
+  .meta-block:last-child  { padding-right: 0; }
+  .meta-block + .meta-block { border-left: 1px solid var(--rule); }
   .meta-label {
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.32em;
     color: var(--gold);
     text-transform: uppercase;
   }
   .meta-value {
-    font-family: 'Cinzel', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 600;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
     color: var(--cream);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   }
-  .meta-value .accent { color: var(--blood); }
+  .meta-value .accent {
+    color: var(--blood-bright);
+    font-style: italic;
+  }
 
   .cta-row {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-top: 2.5rem;
     opacity: 0;
     animation: rise 1s ease-out 1.4s forwards;
   }
@@ -288,270 +359,322 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 1rem 1.8rem;
+    padding: 1.1rem 2rem;
     font-family: 'Cinzel', serif;
+    font-weight: 600;
     font-size: 0.78rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     text-decoration: none;
     transition: all 0.3s;
     border: 1px solid transparent;
+    cursor: pointer;
   }
   .btn-primary {
     background: var(--blood);
     color: var(--cream);
+    box-shadow: 0 8px 24px rgba(168, 32, 26, 0.3);
   }
   .btn-primary:hover {
     background: var(--blood-bright);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(168, 32, 26, 0.4);
+    box-shadow: 0 12px 32px rgba(168, 32, 26, 0.45);
   }
   .btn-ghost {
-    background: transparent;
+    background: rgba(10, 6, 6, 0.4);
     color: var(--gold);
     border-color: var(--gold-dim);
+    backdrop-filter: blur(6px);
   }
   .btn-ghost:hover {
     border-color: var(--gold);
     color: var(--cream);
+    background: rgba(201, 169, 97, 0.1);
   }
 
   @keyframes rise {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== Countdown ===== */
+  /* ============ COUNTDOWN ============ */
   .countdown-section {
-    padding: 4rem 1.5rem;
+    padding: 4.5rem 1.5rem;
     background: var(--ink-2);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
+    border-top: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
     text-align: center;
   }
   .countdown-label {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
     color: var(--gold);
-    letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
   }
   .countdown {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    align-items: stretch;
+    gap: 0;
     flex-wrap: wrap;
+    max-width: 720px;
+    margin: 0 auto;
   }
   .countdown-unit {
-    min-width: 90px;
+    flex: 1;
+    min-width: 80px;
+    padding: 0 1.2rem;
+    position: relative;
+  }
+  .countdown-unit + .countdown-unit::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: var(--rule-strong);
   }
   .countdown-num {
-    font-family: 'Cinzel', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.4rem, 6vw, 4rem);
     color: var(--cream);
     line-height: 1;
     display: block;
   }
   .countdown-label-small {
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-top: 0.6rem;
+    margin-top: 0.7rem;
     display: block;
   }
-  .countdown-divider {
-    color: var(--blood);
-    font-size: 2rem;
-    align-self: center;
-    opacity: 0.5;
-  }
 
-  /* ===== Section foundations ===== */
+  /* ============ SECTIONS ============ */
   section { padding: 6rem 1.5rem; position: relative; }
   .container { max-width: 1200px; margin: 0 auto; }
 
-  .section-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--blood);
-    margin-bottom: 1rem;
-    text-align: center;
-  }
   .section-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
     text-align: center;
     color: var(--cream);
     margin-bottom: 1rem;
-    line-height: 1.1;
+    line-height: 1.05;
+  }
+  .section-title .italic-accent {
+    font-style: italic;
+    color: var(--blood-bright);
   }
   .section-subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
     text-align: center;
     color: var(--gold);
     margin-bottom: 4rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* ===== Categories grid ===== */
+  /* ============ CATEGORIES ============ */
+  .categories-frame {
+    margin-top: 3rem;
+    border-top: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+  }
   .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
   }
   .category-card {
-    background: linear-gradient(180deg, rgba(20, 9, 10, 0.6), rgba(10, 6, 6, 0.9));
-    border: 1px solid var(--rule);
-    padding: 2.5rem 2rem;
+    padding: 3rem 2rem;
     text-align: center;
-    transition: all 0.4s;
+    transition: background 0.4s;
     position: relative;
-    overflow: hidden;
   }
-  .category-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.05), transparent);
-    transition: left 0.8s;
+  .category-card + .category-card {
+    border-left: 1px solid var(--rule);
   }
   .category-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
+    background: linear-gradient(180deg, transparent, rgba(168, 32, 26, 0.04));
   }
-  .category-card:hover::before { left: 100%; }
-  .category-icon {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 1.5rem;
-    border: 1.5px solid var(--gold);
+
+  .category-icon-frame {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 1.6rem;
+    border: 1px solid var(--gold-dim);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--gold);
-    transition: all 0.3s;
+    transition: all 0.4s;
+    position: relative;
   }
-  .category-card:hover .category-icon {
-    background: rgba(201, 169, 97, 0.08);
-    transform: rotate(-5deg);
+  .category-icon-frame::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
   }
-  .category-icon svg { width: 32px; height: 32px; }
+  .category-card:hover .category-icon-frame {
+    border-color: var(--gold-bright);
+    transform: rotate(-3deg) scale(1.05);
+    color: var(--gold-bright);
+  }
+  .category-icon-frame svg { width: 44px; height: 44px; }
+
   .category-title {
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: 0.12em;
+    font-size: 0.82rem;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--cream);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
   }
-  .category-title .accent { color: var(--blood); display: block; }
+  .category-title-accent {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--blood);
+    display: block;
+    margin-top: 0.2rem;
+  }
   .category-body {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--cream-dim);
-    line-height: 1.5;
+    line-height: 1.55;
+    margin-top: 1rem;
   }
 
-  /* ===== Highlights bar ===== */
+  /* ============ HIGHLIGHTS ============ */
   .highlights {
     background: var(--ink-2);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem;
+    border-bottom: 1px solid var(--rule-strong);
   }
   .highlights-list {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
     gap: 1.5rem;
     list-style: none;
   }
   .highlights-list li {
     font-family: 'Cinzel', serif;
     font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--cream);
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.7rem;
   }
   .highlights-list li::before {
-    content: '●';
+    content: '◆';
     color: var(--blood);
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
-  /* ===== Visit section ===== */
+  /* ============ CABINET TEASER ============ */
+  .cabinet {
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(168, 32, 26, 0.06) 0%, transparent 60%),
+      var(--ink);
+  }
+
+  /* ============ VISIT ============ */
   .visit {
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(168, 32, 26, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 0%, rgba(168, 32, 26, 0.07) 0%, transparent 60%),
       var(--ink);
   }
   .visit-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .visit-block {
+    padding: 1rem 3rem;
+    text-align: center;
   }
   .visit-block h3 {
     font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
   .visit-block p,
   .visit-block address {
     font-family: 'Cormorant Garamond', serif;
     font-style: normal;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     color: var(--cream);
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    line-height: 1.55;
+    margin-bottom: 1.4rem;
   }
   .visit-block a {
     color: var(--blood-bright);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
   }
   .visit-block a:hover { border-bottom-color: var(--blood-bright); }
 
-  /* ===== Socials ===== */
+  /* ============ SOCIALS ============ */
   .socials {
     text-align: center;
     padding: 5rem 1.5rem;
     background: var(--ink-2);
+    border-top: 1px solid var(--rule-strong);
   }
   .socials-handle {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3vw, 2rem);
     color: var(--gold);
-    letter-spacing: 0.05em;
-    margin: 1.5rem 0 2.5rem;
+    letter-spacing: 0.02em;
+    margin: 1rem 0 2.5rem;
   }
   .socials-row {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     flex-wrap: wrap;
   }
   .social-link {
@@ -574,33 +697,35 @@
   }
   .social-link svg { width: 22px; height: 22px; }
 
-  /* ===== Footer ===== */
+  /* ============ FOOTER ============ */
   footer {
     background: var(--ink);
     border-top: 1px solid var(--rule);
-    padding: 3rem 1.5rem 2rem;
+    padding: 3.5rem 1.5rem 2rem;
     text-align: center;
   }
   .footer-key {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.4rem;
+    font-weight: 400;
+    font-size: 1.5rem;
     color: var(--gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
   }
   .footer-banner {
     display: inline-block;
     background: var(--blood);
     color: var(--cream);
     font-family: 'Cinzel', serif;
+    font-weight: 600;
     font-size: 0.7rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    padding: 0.4rem 1.2rem;
-    margin-top: 0.5rem;
+    padding: 0.5rem 1.4rem;
+    margin-top: 0.3rem;
   }
   .footer-meta {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     font-size: 0.75rem;
     color: var(--cream-dim);
     letter-spacing: 0.05em;
@@ -608,20 +733,46 @@
   .footer-meta a { color: var(--gold); text-decoration: none; }
   .footer-meta a:hover { color: var(--cream); }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    .moon { width: 140px; height: 140px; top: 4%; right: 4%; opacity: 0.35; }
-    .hero { padding-top: 3rem; }
-    .event-meta { gap: 1.5rem; }
-    .visit-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    section { padding: 4rem 1.5rem; }
-    .countdown { gap: 0.8rem; }
-    .countdown-unit { min-width: 70px; }
-    .countdown-divider { display: none; }
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .categories { grid-template-columns: 1fr; }
+    .category-card + .category-card {
+      border-left: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .visit-grid { grid-template-columns: 1fr; }
+    .visit-grid .flourish-v {
+      width: auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem 4rem;
+    }
+    .visit-block { padding: 1rem; }
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+    .event-meta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .meta-block {
+      padding: 1rem 0;
+      align-items: center;
+      text-align: center;
+    }
+    .meta-block + .meta-block {
+      border-left: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .countdown-unit { min-width: 70px; padding: 0 0.6rem; }
+    .highlights-list { flex-direction: column; gap: 1rem; }
+    .cta-row .btn { flex: 1; justify-content: center; padding: 1rem 1.2rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .bat, .moon { animation: none; }
+    .hero-bg { animation: none; }
     * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
 </style>
@@ -634,25 +785,36 @@
   <a href="https://santasecret.com.au">← Back to home</a>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <header class="hero">
-  <div class="moon" aria-hidden="true"></div>
-  <div class="bat bat-1" aria-hidden="true">🦇</div>
-  <div class="bat bat-2" aria-hidden="true">🦇</div>
-  <div class="bat bat-3" aria-hidden="true">🦇</div>
+  <div class="hero-bg" role="img" aria-label="A vintage 1934 Packard limousine under moonlight, door open to red velvet interior"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
 
   <div class="hero-inner">
-    <div class="eyebrow">Halloween in Bungendore</div>
+    <div class="hero-eyebrow">Halloween in Bungendore</div>
+
     <h1 class="headline">
       <span class="normal-is">Normal Is</span>
       <span class="overrated">Overrated</span>
     </h1>
+
     <p class="tagline">A spooky stroll through the heart of Bungendore.</p>
 
-    <div class="ornament">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond">◆ ❦ ◆</div>
-      <div class="ornament-line"></div>
+    <div class="hero-ornament" aria-hidden="true">
+      <svg viewBox="0 0 280 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M2 14 L80 14"/>
+        <path d="M80 14 c4 0 6 -3 6 -6 c0 -3 -3 -5 -6 -5 c-3 0 -5 2 -5 4 c0 1.5 1 3 3 3"/>
+        <path d="M80 14 c4 0 6 3 6 6 c0 3 -3 5 -6 5 c-3 0 -5 -2 -5 -4 c0 -1.5 1 -3 3 -3"/>
+        <path d="M100 14 L130 14" stroke-dasharray="2 3"/>
+        <path d="M140 8 L146 14 L140 20 L134 14 Z" fill="currentColor"/>
+        <circle cx="155" cy="14" r="2" fill="#a8201a" stroke="none"/>
+        <path d="M170 8 L176 14 L170 20 L164 14 Z" fill="currentColor"/>
+        <path d="M186 14 L210 14" stroke-dasharray="2 3"/>
+        <path d="M210 14 L278 14"/>
+        <path d="M210 14 c-4 0 -6 -3 -6 -6 c0 -3 3 -5 6 -5 c3 0 5 2 5 4 c0 1.5 -1 3 -3 3"/>
+        <path d="M210 14 c-4 0 -6 3 -6 6 c0 3 3 5 6 5 c3 0 5 -2 5 -4 c0 -1.5 -1 -3 -3 -3"/>
+      </svg>
     </div>
 
     <div class="event-meta">
@@ -677,104 +839,127 @@
   </div>
 </header>
 
-<!-- Countdown -->
+<!-- COUNTDOWN -->
 <section class="countdown-section" aria-label="Countdown to Halloween">
   <p class="countdown-label">— The witching hour approaches —</p>
   <div class="countdown" id="countdown">
-    <div class="countdown-unit">
-      <span class="countdown-num" id="cd-days">00</span>
-      <span class="countdown-label-small">Days</span>
-    </div>
-    <div class="countdown-divider">:</div>
-    <div class="countdown-unit">
-      <span class="countdown-num" id="cd-hours">00</span>
-      <span class="countdown-label-small">Hours</span>
-    </div>
-    <div class="countdown-divider">:</div>
-    <div class="countdown-unit">
-      <span class="countdown-num" id="cd-mins">00</span>
-      <span class="countdown-label-small">Minutes</span>
-    </div>
-    <div class="countdown-divider">:</div>
-    <div class="countdown-unit">
-      <span class="countdown-num" id="cd-secs">00</span>
-      <span class="countdown-label-small">Seconds</span>
-    </div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label-small">Days</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label-small">Hours</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-label-small">Minutes</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-label-small">Seconds</span></div>
   </div>
 </section>
 
-<!-- Categories / What's happening -->
+<!-- CATEGORIES -->
 <section id="categories">
   <div class="container">
-    <div class="section-eyebrow">◆ The Programme ◆</div>
-    <h2 class="section-title">What Awaits You</h2>
+    <div class="section-eyebrow">The Programme</div>
+    <h2 class="section-title">What <span class="italic-accent">Awaits</span> You</h2>
     <p class="section-subtitle">Three reasons to put on the costume and come into town.</p>
 
-    <div class="categories">
-      <article class="category-card">
-        <div class="category-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 8h12l-1 12H7L6 8z"/>
-            <path d="M9 8V6a3 3 0 116 0v2"/>
-            <circle cx="10" cy="13" r="0.8" fill="currentColor"/>
-            <circle cx="14" cy="13" r="0.8" fill="currentColor"/>
-            <path d="M10 16c1 1 3 1 4 0"/>
-          </svg>
-        </div>
-        <h3 class="category-title">Trick-or-Treat <span class="accent">The District</span></h3>
-        <p class="category-body">Wander through the local business district collecting treats from participating shops. A spooky stroll through the heart of Bungendore.</p>
-      </article>
+    <div class="flourish-h" aria-hidden="true">
+      <svg viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M2 12 L20 12"/>
+        <path d="M30 4 L36 12 L30 20 L24 12 Z" fill="currentColor"/>
+        <path d="M40 12 L58 12"/>
+      </svg>
+    </div>
 
-      <article class="category-card">
-        <div class="category-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M7 16h10v-1c0-.5-.3-.9-.7-1L14 13V8h-4v5l-2.3 1c-.4.1-.7.5-.7 1v1z"/>
-            <path d="M5 16h14v2H5z"/>
-            <path d="M10 8h4V5h-4z"/>
-          </svg>
-        </div>
-        <h3 class="category-title">Meet The <span class="accent">Addams Family</span></h3>
-        <p class="category-body">Step inside a vintage 1934 Packard limousine for a free family photo experience. Mysterious, kooky, altogether ooky.</p>
-      </article>
+    <div class="categories-frame">
+      <div class="categories">
 
-      <article class="category-card">
-        <div class="category-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 3l-2 5L4 9l4.5 4-1 6 4.5-3 4.5 3-1-6L20 9l-6-1z"/>
-          </svg>
-        </div>
-        <h3 class="category-title">Costume <span class="accent">Prizes</span></h3>
-        <p class="category-body">Come as your favourite character — the more unconventional, the better. Prizes to be won across all ages.</p>
-      </article>
+        <article class="category-card">
+          <div class="category-icon-frame" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+              <path d="M10 18 L38 18 L36 42 L12 42 Z" fill="rgba(201,169,97,0.08)"/>
+              <path d="M16 18 C16 12, 20 9, 24 9 C28 9, 32 12, 32 18"/>
+              <path d="M18 26 L21 30 L15 30 Z" fill="currentColor" stroke="none"/>
+              <path d="M30 26 L33 30 L27 30 Z" fill="currentColor" stroke="none"/>
+              <path d="M16 35 Q20 38 24 35 Q28 38 32 35"/>
+              <rect x="22" y="14" width="4" height="4" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="category-title">Trick-or-Treat
+            <span class="category-title-accent">The District</span>
+          </div>
+          <p class="category-body">Wander through the local business district collecting treats from participating shops. A spooky stroll through the heart of Bungendore.</p>
+        </article>
+
+        <article class="category-card">
+          <div class="category-icon-frame" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+              <ellipse cx="24" cy="36" rx="18" ry="3"/>
+              <path d="M14 36 L14 14 Q14 10 24 10 Q34 10 34 14 L34 36" fill="rgba(201,169,97,0.08)"/>
+              <path d="M14 30 L34 30" stroke-width="3" stroke="#a8201a"/>
+              <path d="M14 30 L34 30"/>
+              <path d="M18 14 Q18 12 24 12" stroke-width="0.8" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="category-title">Step Inside The
+            <span class="category-title-accent">Vintage Limousine</span>
+          </div>
+          <p class="category-body">A free family photo experience inside our 1934 Packard. Mysterious, kooky, and not-quite-of-this-world guests in attendance.</p>
+        </article>
+
+        <article class="category-card">
+          <div class="category-icon-frame" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+              <ellipse cx="24" cy="38" rx="18" ry="3"/>
+              <path d="M10 38 Q24 38 38 38 L28 14 Q26 8 22 14 Z" fill="rgba(201,169,97,0.08)"/>
+              <path d="M25 17 Q28 16 30 18"/>
+              <path d="M14 34 L34 34" stroke-width="3" stroke="#a8201a"/>
+              <path d="M14 34 L34 34"/>
+              <rect x="22" y="32" width="4" height="4" fill="none"/>
+              <path d="M34 18 L35 20 L37 21 L35 22 L34 24 L33 22 L31 21 L33 20 Z" fill="currentColor" stroke="none" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="category-title">Costume
+            <span class="category-title-accent">Prizes Aplenty</span>
+          </div>
+          <p class="category-body">Come as your favourite character — the more unconventional, the better. Prizes to be won across all ages and groups.</p>
+        </article>
+
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Highlights bar -->
+<!-- HIGHLIGHTS -->
 <aside class="highlights">
   <ul class="highlights-list">
-    <li>Free community event</li>
-    <li>Fun for all ages</li>
-    <li>Prizes to be won</li>
-    <li>Family photo experience</li>
+    <li>Free Community Event</li>
+    <li>Fun For All Ages</li>
+    <li>Prizes To Be Won</li>
+    <li>Family Photo Experience</li>
   </ul>
 </aside>
 
-<!-- Halloween Cabinet teaser -->
-<section style="text-align:center;">
+<!-- CABINET -->
+<section class="cabinet">
   <div class="container">
-    <div class="section-eyebrow">◆ At The Shop ◆</div>
-    <h2 class="section-title">Step Inside Our<br><span style="color:var(--blood)">Halloween Cabinet</span></h2>
+    <div class="section-eyebrow">At The Shop</div>
+    <h2 class="section-title">Step Inside Our<br><span class="italic-accent">Halloween Cabinet</span></h2>
     <p class="section-subtitle">Bespoke decorations, handcrafted curiosities, and a few things best not described in writing.</p>
+
+    <div class="flourish-h" aria-hidden="true">
+      <svg viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <path d="M2 12 L18 12"/>
+        <circle cx="22" cy="12" r="2" fill="currentColor"/>
+        <path d="M30 4 L36 12 L30 20 L24 12 Z" fill="currentColor"/>
+        <circle cx="38" cy="12" r="2" fill="currentColor"/>
+        <path d="M42 12 L58 12"/>
+      </svg>
+    </div>
+
     <a href="https://santasecret.com.au/shop/" class="btn btn-ghost">Visit the Shop →</a>
   </div>
 </section>
 
-<!-- Visit -->
+<!-- VISIT -->
 <section id="visit" class="visit">
   <div class="container">
-    <div class="section-eyebrow">◆ Find Us ◆</div>
-    <h2 class="section-title">Plan Your Spooky Stroll</h2>
+    <div class="section-eyebrow">Find Us</div>
+    <h2 class="section-title">Plan Your <span class="italic-accent">Spooky Stroll</span></h2>
     <p class="section-subtitle">Bungendore, NSW</p>
 
     <div class="visit-grid">
@@ -786,10 +971,13 @@
         </address>
         <a href="https://www.google.com/maps/dir//24b+Malbon+St,+Bungendore+NSW+2621" target="_blank" rel="noopener">Get directions →</a>
       </div>
+
+      <div class="flourish-v" aria-hidden="true"></div>
+
       <div class="visit-block">
         <h3>Get In Touch</h3>
         <p>
-          <a href="tel:+61480784317">0480 784 317</a><br>
+          <a href="tel:+61480784317" style="font-style:normal; font-size:1.3rem; color:var(--cream);">0480 784 317</a><br>
           <a href="mailto:info.santasecret@gmail.com">info.santasecret@gmail.com</a>
         </p>
       </div>
@@ -797,10 +985,10 @@
   </div>
 </section>
 
-<!-- Socials -->
+<!-- SOCIALS -->
 <section class="socials">
-  <div class="section-eyebrow">◆ Follow The Trail ◆</div>
-  <h2 class="section-title">Stay In The Loop</h2>
+  <div class="section-eyebrow">Follow The Trail</div>
+  <h2 class="section-title">Stay In <span class="italic-accent">The Loop</span></h2>
   <p class="socials-handle">@santassecretbungendore</p>
   <div class="socials-row">
     <a href="https://www.facebook.com/santassecretbungendore" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
@@ -815,7 +1003,7 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-key">Hosted by Santa's Secret</div>
   <div class="footer-banner">Bungendore</div>
@@ -829,13 +1017,12 @@
   // Countdown to Saturday 31 October 2026, 3:00 PM AEDT (UTC+11)
   const target = new Date('2026-10-31T15:00:00+11:00').getTime();
   const els = {
-    days: document.getElementById('cd-days'),
+    days:  document.getElementById('cd-days'),
     hours: document.getElementById('cd-hours'),
-    mins: document.getElementById('cd-mins'),
-    secs: document.getElementById('cd-secs')
+    mins:  document.getElementById('cd-mins'),
+    secs:  document.getElementById('cd-secs')
   };
-
-  function pad(n) { return String(n).padStart(2, '0'); }
+  const pad = n => String(n).padStart(2, '0');
 
   function tick() {
     const diff = target - Date.now();
@@ -846,14 +1033,10 @@
       els.secs.textContent = '00';
       return;
     }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    els.days.textContent = pad(d);
-    els.hours.textContent = pad(h);
-    els.mins.textContent = pad(m);
-    els.secs.textContent = pad(s);
+    els.days.textContent  = pad(Math.floor(diff / 86400000));
+    els.hours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    els.mins.textContent  = pad(Math.floor((diff % 3600000) / 60000));
+    els.secs.textContent  = pad(Math.floor((diff % 60000) / 1000));
   }
   tick();
   setInterval(tick, 1000);
