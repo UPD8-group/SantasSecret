@@ -100,7 +100,7 @@
         .countdown-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;margin-bottom:12px}
         .countdown-inner>p{color:var(--warm-mid);margin-bottom:56px}
         .countdown-card{background:white;border-radius:8px;padding:56px 48px;box-shadow:0 8px 40px rgba(26,16,8,0.07);border:1px solid rgba(200,151,58,0.12);position:relative;overflow:hidden}
-        .countdown-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+        .countdown-card::before{content:'absolute';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
         .countdown-date-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid rgba(26,16,8,0.06)}
         .countdown-date-row h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400}
         .date-controls{display:flex;align-items:center;gap:10px}
@@ -483,12 +483,12 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
 }); // end DOMContentLoaded
 </script>
 
-<!-- SAYGDAY AI WIDGET INTEGRATION: HOLLY (COMING SOON / SYNCING STATE) -->
+<!-- SAYGDAY AI WIDGET INTEGRATION: HOLLY (COMING SOON & QUICK REPLIES) -->
 <style>
     /* Widget Scoped CSS - Inherits Santa's Secret Theme Colors */
     #saygday-launcher { position: fixed; bottom: 32px; right: 32px; width: 68px; height: 68px; background: white; border: 2px solid var(--red); border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 12px 30px rgba(192, 57, 43, 0.25); animation: sd-bounce-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     #saygday-launcher img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-    #saygday-launcher .badge { position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: #f59e0b; border: 2px solid white; border-radius: 50%; }
+    #saygday-launcher .badge { position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: #10b981; border: 2px solid white; border-radius: 50%; }
     
     #saygday-widget { position: fixed; bottom: 115px; right: 32px; width: 360px; background: white; border-radius: 16px; box-shadow: 0 16px 50px rgba(26,16,8,0.15); z-index: 9998; display: flex; flex-direction: column; overflow: hidden; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border: 1px solid rgba(200,151,58,0.2); }
     #saygday-widget.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
@@ -498,9 +498,8 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     .sd-header img { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .sd-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--red); line-height: 1.1; }
     
-    /* Updated status to show syncing state */
-    .sd-status { font-family: 'Jost', sans-serif; font-size: 0.75rem; color: #f59e0b; font-weight: 500; display: flex; align-items: center; gap: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
-    .sd-status::before { content: ''; width: 6px; height: 6px; background: #f59e0b; border-radius: 50%; animation: pulse-sync 1.5s infinite; }
+    .sd-status { font-family: 'Jost', sans-serif; font-size: 0.75rem; color: #10b981; font-weight: 500; display: flex; align-items: center; gap: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .sd-status::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; }
     
     .sd-close { background: none; border: none; font-size: 28px; color: var(--warm-mid); cursor: pointer; transition: color 0.2s; line-height: 1; padding: 0; }
     .sd-close:hover { color: var(--red); }
@@ -511,16 +510,25 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     
     .sd-msg { max-width: 85%; padding: 14px 18px; font-family: 'Jost', sans-serif; font-size: 0.95rem; line-height: 1.5; border-radius: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); animation: sd-fade-up 0.3s ease; }
     .sd-msg.bot { background: white; border: 1px solid rgba(200,151,58,0.15); border-bottom-left-radius: 4px; color: var(--ink); align-self: flex-start; }
+    .sd-msg.user { background: var(--red); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
     
-    .sd-input-area { padding: 16px 20px; background: white; border-top: 1px solid rgba(200,151,58,0.15); display: flex; gap: 10px; }
+    .sd-chips { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; animation: sd-fade-up 0.5s ease; }
+    .sd-chip { background: white; border: 1px solid var(--gold); color: var(--warm-mid); padding: 10px 14px; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: left; }
+    .sd-chip:hover { background: var(--cream); color: var(--red); border-color: var(--red); transform: translateX(2px); }
+
+    .sd-input-area { padding: 16px 20px 10px; background: white; border-top: 1px solid rgba(200,151,58,0.15); display: flex; flex-direction: column; gap: 10px; }
     
     /* Disabled inputs for 'Coming Soon' state */
+    .sd-input-container { display: flex; gap: 10px; width: 100%; }
     .sd-input-area input { flex: 1; border: 1px solid rgba(26,16,8,0.1); border-radius: 24px; padding: 12px 18px; font-family: 'Jost', sans-serif; font-size: 0.95rem; background: #f9fafb; cursor: not-allowed; opacity: 0.7; outline: none;}
     .sd-input-area button { background: #d1d5db; color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: not-allowed; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
     
+    .sd-foot { text-align: center; font-size: 0.75rem; color: #a1a1aa; padding-top: 8px; margin-top: 2px; border-top: 1px solid rgba(200,151,58,0.15); width: 100%; font-family: 'Jost', sans-serif; }
+    .sd-foot a { color: var(--red); text-decoration: none; font-weight: 500; }
+    .sd-foot a:hover { text-decoration: underline; }
+
     @keyframes sd-bounce-in { 0% { transform: scale(0); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
     @keyframes sd-fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse-sync { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     
     @media (max-width: 480px) {
         #saygday-widget { width: calc(100% - 32px); right: 16px; bottom: 90px; }
@@ -534,14 +542,14 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     <div class="badge"></div>
 </div>
 
-<!-- Interactive Widget (Syncing State) -->
+<!-- Interactive Widget (Coming Soon + Quick Replies) -->
 <div id="saygday-widget">
     <div class="sd-header">
         <div class="sd-header-left">
             <img src="https://saygday.ai/clients/santasecret/santa_kip.png" alt="Holly" onerror="this.src='https://saygday.ai/skippy.png'">
             <div>
                 <div class="sd-title">Holly</div>
-                <div class="sd-status">Syncing Data...</div>
+                <div class="sd-status">Online</div>
             </div>
         </div>
         <button class="sd-close">&times;</button>
@@ -549,17 +557,24 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     
     <div class="sd-body" id="sd-chat-body">
         <div class="sd-msg bot">
-            G'day! I'm Holly 🎄. 
+            G'day! I'm Holly 🎄.
             <br><br>
-            My AI engine is currently scanning the Santa's Secret website to build my real-time knowledge base. 
-            <br><br>
-            I will be fully operational and ready to assist you very soon! In the meantime, please feel free to use the contact form or call the shop directly.
+            Our full interactive digital assistant is coming soon! In the meantime, you can click the quick questions below to find our core details.
+        </div>
+        <div class="sd-chips" id="sd-chip-container">
+            <button class="sd-chip">Hours?</button>
+            <button class="sd-chip">Location?</button>
+            <button class="sd-chip">Wreaths?</button>
+            <button class="sd-chip">Who is Kim?</button>
         </div>
     </div>
     
     <div class="sd-input-area">
-        <input type="text" id="sd-input" placeholder="Knowledge base syncing..." disabled>
-        <button id="sd-send" disabled><i class="fas fa-lock"></i></button>
+        <div class="sd-input-container">
+            <input type="text" id="sd-input" placeholder="Chatbot coming soon..." disabled>
+            <button id="sd-send" disabled><i class="fas fa-lock"></i></button>
+        </div>
+        <div class="sd-foot">Chatbot by <a href="https://saygday.ai" target="_blank">saygday.ai</a></div>
     </div>
 </div>
 
@@ -567,8 +582,11 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     const sdLauncher = document.getElementById('saygday-launcher');
     const sdWidget = document.getElementById('saygday-widget');
     const sdClose = document.querySelector('.sd-close');
+    const sdChips = document.querySelectorAll('.sd-chip');
+    const sdChatBody = document.getElementById('sd-chat-body');
+    const sdChipContainer = document.getElementById('sd-chip-container');
 
-    // Simple Toggle logic for the Coming Soon state
+    // Toggle logic
     sdLauncher.addEventListener('click', () => {
         sdWidget.classList.add('active');
         sdLauncher.querySelector('.badge').style.display = 'none';
@@ -576,6 +594,41 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
 
     sdClose.addEventListener('click', () => {
         sdWidget.classList.remove('active');
+    });
+
+    function appendMessage(text, sender) {
+        const msg = document.createElement('div');
+        msg.className = `sd-msg ${sender}`;
+        msg.innerText = text;
+        sdChatBody.appendChild(msg);
+        sdChatBody.scrollTop = sdChatBody.scrollHeight;
+    }
+
+    // Logic for the scraped quick replies
+    sdChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const question = chip.innerText;
+            appendMessage(question, 'user');
+            
+            let answer = "";
+            if (question.includes("Hours")) {
+                answer = "Our shop is open Thursday to Monday, 10 am to 3 pm. (Hours may differ on public holidays).";
+            } else if (question.includes("Location")) {
+                answer = "You can find us at 24b Malbon St, Bungendore NSW 2621.";
+            } else if (question.includes("Wreaths")) {
+                answer = "Kim creates beautiful, bespoke handcrafted wreaths for every season, including custom designs and unique themes.";
+            } else if (question.includes("Kim")) {
+                answer = "Kim is the Owner and Artisan of Santa's Secret. Every piece in the shop is handcrafted by her!";
+            }
+            
+            // Hide the chips after making a selection
+            sdChipContainer.style.display = 'none';
+
+            // Brief delay to simulate the bot "thinking"
+            setTimeout(() => {
+                appendMessage(answer, 'bot');
+            }, 600);
+        });
     });
 </script>
 <!-- END SAYGDAY AI WIDGET -->
