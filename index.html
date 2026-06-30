@@ -100,7 +100,7 @@
         .countdown-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;margin-bottom:12px}
         .countdown-inner>p{color:var(--warm-mid);margin-bottom:56px}
         .countdown-card{background:white;border-radius:8px;padding:56px 48px;box-shadow:0 8px 40px rgba(26,16,8,0.07);border:1px solid rgba(200,151,58,0.12);position:relative;overflow:hidden}
-        .countdown-card::before{content:'absolute';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+        .countdown-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
         .countdown-date-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid rgba(26,16,8,0.06)}
         .countdown-date-row h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400}
         .date-controls{display:flex;align-items:center;gap:10px}
@@ -483,47 +483,59 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
 }); // end DOMContentLoaded
 </script>
 
-<!-- SAYGDAY AI WIDGET INTEGRATION: HOLLY (COMING SOON & QUICK REPLIES) -->
+<!-- SAYGDAY AI WIDGET INTEGRATION: SPLIT UI (COMING SOON) -->
 <style>
-    /* Widget Scoped CSS - Inherits Santa's Secret Theme Colors */
+    /* Widget Scoped CSS - Split Floating Layout */
     #saygday-launcher { position: fixed; bottom: 32px; right: 32px; width: 68px; height: 68px; background: white; border: 2px solid var(--red); border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 12px 30px rgba(192, 57, 43, 0.25); animation: sd-bounce-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
     #saygday-launcher img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
     #saygday-launcher .badge { position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: #10b981; border: 2px solid white; border-radius: 50%; }
     
-    #saygday-widget { position: fixed; bottom: 115px; right: 32px; width: 360px; background: white; border-radius: 16px; box-shadow: 0 16px 50px rgba(26,16,8,0.15); z-index: 9998; display: flex; flex-direction: column; overflow: hidden; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border: 1px solid rgba(200,151,58,0.2); }
+    /* Wrapper handles the floating gap */
+    #saygday-widget { position: fixed; bottom: 115px; right: 32px; width: 360px; background: transparent; z-index: 9998; display: flex; flex-direction: column; gap: 12px; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
     #saygday-widget.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
     
-    .sd-header { background: linear-gradient(135deg, var(--cream) 0%, white 100%); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(200,151,58,0.15); }
-    .sd-header-left { display: flex; align-items: center; gap: 12px; }
-    .sd-header img { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .sd-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--red); line-height: 1.1; }
+    /* MAIN CARD: Gradient, Chat, List & Mascot */
+    .sd-main-card { background: radial-gradient(100% 100% at 50% 0%, #fff0f0 0%, #ffffff 100%); border-radius: 24px; box-shadow: 0 16px 40px rgba(26,16,8,0.12); display: flex; flex-direction: column; overflow: hidden; height: 420px; position: relative; border: 1px solid rgba(200,151,58,0.1); }
     
-    .sd-status { font-family: 'Jost', sans-serif; font-size: 0.75rem; color: #10b981; font-weight: 500; display: flex; align-items: center; gap: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
-    .sd-status::before { content: ''; width: 6px; height: 6px; background: #10b981; border-radius: 50%; }
-    
-    .sd-close { background: none; border: none; font-size: 28px; color: var(--warm-mid); cursor: pointer; transition: color 0.2s; line-height: 1; padding: 0; }
+    .sd-header { padding: 16px 20px 8px; display: flex; justify-content: space-between; align-items: center; }
+    .sd-title { font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--warm-mid); letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+    .sd-title img { width: 18px; height: 18px; border-radius: 50%; }
+    .sd-close { background: none; border: none; font-size: 24px; color: var(--warm-mid); cursor: pointer; transition: color 0.2s; line-height: 1; padding: 0; }
     .sd-close:hover { color: var(--red); }
     
-    .sd-body { height: 360px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #fafafa; }
-    .sd-body::-webkit-scrollbar { width: 6px; }
-    .sd-body::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); border-radius: 3px; }
+    /* The core scrolling area above the mascot */
+    .sd-scroll-area { flex: 1; padding: 0 20px; overflow-y: auto; display: flex; flex-direction: column; z-index: 2; }
+    .sd-scroll-area::-webkit-scrollbar { width: 4px; }
+    .sd-scroll-area::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.2); border-radius: 3px; }
     
-    .sd-msg { max-width: 85%; padding: 14px 18px; font-family: 'Jost', sans-serif; font-size: 0.95rem; line-height: 1.5; border-radius: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); animation: sd-fade-up 0.3s ease; }
+    /* Big Intro Text */
+    .sd-big-greeting { font-family: 'Jost', sans-serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); text-align: center; margin: 10px 0 20px; line-height: 1.2; animation: sd-fade-up 0.4s ease; }
+    
+    /* Chat bubbles */
+    .sd-chat-history { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .sd-msg { max-width: 85%; padding: 12px 16px; font-family: 'Jost', sans-serif; font-size: 0.95rem; line-height: 1.4; border-radius: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); animation: sd-fade-up 0.3s ease; }
     .sd-msg.bot { background: white; border: 1px solid rgba(200,151,58,0.15); border-bottom-left-radius: 4px; color: var(--ink); align-self: flex-start; }
     .sd-msg.user { background: var(--red); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
     
-    .sd-chips { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; animation: sd-fade-up 0.5s ease; }
-    .sd-chip { background: white; border: 1px solid var(--gold); color: var(--warm-mid); padding: 10px 14px; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-align: left; }
-    .sd-chip:hover { background: var(--cream); color: var(--red); border-color: var(--red); transform: translateX(2px); }
-
-    .sd-input-area { padding: 16px 20px 10px; background: white; border-top: 1px solid rgba(200,151,58,0.15); display: flex; flex-direction: column; gap: 10px; }
+    /* Persistent Menu Actions */
+    .sd-action-list { display: flex; flex-direction: column; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(200,151,58,0.1); margin-bottom: 20px; backdrop-filter: blur(4px); }
+    .sd-action-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; font-family: 'Jost', sans-serif; font-size: 0.95rem; color: var(--ink); cursor: pointer; transition: background 0.2s; border-bottom: 1px solid rgba(200,151,58,0.08); }
+    .sd-action-item:last-child { border-bottom: none; }
+    .sd-action-item:hover { background: rgba(255,255,255,0.9); color: var(--red); }
+    .sd-action-icon { width: 28px; height: 28px; background: var(--cream); color: var(--red); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
     
-    /* Disabled inputs for 'Coming Soon' state */
-    .sd-input-container { display: flex; gap: 10px; width: 100%; }
-    .sd-input-area input { flex: 1; border: 1px solid rgba(26,16,8,0.1); border-radius: 24px; padding: 12px 18px; font-family: 'Jost', sans-serif; font-size: 0.95rem; background: #f9fafb; cursor: not-allowed; opacity: 0.7; outline: none;}
-    .sd-input-area button { background: #d1d5db; color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: not-allowed; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    /* Mascot peek cut off at the bottom */
+    .sd-mascot-peek { text-align: center; margin-top: auto; display: flex; justify-content: center; z-index: 1; }
+    .sd-mascot-peek img { height: 110px; object-fit: cover; object-position: top; transform: translateY(20px); filter: drop-shadow(0 -4px 12px rgba(0,0,0,0.05)); }
     
-    .sd-foot { text-align: center; font-size: 0.75rem; color: #a1a1aa; padding-top: 8px; margin-top: 2px; border-top: 1px solid rgba(200,151,58,0.15); width: 100%; font-family: 'Jost', sans-serif; }
+    /* INPUT PANEL: Detached floating pill */
+    .sd-input-panel { background: white; border-radius: 20px; padding: 14px 16px; box-shadow: 0 8px 24px rgba(26,16,8,0.08); display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(200,151,58,0.1); }
+    
+    .sd-input-container { display: flex; gap: 10px; width: 100%; align-items: center; }
+    .sd-input-container input { flex: 1; border: none; font-family: 'Jost', sans-serif; font-size: 0.95rem; color: var(--ink); background: transparent; cursor: not-allowed; opacity: 0.7; outline: none; padding: 4px 8px; }
+    .sd-input-container button { background: var(--red); color: white; border: none; padding: 10px 16px; border-radius: 100px; cursor: not-allowed; display: flex; align-items: center; gap: 6px; font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 500; opacity: 0.5; }
+    
+    .sd-foot { text-align: center; font-size: 0.75rem; color: #a1a1aa; padding-top: 8px; margin-top: 4px; border-top: 1px solid rgba(200,151,58,0.1); width: 100%; font-family: 'Jost', sans-serif; }
     .sd-foot a { color: var(--red); text-decoration: none; font-weight: 500; }
     .sd-foot a:hover { text-decoration: underline; }
 
@@ -542,51 +554,64 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
     <div class="badge"></div>
 </div>
 
-<!-- Interactive Widget (Coming Soon + Quick Replies) -->
+<!-- Interactive Widget (Split Floating UI) -->
 <div id="saygday-widget">
-    <div class="sd-header">
-        <div class="sd-header-left">
-            <img src="https://saygday.ai/clients/santasecret/santa_kip.png" alt="Holly" onerror="this.src='https://saygday.ai/skippy.png'">
-            <div>
-                <div class="sd-title">Holly</div>
-                <div class="sd-status">Online</div>
+    
+    <!-- Top Floating Card -->
+    <div class="sd-main-card">
+        <div class="sd-header">
+            <div class="sd-title">
+                <img src="https://saygday.ai/clients/santasecret/santa_kip.png" alt="Holly Icon" onerror="this.src='https://saygday.ai/skippy.png'">
+                Holly AI
+            </div>
+            <button class="sd-close">&times;</button>
+        </div>
+        
+        <div class="sd-scroll-area" id="sd-scroll-area">
+            <h2 class="sd-big-greeting">G'day! I'm Holly 🎄</h2>
+            
+            <div class="sd-chat-history" id="sd-chat-history"></div>
+            
+            <!-- Persistent Questions Menu -->
+            <div class="sd-action-list">
+                <div class="sd-action-item" data-question="What are your hours?">
+                    <div class="sd-action-icon"><i class="fas fa-clock"></i></div>
+                    What are your hours?
+                </div>
+                <div class="sd-action-item" data-question="Where are you located?">
+                    <div class="sd-action-icon"><i class="fas fa-location-dot"></i></div>
+                    Where are you located?
+                </div>
             </div>
         </div>
-        <button class="sd-close">&times;</button>
-    </div>
-    
-    <div class="sd-body" id="sd-chat-body">
-        <div class="sd-msg bot">
-            G'day! I'm Holly 🎄.
-            <br><br>
-            Our full interactive digital assistant is coming soon! In the meantime, you can click the quick questions below to find our core details.
-        </div>
-        <div class="sd-chips" id="sd-chip-container">
-            <button class="sd-chip">Hours?</button>
-            <button class="sd-chip">Location?</button>
-            <button class="sd-chip">Wreaths?</button>
-            <button class="sd-chip">Who is Kim?</button>
+        
+        <!-- Mascot peeking out of the bottom -->
+        <div class="sd-mascot-peek">
+            <img src="https://saygday.ai/clients/santasecret/santa_kip.png" alt="Santa Koala Mascot" onerror="this.src='https://saygday.ai/skippy.png'">
         </div>
     </div>
     
-    <div class="sd-input-area">
+    <!-- Bottom Floating Input Pill -->
+    <div class="sd-input-panel">
         <div class="sd-input-container">
-            <input type="text" id="sd-input" placeholder="Chatbot coming soon..." disabled>
-            <button id="sd-send" disabled><i class="fas fa-lock"></i></button>
+            <i class="fas fa-plus" style="color: #9ca3af; padding-left: 8px;"></i>
+            <input type="text" placeholder="Chatbot coming soon..." disabled>
+            <button disabled><i class="fas fa-paper-plane"></i></button>
         </div>
         <div class="sd-foot">Chatbot by <a href="https://saygday.ai" target="_blank">saygday.ai</a></div>
     </div>
+    
 </div>
 
 <script>
     const sdLauncher = document.getElementById('saygday-launcher');
     const sdWidget = document.getElementById('saygday-widget');
     const sdClose = document.querySelector('.sd-close');
-    const sdChips = document.querySelectorAll('.sd-chip');
-    const sdChatBody = document.getElementById('sd-chat-body');
-    const sdChipContainer = document.getElementById('sd-chip-container');
+    const sdActionItems = document.querySelectorAll('.sd-action-item');
+    const sdChatHistory = document.getElementById('sd-chat-history');
+    const sdScrollArea = document.getElementById('sd-scroll-area');
 
-    // Toggle logic
+    // Simple Toggle logic
     sdLauncher.addEventListener('click', () => {
         sdWidget.classList.add('active');
         sdLauncher.querySelector('.badge').style.display = 'none';
@@ -600,30 +625,34 @@ window.shareOnFacebook = function(){ window.open('https://www.facebook.com/share
         const msg = document.createElement('div');
         msg.className = `sd-msg ${sender}`;
         msg.innerText = text;
-        sdChatBody.appendChild(msg);
-        sdChatBody.scrollTop = sdChatBody.scrollHeight;
+        sdChatHistory.appendChild(msg);
+        
+        // Smooth scroll to keep the newest message in view above the persistent action list
+        setTimeout(() => {
+            sdScrollArea.scrollTo({
+                top: sdScrollArea.scrollHeight,
+                behavior: 'smooth'
+            });
+        }, 50);
     }
 
-    // Logic for the scraped quick replies
-    sdChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-            const question = chip.innerText;
+    // Logic for the persistent quick replies
+    sdActionItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const question = item.getAttribute('data-question');
+            
+            // Post User question
             appendMessage(question, 'user');
             
             let answer = "";
-            if (question.includes("Hours")) {
-                answer = "Our shop is open Thursday to Monday, 10 am to 3 pm. (Hours may differ on public holidays).";
-            } else if (question.includes("Location")) {
+            if (question.includes("hours")) {
+                answer = "Our shop is open Thursday to Monday, 10 am to 3 pm.";
+            } else if (question.includes("located")) {
                 answer = "You can find us at 24b Malbon St, Bungendore NSW 2621.";
-            } else if (question.includes("Wreaths")) {
-                answer = "Kim creates beautiful, bespoke handcrafted wreaths for every season, including custom designs and unique themes.";
-            } else if (question.includes("Kim")) {
-                answer = "Kim is the Owner and Artisan of Santa's Secret. Every piece in the shop is handcrafted by her!";
             }
             
-            // Hide the chips after making a selection
-            sdChipContainer.style.display = 'none';
-
+            // The action list intentionally remains visible as requested
+            
             // Brief delay to simulate the bot "thinking"
             setTimeout(() => {
                 appendMessage(answer, 'bot');
